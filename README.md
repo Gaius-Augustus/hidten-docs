@@ -1,1 +1,1 @@
-# hidten-docs
+Documentation for HidTen
