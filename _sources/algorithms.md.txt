@@ -1,0 +1,12 @@
+# Algorithms
+
+Understand how to use different algorithms in HidTen for inference
+and training.
+
+### Forward
+
+### Posterior
+
+### Viterbi
+
+### Maximum expected accuracy
