@@ -1,0 +1,110 @@
+API Reference
+=============
+
+HidTen: A framework for combining hidden Markov models with modern deep learning.
+
+This page provides a complete reference to all public classes, functions, and modules in HidTen.
+
+Core Module
+-----------
+
+The main hidten module exports the primary classes and functions.
+
+.. automodule:: hidten
+
+HMM Classes
+-----------
+
+Core HMM implementation with configuration and modes.
+
+.. automodule:: hidten.hmm
+
+Configuration
+-------------
+
+Base configuration classes and decorators for model setup.
+
+.. automodule:: hidten.config
+
+Emitters
+--------
+
+Emission models that map observations to feature values.
+
+.. automodule:: hidten.emitter
+
+Transitioners
+-------------
+
+Transition models that handle state-to-state transitions.
+
+.. automodule:: hidten.transitioner
+
+Priors
+------
+
+Prior distributions for model parameters.
+
+.. automodule:: hidten.prior
+
+Generic Base Classes
+--------------------
+
+Abstract base classes for modules and distributions.
+
+.. automodule:: hidten.generic
+
+Utilities
+---------
+
+Utility functions and helper classes.
+
+.. automodule:: hidten.util
+
+TensorFlow Backend
+==================
+
+The TensorFlow backend provides concrete implementations optimized for TensorFlow.
+
+Core TensorFlow HMM
+--------------------
+
+Main TensorFlow implementation of HMM.
+
+.. automodule:: hidten.tf.hmm
+
+TensorFlow Emitters
+-------------------
+
+TensorFlow-specific emission models.
+
+.. automodule:: hidten.tf.emitter
+
+.. automodule:: hidten.tf.categorical
+
+.. automodule:: hidten.tf.multivariate_normal
+
+TensorFlow Transitioners
+------------------------
+
+TensorFlow-specific transition models.
+
+.. automodule:: hidten.tf.transitioner
+
+Algorithms
+----------
+
+Core algorithms for inference and learning.
+
+.. automodule:: hidten.tf.forward_backward
+
+.. automodule:: hidten.tf.viterbi
+
+.. automodule:: hidten.tf.scan
+
+TensorFlow Utilities
+--------------------
+
+TensorFlow-specific utility functions.
+
+.. automodule:: hidten.tf.util
