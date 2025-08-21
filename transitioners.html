@@ -42,19 +42,18 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="readme.html">README</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms for Inference and Training</a></li>
 <li class="toctree-l1"><a class="reference internal" href="emitters.html">Emitters</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Transitioners</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#what-are-transitioners">What are Transitioners?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#built-in-transitioners">Built-in Transitioners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#built-in-transitioners">Built-in Transitioners</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#standard-transitioners">Standard Transitioners</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dense-transitioners">Dense Transitioners</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-custom-transitioners">Creating Custom Transitioners</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tensorflow-transitioners">TensorFlow Transitioners</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
@@ -83,7 +82,7 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Transitioners</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/transitioners.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/transitioners.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -96,26 +95,49 @@
 <p>Understanding and using transition models in HidTen.</p>
 <section id="what-are-transitioners">
 <h2>What are Transitioners?<a class="headerlink" href="#what-are-transitioners" title="Link to this heading"></a></h2>
-<!-- Explain the role of transitioners in HMMs -->
+<p>Transitioners are components that compute transition probabilities or scores between hidden states. They define how likely the model is to transition from one state to another.</p>
 </section>
 <section id="built-in-transitioners">
 <h2>Built-in Transitioners<a class="headerlink" href="#built-in-transitioners" title="Link to this heading"></a></h2>
-<!-- Document the available transitioner classes -->
+<section id="standard-transitioners">
+<h3>Standard Transitioners<a class="headerlink" href="#standard-transitioners" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="api.html#hidten.tf.transitioner.TFTransitioner" title="hidten.tf.transitioner.TFTransitioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.transitioner.TFTransitioner</span></code></a> provides basic transition matrix functionality.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf.transitioner</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFTransitioner</span>
+
+<span class="c1"># Create transitioner with transition matrix</span>
+<span class="n">transitioner</span> <span class="o">=</span> <span class="n">TFTransitioner</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="dense-transitioners">
+<h3>Dense Transitioners<a class="headerlink" href="#dense-transitioners" title="Link to this heading"></a></h3>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.dense.TFDenseTransitioner</span></code> handles fully-connected transition models.</p>
+</section>
 </section>
 <section id="creating-custom-transitioners">
 <h2>Creating Custom Transitioners<a class="headerlink" href="#creating-custom-transitioners" title="Link to this heading"></a></h2>
-<!-- Guide on how to implement custom transition models -->
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of custom transitioner</span>
+<p>To create custom transitioners, inherit from <a class="reference internal" href="api.html#hidten.transitioner.Transitioner" title="hidten.transitioner.Transitioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.transitioner.Transitioner</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.transitioner</span><span class="w"> </span><span class="kn">import</span> <span class="n">Transitioner</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CustomTransitioner</span><span class="p">(</span><span class="n">Transitioner</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transition_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
+        <span class="c1"># Implement your transition logic here</span>
+        <span class="k">pass</span>
 </pre></div>
 </div>
 </section>
 <section id="tensorflow-transitioners">
 <h2>TensorFlow Transitioners<a class="headerlink" href="#tensorflow-transitioners" title="Link to this heading"></a></h2>
-<!-- Specific documentation for TF backend -->
+<p>The TensorFlow backend provides several transitioner implementations:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="api.html#hidten.tf.transitioner.TFTransitioner" title="hidten.tf.transitioner.TFTransitioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.transitioner.TFTransitioner</span></code></a> - Base class for TensorFlow transitioners</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.dense.TFDenseTransitioner</span></code> - Dense transition matrices</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.sparse.TFSparseTransitioner</span></code> - Sparse transition matrices for efficiency</p></li>
+</ul>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
-<!-- Practical examples of using different transitioners -->
+<p>See the <a class="reference internal" href="getting_started.html"><span class="doc">Getting Started</span></a> guide for practical examples of using different transitioners.</p>
 </section>
 </section>
 

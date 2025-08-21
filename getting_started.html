@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Algorithms" href="algorithms.html" />
-    <link rel="prev" title="Installation" href="installation.html" /> 
+    <link rel="next" title="Algorithms for Inference and Training" href="algorithms.html" />
+    <link rel="prev" title="Welcome to hidten’s documentation!" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,25 +42,13 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="readme.html">README</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#your-first-hmm">Your First HMM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#basic-concepts">Basic Concepts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#hidden-markov-models">Hidden Markov Models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#emission-models">Emission Models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#transition-models">Transition Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tensorflow">TensorFlow</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
-</ul>
-</li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms for Inference and Training</a></li>
 <li class="toctree-l1"><a class="reference internal" href="emitters.html">Emitters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transitioners.html">Transitioners</a></li>
 </ul>
@@ -86,7 +74,7 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Getting Started</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/getting_started.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/getting_started.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -96,34 +84,75 @@
              
   <section id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h1>
-<p>A quick start guide to using HidTen.</p>
-<section id="your-first-hmm">
-<h2>Your First HMM<a class="headerlink" href="#your-first-hmm" title="Link to this heading"></a></h2>
-<!-- Add a simple example of creating an HMM -->
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">hidten</span>
-
-<span class="c1"># Example code will go here</span>
+<section id="tensorflow">
+<h2>TensorFlow<a class="headerlink" href="#tensorflow" title="Link to this heading"></a></h2>
+<p>Let’s implement an HMM with the following state transition graph using HidTen:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">IR</span> <span class="o">-&gt;</span> <span class="n">E0</span> <span class="o">-&gt;</span> <span class="n">E1</span> <span class="o">-&gt;</span> <span class="n">E2</span>
+<span class="o">^------^-----------|</span>
 </pre></div>
 </div>
-</section>
-<section id="basic-concepts">
-<h2>Basic Concepts<a class="headerlink" href="#basic-concepts" title="Link to this heading"></a></h2>
-<section id="hidden-markov-models">
-<h3>Hidden Markov Models<a class="headerlink" href="#hidden-markov-models" title="Link to this heading"></a></h3>
-<!-- Explain HMMs in the context of HidTen -->
-</section>
-<section id="emission-models">
-<h3>Emission Models<a class="headerlink" href="#emission-models" title="Link to this heading"></a></h3>
-<!-- Brief introduction to emission models -->
-</section>
-<section id="transition-models">
-<h3>Transition Models<a class="headerlink" href="#transition-models" title="Link to this heading"></a></h3>
-<!-- Brief introduction to transition models -->
-</section>
-</section>
-<section id="next-steps">
-<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
-<!-- Link to more detailed documentation sections -->
+<p>This can be done by creating a <a class="reference internal" href="api.html#hidten.tf.hmm.TFHMM" title="hidten.tf.hmm.TFHMM"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.hmm.TFHMM</span></code></a> object.
+The <a class="reference internal" href="api.html#hidten.tf.hmm.TFHMM" title="hidten.tf.hmm.TFHMM"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.hmm.TFHMM</span></code></a> derives from <code class="docutils literal notranslate"><span class="pre">tf.keras.Layer</span></code>.
+Under the hood, two important components are created automatically
+(if the user does not provide them specifically), that are
+used by all HidTen algorithms:
+The <a class="reference internal" href="api.html#hidten.emitter.Emitter" title="hidten.emitter.Emitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.emitter.Emitter</span></code></a> and the <a class="reference internal" href="api.html#hidten.transitioner.Transitioner" title="hidten.transitioner.Transitioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.transitioner.Transitioner</span></code></a>.</p>
+<p>The Emitter computes <strong>emission scores</strong> from observations and the Transitioner
+uses the state transition graph given to it to compute steps in a Markov chain.</p>
+<p>Let’s see this in action:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new HMM with 4 states</span>
+<span class="n">hmm</span> <span class="o">=</span> <span class="n">TFHMM</span><span class="p">(</span><span class="n">states</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Always start in the first state (IR)</span>
+<span class="n">hmm</span><span class="o">.</span><span class="n">transitioner</span><span class="o">.</span><span class="n">allow_start</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Define the state transition graph</span>
+<span class="n">hmm</span><span class="o">.</span><span class="n">transitioner</span><span class="o">.</span><span class="n">allow</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>     <span class="c1"># IR -&gt; IR</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>     <span class="c1"># IR -&gt; E0</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>     <span class="c1"># E0 -&gt; E1</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>     <span class="c1"># E1 -&gt; E2</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>     <span class="c1"># E2 -&gt; IR</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>     <span class="c1"># E2 -&gt; E0</span>
+<span class="p">]</span>
+
+<span class="c1"># Initialize the transition probabilities</span>
+<span class="c1"># The initialize has the same order as used above for allow</span>
+<span class="n">p_enter_E0</span><span class="p">,</span> <span class="n">p_enter_IR</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span>
+<span class="n">hmm</span><span class="o">.</span><span class="n">transitioner</span><span class="o">.</span><span class="n">initializer</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">1</span><span class="o">-</span><span class="n">p_enter_E0</span><span class="p">,</span>
+    <span class="n">p_enter_E0</span><span class="p">,</span>
+    <span class="mf">1.</span><span class="p">,</span>
+    <span class="mf">1.</span><span class="p">,</span>
+    <span class="n">p_enter_IR</span><span class="p">,</span>
+    <span class="mi">1</span><span class="o">-</span><span class="n">p_enter_IR</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># The default emitter is a Categorical Emitter over a discrete observation space.</span>
+<span class="c1"># Let the alphabet be {0, 1, 2, 3}.</span>
+<span class="c1"># We define emission probabilities:</span>
+<span class="n">hmm</span><span class="o">.</span><span class="n">emitter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">initializer</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span>   <span class="c1"># IR</span>
+    <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span>       <span class="c1"># E0</span>
+    <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span>       <span class="c1"># E1</span>
+    <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span>       <span class="c1"># E2</span>
+<span class="p">]</span>
+<span class="c1"># Note that HidTen support multiple emitters, which is why the emitter property</span>
+<span class="c1"># is a list of emitters - by default only containing the Categorical Emitter.</span>
+</pre></div>
+</div>
+<p>In TensorFlow, a layer has to be built to be used. Run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hmm</span><span class="o">.</span><span class="n">build</span><span class="p">((</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>We can now inspect the transition- and emission-matrices that we’ve just defined:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hmm</span><span class="o">.</span><span class="n">transitioner</span><span class="o">.</span><span class="n">matrix</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hmm</span><span class="o">.</span><span class="n">emitter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">matrix</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Next, we’ll see how to use the <cite>hmm</cite> for inference.</p>
 </section>
 </section>
 
@@ -131,8 +160,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="algorithms.html" class="btn btn-neutral float-right" title="Algorithms" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to hidten’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="algorithms.html" class="btn btn-neutral float-right" title="Algorithms for Inference and Training" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

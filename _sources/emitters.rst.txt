@@ -1,0 +1,57 @@
+Emitters
+========
+
+Understanding and using emission models in HidTen.
+
+What are Emitters?
+------------------
+
+Emitters are components that compute emission probabilities or scores for observations given hidden states. They define how likely each observation is to be emitted from each state.
+
+Built-in Emitters
+-----------------
+
+Categorical Emitters
+~~~~~~~~~~~~~~~~~~~~
+
+:class:`hidten.tf.categorical.TFCategoricalEmitter` handles discrete observations with categorical distributions.
+
+.. code-block:: python
+
+    from hidten.tf.categorical import TFCategoricalEmitter
+    
+    # Create categorical emitter for discrete alphabet {0, 1, 2, 3}
+    emitter = TFCategoricalEmitter()
+
+Continuous Emitters
+~~~~~~~~~~~~~~~~~~~
+
+:class:`hidten.tf.multivariate_normal.TFMultivariateNormalEmitter` handles continuous observations with multivariate normal distributions.
+
+Creating Custom Emitters
+-------------------------
+
+To create custom emitters, inherit from :class:`hidten.emitter.Emitter`:
+
+.. code-block:: python
+
+    from hidten.emitter import Emitter
+    
+    class CustomEmitter(Emitter):
+        def emission_scores(self, observations):
+            # Implement your emission logic here
+            pass
+
+TensorFlow Emitters
+-------------------
+
+The TensorFlow backend provides several emitter implementations:
+
+- :class:`hidten.tf.emitter.TFEmitter` - Base class for TensorFlow emitters
+- :class:`hidten.tf.categorical.TFCategoricalEmitter` - Categorical emissions
+- :class:`hidten.tf.multivariate_normal.TFMultivariateNormalEmitter` - Multivariate normal emissions
+
+Examples
+--------
+
+See the :doc:`getting_started` guide for practical examples of using different emitters.

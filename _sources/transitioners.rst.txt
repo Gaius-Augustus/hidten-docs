@@ -1,0 +1,57 @@
+Transitioners
+=============
+
+Understanding and using transition models in HidTen.
+
+What are Transitioners?
+-----------------------
+
+Transitioners are components that compute transition probabilities or scores between hidden states. They define how likely the model is to transition from one state to another.
+
+Built-in Transitioners
+----------------------
+
+Standard Transitioners
+~~~~~~~~~~~~~~~~~~~~~~~
+
+:class:`hidten.tf.transitioner.TFTransitioner` provides basic transition matrix functionality.
+
+.. code-block:: python
+
+    from hidten.tf.transitioner import TFTransitioner
+    
+    # Create transitioner with transition matrix
+    transitioner = TFTransitioner()
+
+Dense Transitioners
+~~~~~~~~~~~~~~~~~~~
+
+:class:`hidten.tf.dense.TFDenseTransitioner` handles fully-connected transition models.
+
+Creating Custom Transitioners
+------------------------------
+
+To create custom transitioners, inherit from :class:`hidten.transitioner.Transitioner`:
+
+.. code-block:: python
+
+    from hidten.transitioner import Transitioner
+    
+    class CustomTransitioner(Transitioner):
+        def transition_scores(self, states):
+            # Implement your transition logic here
+            pass
+
+TensorFlow Transitioners
+------------------------
+
+The TensorFlow backend provides several transitioner implementations:
+
+- :class:`hidten.tf.transitioner.TFTransitioner` - Base class for TensorFlow transitioners
+- :class:`hidten.tf.dense.TFDenseTransitioner` - Dense transition matrices
+- :class:`hidten.tf.sparse.TFSparseTransitioner` - Sparse transition matrices for efficiency
+
+Examples
+--------
+
+See the :doc:`getting_started` guide for practical examples of using different transitioners.

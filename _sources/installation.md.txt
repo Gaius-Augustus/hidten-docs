@@ -1,5 +1,0 @@
-# Installation
-
-How to install and set up HidTen.
-
-

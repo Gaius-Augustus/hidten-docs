@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Algorithms &mdash; HidTen 0.1 documentation</title>
+  <title>Algorithms for Inference and Training &mdash; HidTen 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -42,16 +42,12 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="readme.html">README</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Algorithms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#forward">Forward</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Algorithms for Inference and Training</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#emission-scores">Emission scores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#likelihood">Likelihood</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#posterior">Posterior</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#viterbi">Viterbi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#maximum-expected-accuracy">Maximum expected accuracy</a></li>
@@ -80,9 +76,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Algorithms</li>
+      <li class="breadcrumb-item active">Algorithms for Inference and Training</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/algorithms.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/algorithms.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -90,21 +86,75 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="algorithms">
-<h1>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading"></a></h1>
-<p>Understand how to use different algorithms in HidTen for inference
-and training.</p>
-<section id="forward">
-<h2>Forward<a class="headerlink" href="#forward" title="Link to this heading"></a></h2>
+  <section id="algorithms-for-inference-and-training">
+<h1>Algorithms for Inference and Training<a class="headerlink" href="#algorithms-for-inference-and-training" title="Link to this heading"></a></h1>
+<p>Previously, we implemented a Hidden Markov Model (HMM) using HidTen. Now, let’s explore the different algorithms available for inference and training.</p>
+<p>We’ll need some observations to work with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate some observations</span>
+<span class="c1"># hidten expects inputs of shape (B, T, D), where B is the batch size,</span>
+<span class="c1"># T is the sequence length, and D is the number of features</span>
+<span class="n">observations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">,))</span>
+<span class="n">observations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)[</span><span class="n">observations</span><span class="p">]</span> <span class="c1"># one hot</span>
+</pre></div>
+</div>
+<section id="emission-scores">
+<h2>Emission scores<a class="headerlink" href="#emission-scores" title="Link to this heading"></a></h2>
+<p>The simplest inference we can get from an HMM is <a class="reference internal" href="api.html#hidten.hmm.HMM.emission_scores" title="hidten.hmm.HMM.emission_scores"><code class="xref py py-meth docutils literal notranslate"><span class="pre">emission_scores()</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hmm</span><span class="o">.</span><span class="n">emission_scores</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This tells us how likely the observation at each time point is at each state,
+independently of the other time points.</p>
+<p>The output depends only on the emitters we have added to the model. If no emitter
+was added, a <a class="reference internal" href="api.html#hidten.tf.categorical.TFCategoricalEmitter" title="hidten.tf.categorical.TFCategoricalEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.categorical.TFCategoricalEmitter</span></code></a> is used automatically.</p>
+</section>
+<section id="likelihood">
+<h2>Likelihood<a class="headerlink" href="#likelihood" title="Link to this heading"></a></h2>
+<p>The likelihood of the observations given the model can be computed using the
+<a class="reference internal" href="api.html#hidten.tf.forward_backward.TFForwardBackwardMixin.likelihood_log" title="hidten.tf.forward_backward.TFForwardBackwardMixin.likelihood_log"><code class="xref py py-meth docutils literal notranslate"><span class="pre">likelihood_log()</span></code></a> method.
+This is useful for sequence classification tasks and <em>unsupervised</em> learning.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hmm</span><span class="o">.</span><span class="n">likelihood_log</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This computes the log-probability of the observed sequence under the model, marginalizing over all possible hidden state sequences.</p>
+<p>The likelihood is a result of the more general forward algorithm which computes forward scores.</p>
+<p>This algorithm exists in two variants.</p>
+<p>First, the <a class="reference internal" href="api.html#hidten.tf.forward_backward.TFForwardBackwardMixin.forward_log" title="hidten.tf.forward_backward.TFForwardBackwardMixin.forward_log"><code class="xref py py-meth docutils literal notranslate"><span class="pre">forward_log()</span></code></a> method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hmm</span><span class="o">.</span><span class="n">forward_log</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which computes the logarithmic forward scores.</p>
+<p>Second, the <a class="reference internal" href="api.html#hidten.tf.forward_backward.TFForwardBackwardMixin.forward_scaled" title="hidten.tf.forward_backward.TFForwardBackwardMixin.forward_scaled"><code class="xref py py-meth docutils literal notranslate"><span class="pre">forward_scaled()</span></code></a> method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hmm</span><span class="o">.</span><span class="n">forward_scaled</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which computes the scaled forward scores and scaling factors.</p>
 </section>
 <section id="posterior">
 <h2>Posterior<a class="headerlink" href="#posterior" title="Link to this heading"></a></h2>
+<p>The posterior probabilities can be computed using the <a class="reference internal" href="api.html#hidten.tf.forward_backward.TFForwardBackwardMixin.posterior" title="hidten.tf.forward_backward.TFForwardBackwardMixin.posterior"><code class="xref py py-meth docutils literal notranslate"><span class="pre">posterior()</span></code></a> method.
+This is useful for sequence-to-sequence classification tasks and <em>supervised</em> learning.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hmm</span><span class="o">.</span><span class="n">posterior</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This computes the posterior probabilities of the hidden states given the observed sequence.</p>
 </section>
 <section id="viterbi">
 <h2>Viterbi<a class="headerlink" href="#viterbi" title="Link to this heading"></a></h2>
+<p>The Viterbi algorithm finds the most likely sequence of hidden states given the observed sequence.
+The method is <code class="xref py py-meth docutils literal notranslate"><span class="pre">viterbi()</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hmm</span><span class="o">.</span><span class="n">viterbi</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is useful for decoding solutions from a model.</p>
 </section>
 <section id="maximum-expected-accuracy">
 <h2>Maximum expected accuracy<a class="headerlink" href="#maximum-expected-accuracy" title="Link to this heading"></a></h2>
+<p>The maximum expected accuracy (MEA) is a training objective that aims to maximize the expected accuracy of the model on a given set of observations. The method is <code class="xref py py-meth docutils literal notranslate"><span class="pre">maximum_expected_accuracy()</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hmm</span><span class="o">.</span><span class="n">maximum_expected_accuracy</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is a useful alternative to Viterbi decoding in certain situations.</p>
 </section>
 </section>
 

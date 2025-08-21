@@ -1,0 +1,84 @@
+Getting Started
+===============
+
+TensorFlow
+----------
+
+Let's implement an HMM with the following state transition graph using HidTen:
+
+.. code-block:: python
+
+    IR -> E0 -> E1 -> E2
+    ^------^-----------|
+
+This can be done by creating a :class:`hidten.tf.hmm.TFHMM` object.
+The :class:`hidten.tf.hmm.TFHMM` derives from ``tf.keras.Layer``.
+Under the hood, two important components are created automatically
+(if the user does not provide them specifically), that are
+used by all HidTen algorithms:
+The :class:`hidten.emitter.Emitter` and the :class:`hidten.transitioner.Transitioner`.
+
+The Emitter computes **emission scores** from observations and the Transitioner
+uses the state transition graph given to it to compute steps in a Markov chain.
+
+Let's see this in action:
+
+.. code-block:: python
+
+    # Create a new HMM with 4 states
+    hmm = TFHMM(states=4)
+
+    # Always start in the first state (IR)
+    hmm.transitioner.allow_start = [0]
+
+    # Define the state transition graph
+    hmm.transitioner.allow = [
+        (0, 0),     # IR -> IR
+        (0, 1),     # IR -> E0
+        (1, 2),     # E0 -> E1
+        (2, 3),     # E1 -> E2
+        (3, 0),     # E2 -> IR
+        (3, 1),     # E2 -> E0
+    ]
+
+    # Initialize the transition probabilities
+    # The initialize has the same order as used above for allow
+    p_enter_E0, p_enter_IR = 0.1, 0.5
+    hmm.transitioner.initializer = [
+        1-p_enter_E0,
+        p_enter_E0,
+        1.,
+        1.,
+        p_enter_IR,
+        1-p_enter_IR,
+    ]
+
+    # The default emitter is a Categorical Emitter over a discrete observation space.
+    # Let the alphabet be {0, 1, 2, 3}.
+    # We define emission probabilities:
+    hmm.emitter[0].initializer = [
+        0.25, 0.25, 0.25, 0.25,   # IR
+        0.4, 0.2, 0.2, 0.2,       # E0
+        0.4, 0.2, 0.2, 0.2,       # E1
+        0.4, 0.2, 0.2, 0.2,       # E2
+    ]
+    # Note that HidTen support multiple emitters, which is why the emitter property
+    # is a list of emitters - by default only containing the Categorical Emitter.
+
+In TensorFlow, a layer has to be built to be used. Run:
+
+.. code-block:: python
+
+    hmm.build((None, None, 4))
+
+We can now inspect the transition- and emission-matrices that we've just defined:
+
+.. code-block:: python
+
+    hmm.transitioner.matrix()
+
+.. code-block:: python
+
+    hmm.emitter[0].matrix()
+
+Next, we'll see how to use the `hmm` for inference.

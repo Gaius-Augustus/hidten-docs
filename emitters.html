@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Transitioners" href="transitioners.html" />
-    <link rel="prev" title="Algorithms" href="algorithms.html" /> 
+    <link rel="prev" title="Algorithms for Inference and Training" href="algorithms.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,15 +42,10 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="readme.html">README</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms for Inference and Training</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Emitters</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#what-are-emitters">What are Emitters?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#built-in-emitters">Built-in Emitters</a><ul>
@@ -87,7 +82,7 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Emitters</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/emitters.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/emitters.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -100,33 +95,49 @@
 <p>Understanding and using emission models in HidTen.</p>
 <section id="what-are-emitters">
 <h2>What are Emitters?<a class="headerlink" href="#what-are-emitters" title="Link to this heading"></a></h2>
-<!-- Explain the role of emitters in HMMs -->
+<p>Emitters are components that compute emission probabilities or scores for observations given hidden states. They define how likely each observation is to be emitted from each state.</p>
 </section>
 <section id="built-in-emitters">
 <h2>Built-in Emitters<a class="headerlink" href="#built-in-emitters" title="Link to this heading"></a></h2>
 <section id="categorical-emitters">
 <h3>Categorical Emitters<a class="headerlink" href="#categorical-emitters" title="Link to this heading"></a></h3>
-<!-- Document categorical emission models -->
+<p><a class="reference internal" href="api.html#hidten.tf.categorical.TFCategoricalEmitter" title="hidten.tf.categorical.TFCategoricalEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.categorical.TFCategoricalEmitter</span></code></a> handles discrete observations with categorical distributions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf.categorical</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFCategoricalEmitter</span>
+
+<span class="c1"># Create categorical emitter for discrete alphabet {0, 1, 2, 3}</span>
+<span class="n">emitter</span> <span class="o">=</span> <span class="n">TFCategoricalEmitter</span><span class="p">()</span>
+</pre></div>
+</div>
 </section>
 <section id="continuous-emitters">
 <h3>Continuous Emitters<a class="headerlink" href="#continuous-emitters" title="Link to this heading"></a></h3>
-<!-- Document continuous emission models -->
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.multivariate_normal.TFMultivariateNormalEmitter</span></code> handles continuous observations with multivariate normal distributions.</p>
 </section>
 </section>
 <section id="creating-custom-emitters">
 <h2>Creating Custom Emitters<a class="headerlink" href="#creating-custom-emitters" title="Link to this heading"></a></h2>
-<!-- Guide on how to implement custom emission models -->
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of custom emitter</span>
+<p>To create custom emitters, inherit from <a class="reference internal" href="api.html#hidten.emitter.Emitter" title="hidten.emitter.Emitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.emitter.Emitter</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.emitter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Emitter</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CustomEmitter</span><span class="p">(</span><span class="n">Emitter</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">emission_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observations</span><span class="p">):</span>
+        <span class="c1"># Implement your emission logic here</span>
+        <span class="k">pass</span>
 </pre></div>
 </div>
 </section>
 <section id="tensorflow-emitters">
 <h2>TensorFlow Emitters<a class="headerlink" href="#tensorflow-emitters" title="Link to this heading"></a></h2>
-<!-- Specific documentation for TF backend emitters -->
+<p>The TensorFlow backend provides several emitter implementations:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="api.html#hidten.tf.emitter.TFEmitter" title="hidten.tf.emitter.TFEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.emitter.TFEmitter</span></code></a> - Base class for TensorFlow emitters</p></li>
+<li><p><a class="reference internal" href="api.html#hidten.tf.categorical.TFCategoricalEmitter" title="hidten.tf.categorical.TFCategoricalEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.categorical.TFCategoricalEmitter</span></code></a> - Categorical emissions</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.multivariate_normal.TFMultivariateNormalEmitter</span></code> - Multivariate normal emissions</p></li>
+</ul>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
-<!-- Practical examples of using different emitters -->
+<p>See the <a class="reference internal" href="getting_started.html"><span class="doc">Getting Started</span></a> guide for practical examples of using different emitters.</p>
 </section>
 </section>
 
@@ -134,7 +145,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="algorithms.html" class="btn btn-neutral float-left" title="Algorithms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="algorithms.html" class="btn btn-neutral float-left" title="Algorithms for Inference and Training" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="transitioners.html" class="btn btn-neutral float-right" title="Transitioners" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

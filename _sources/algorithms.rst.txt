@@ -1,0 +1,99 @@
+Algorithms for Inference and Training
+=====================================
+
+Previously, we implemented a Hidden Markov Model (HMM) using HidTen. Now, let's explore the different algorithms available for inference and training.
+
+We'll need some observations to work with:
+
+.. code-block:: python
+
+    # generate some observations
+    # hidten expects inputs of shape (B, T, D), where B is the batch size,
+    # T is the sequence length, and D is the number of features
+    observations = np.random.randint(0, 4, size=(4, 10,))
+    observations = np.eye(4)[observations] # one hot
+
+Emission scores
+---------------
+
+The simplest inference we can get from an HMM is :meth:`~hidten.hmm.HMM.emission_scores`.
+
+.. code-block:: python
+
+    hmm.emission_scores(observations)
+
+This tells us how likely the observation at each time point is at each state,
+independently of the other time points.
+
+The output depends only on the emitters we have added to the model. If no emitter
+was added, a :class:`hidten.tf.categorical.TFCategoricalEmitter` is used automatically.
+
+Likelihood
+-------
+
+The likelihood of the observations given the model can be computed using the
+:meth:`~hidten.tf.forward_backward.TFForwardBackwardMixin.likelihood_log` method.
+This is useful for sequence classification tasks and *unsupervised* learning.
+
+.. code-block:: python
+
+    hmm.likelihood_log(observations)
+
+This computes the log-probability of the observed sequence under the model, marginalizing over all possible hidden state sequences.
+
+The likelihood is a result of the more general forward algorithm which computes forward scores.
+
+This algorithm exists in two variants.
+
+First, the :meth:`~hidten.tf.forward_backward.TFForwardBackwardMixin.forward_log` method.
+
+.. code-block:: python
+
+    hmm.forward_log(observations)
+
+which computes the logarithmic forward scores.
+
+
+Second, the :meth:`~hidten.tf.forward_backward.TFForwardBackwardMixin.forward_scaled` method.
+
+.. code-block:: python
+
+    hmm.forward_scaled(observations)
+
+which computes the scaled forward scores and scaling factors.
+
+
+Posterior
+---------
+
+The posterior probabilities can be computed using the :meth:`~hidten.tf.forward_backward.TFForwardBackwardMixin.posterior` method.
+This is useful for sequence-to-sequence classification tasks and *supervised* learning.
+
+.. code-block:: python
+
+    hmm.posterior(observations)
+
+This computes the posterior probabilities of the hidden states given the observed sequence.
+
+Viterbi
+-------
+
+The Viterbi algorithm finds the most likely sequence of hidden states given the observed sequence.
+The method is :meth:`~hidten.tf.viterbi.ViterbiMixin.viterbi`.
+
+.. code-block:: python
+
+    hmm.viterbi(observations)
+
+This is useful for decoding solutions from a model.
+
+Maximum expected accuracy
+-------------------------
+
+The maximum expected accuracy (MEA) is a training objective that aims to maximize the expected accuracy of the model on a given set of observations. The method is :meth:`~hidten.tf.viterbi.ViterbiMixin.maximum_expected_accuracy`.
+
+.. code-block:: python
+
+    hmm.maximum_expected_accuracy(observations)
+
+This is a useful alternative to Viterbi decoding in certain situations.

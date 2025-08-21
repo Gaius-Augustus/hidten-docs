@@ -1,21 +1,17 @@
 Welcome to hidten's documentation!
 ==================================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-   README <readme>
-   installation
-   getting_started
+.. include:: ../README.md
+   :parser: myst_parser.sphinx_
 
 .. toctree::
    :maxdepth: 2
    :caption: User Guide:
 
-   algorithms
-   emitters
-   transitioners
+   getting_started
+   algorithms.rst
+   emitters.rst
+   transitioners.rst
 
 .. toctree::
    :maxdepth: 2
