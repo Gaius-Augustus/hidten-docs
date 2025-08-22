@@ -47,16 +47,11 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms for Inference and Training</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Emitters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#what-are-emitters">What are Emitters?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#built-in-emitters">Built-in Emitters</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#categorical-emitter">Categorical Emitter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#continuous-emitters">Continuous Emitters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#padding-emitter">Padding Emitter</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#categorical">Categorical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#continuous">Continuous</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#padding">Padding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#allowing-and-sharing">Allowing and sharing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-custom-emitters">Creating Custom Emitters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tensorflow-emitters">TensorFlow Emitters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="transitioners.html">Transitioners</a></li>
@@ -94,19 +89,14 @@
   <section id="emitters">
 <h1>Emitters<a class="headerlink" href="#emitters" title="Link to this heading"></a></h1>
 <p>Understanding and using emission models in HidTen.</p>
-<section id="what-are-emitters">
-<h2>What are Emitters?<a class="headerlink" href="#what-are-emitters" title="Link to this heading"></a></h2>
 <p>Emitters are components that compute emission probabilities or scores for observations given hidden states.
 They define how likely each observation is to be emitted from each state.</p>
 <p>A <a class="reference internal" href="api.html#hidten.hmm.HMM" title="hidten.hmm.HMM"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.hmm.HMM</span></code></a> can have multiple emitters, each responsible for a different aspect of the observation space.
 New emitters can be added with <a class="reference internal" href="api.html#hidten.hmm.HMM.add_emitter" title="hidten.hmm.HMM.add_emitter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_emitter()</span></code></a>.
 When using multiple emitters, multiple input <em>tracks</em> must be provided to the <a class="reference internal" href="algorithms.html"><span class="doc">Algorithms for Inference and Training</span></a>.
 The input tracks must match the order of emitters.</p>
-</section>
-<section id="built-in-emitters">
-<h2>Built-in Emitters<a class="headerlink" href="#built-in-emitters" title="Link to this heading"></a></h2>
-<section id="categorical-emitter">
-<h3>Categorical Emitter<a class="headerlink" href="#categorical-emitter" title="Link to this heading"></a></h3>
+<section id="categorical">
+<h2>Categorical<a class="headerlink" href="#categorical" title="Link to this heading"></a></h2>
 <p><a class="reference internal" href="api.html#hidten.tf.categorical.TFCategoricalEmitter" title="hidten.tf.categorical.TFCategoricalEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.categorical.TFCategoricalEmitter</span></code></a> handles discrete observations with categorical distributions.
 As everything in HidTen, CategoricalEmitters support multiple <em>heads</em>, i.e. parallel
 models that use their own set of parameters and states.</p>
@@ -137,9 +127,9 @@ and 2 HMM heads with 3 states each:</p>
 </pre></div>
 </div>
 </section>
-<section id="continuous-emitters">
-<h3>Continuous Emitters<a class="headerlink" href="#continuous-emitters" title="Link to this heading"></a></h3>
-<p><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.multivariate_normal.TFMultivariateNormalEmitter</span></code> handles continuous
+<section id="continuous">
+<h2>Continuous<a class="headerlink" href="#continuous" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="api.html#hidten.tf.multivariate_normal.TFMVNormalEmitter" title="hidten.tf.multivariate_normal.TFMVNormalEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.multivariate_normal.TFMVNormalEmitter</span></code></a> handles continuous
 observations with multivariate normal distributions.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFHMM</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf.multivariate_normal</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFMVNormalEmitter</span>
@@ -178,38 +168,118 @@ observations with multivariate normal distributions.</p>
 </pre></div>
 </div>
 </section>
-<section id="padding-emitter">
-<h3>Padding Emitter<a class="headerlink" href="#padding-emitter" title="Link to this heading"></a></h3>
-<p>When the input sequence have variable length, we can use pad shorter sequences
-to the length of the longest sequence in a batch using padding tokens.
-In HidTen, this is realized with a special input track.
-Sequence padding can be realized by adding a <a class="reference internal" href="api.html#hidten.tf.emitter.TFPaddingEmitter" title="hidten.tf.emitter.TFPaddingEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.emitter.TFPaddingEmitter</span></code></a>.</p>
+<section id="padding">
+<h2>Padding<a class="headerlink" href="#padding" title="Link to this heading"></a></h2>
+<p>When the input sequences have variable length they can be padded
+with zeros.
+A <a class="reference internal" href="api.html#hidten.tf.emitter.TFPaddingEmitter" title="hidten.tf.emitter.TFPaddingEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.emitter.TFPaddingEmitter</span></code></a> must be added to the model that
+expects the binary padding as a separate input track, where <cite>False</cite> or <cite>0</cite>
+indicates a padding position. Padding positions will be ignored in <a class="reference internal" href="algorithms.html"><span class="doc">Algorithms for Inference and Training</span></a>.</p>
+<p>Note: HidTen only supports padding sequences to the right.</p>
+<p>The following code creates an HMM with 2 states and passes an input sequence with padding.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">hidten</span><span class="w"> </span><span class="kn">import</span> <span class="n">HMMMode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFHMM</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf.categorical</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFCategoricalEmitter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf.emitter</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFPaddingEmitter</span>
+
+<span class="n">hmm</span> <span class="o">=</span> <span class="n">TFHMM</span><span class="p">(</span><span class="n">states</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">hmm</span><span class="o">.</span><span class="n">add_emitter</span><span class="p">(</span><span class="n">TFCategoricalEmitter</span><span class="p">())</span>
+<span class="n">hmm</span><span class="o">.</span><span class="n">emitter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">allow</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">hmm</span><span class="o">.</span><span class="n">add_emitter</span><span class="p">(</span><span class="n">TFPaddingEmitter</span><span class="p">())</span>
+<span class="n">observations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="p">],</span>
+    <span class="p">[</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="p">]</span>
+<span class="p">])</span>
+<span class="n">padding</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">posterior</span> <span class="o">=</span> <span class="n">hmm</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">padding</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">HMMMode</span><span class="o">.</span><span class="n">POSTERIOR</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">,</span> <span class="n">numpy</span><span class="o">=</span>
+<span class="n">array</span><span class="p">([[[[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]],</span>
+
+        <span class="p">[[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]],</span>
+
+        <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]],</span>
+
+        <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]]],</span>
+
+
+    <span class="p">[[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]],</span>
+
+        <span class="p">[[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]],</span>
+
+        <span class="p">[[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]],</span>
+
+        <span class="p">[[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]]]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Under the hood, the PaddingEmitter creates a new state (last channel) that will
+be used only for padding positions. Notice how the previously defined HMM has
+2 states, but HMMMode.POSTERIOR returns shape <cite>[…, 3]</cite>.</p>
 </section>
+<section id="allowing-and-sharing">
+<h2>Allowing and sharing<a class="headerlink" href="#allowing-and-sharing" title="Link to this heading"></a></h2>
+<p>Emissions of specific symbols at specific states can be allowed or disallowed
+using the <a class="reference internal" href="api.html#hidten.emitter.Emitter.allow" title="hidten.emitter.Emitter.allow"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hidten.emitter.Emitter.allow</span></code></a> property.</p>
+<p>With the <a class="reference internal" href="api.html#hidten.emitter.Emitter.share" title="hidten.emitter.Emitter.share"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hidten.emitter.Emitter.share</span></code></a> property, it can be defined that
+certain, consecutive states share the same emission parameters.</p>
+<p>In the following example, an emitter is created that only allows specific
+symbols at specific states and shares parameters between some of them:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten</span><span class="w"> </span><span class="kn">import</span> <span class="n">HMMConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf.categorical</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFCategoricalEmitter</span>
+
+<span class="n">emitter</span> <span class="o">=</span> <span class="n">TFCategoricalEmitter</span><span class="p">()</span>
+<span class="n">emitter</span><span class="o">.</span><span class="n">hmm_config</span> <span class="o">=</span> <span class="n">HMMConfig</span><span class="p">(</span><span class="n">states</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+<span class="n">emitter</span><span class="o">.</span><span class="n">allow</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># head 1</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="c1"># head 2</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># this shares the parameters of the three edges exiting state 1 in head 1</span>
+<span class="c1"># and the parameters of the two edges exiting state 2 in head 1</span>
+<span class="n">emitter</span><span class="o">.</span><span class="n">share</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span>
+
+<span class="n">emitter</span><span class="o">.</span><span class="n">initializer</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mf">0.2</span><span class="p">,</span> <span class="c1"># shared 3 times, but will be rescaled to sum to one</span>
+    <span class="mf">0.5</span><span class="p">,</span> <span class="c1"># shared 2 times</span>
+    <span class="mf">1.</span><span class="p">,</span>
+    <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span>
+    <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span>
+<span class="p">]</span>
+
+<span class="n">emitter</span><span class="o">.</span><span class="n">build</span><span class="p">((</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">emitter</span><span class="o">.</span><span class="n">matrix</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span>
+<span class="p">[[[</span><span class="mf">0.33333334</span> <span class="mf">0.33333334</span> <span class="mf">0.33333334</span> <span class="mf">0.</span>        <span class="p">]</span>
+<span class="p">[</span><span class="mf">0.5</span>        <span class="mf">0.</span>         <span class="mf">0.5</span>        <span class="mf">0.</span>        <span class="p">]</span>
+<span class="p">[</span><span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">1.</span>        <span class="p">]]</span>
+
+<span class="p">[[</span><span class="mf">0.29999998</span> <span class="mf">0.7</span>        <span class="mf">0.</span>         <span class="mf">0.</span>        <span class="p">]</span>
+<span class="p">[</span><span class="mf">0.2</span>        <span class="mf">0.3</span>        <span class="mf">0.5</span>        <span class="mf">0.</span>        <span class="p">]</span>
+<span class="p">[</span><span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>        <span class="p">]]],</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>Side note</em>: In this example we have demonstrated how to use an emitter without it
+being part of an HMM. This can be done by providing an <a class="reference internal" href="api.html#hidten.hmm.HMMConfig" title="hidten.hmm.HMMConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.hmm.HMMConfig</span></code></a>.</p>
 </section>
 <section id="creating-custom-emitters">
 <h2>Creating Custom Emitters<a class="headerlink" href="#creating-custom-emitters" title="Link to this heading"></a></h2>
-<p>To create custom emitters, inherit from <a class="reference internal" href="api.html#hidten.emitter.Emitter" title="hidten.emitter.Emitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.emitter.Emitter</span></code></a>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.emitter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Emitter</span>
+<p>To create custom emitters, inherit from <a class="reference internal" href="api.html#hidten.tf.emitter.TFEmitter" title="hidten.tf.emitter.TFEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.emitter.TFEmitter</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf.emitter</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFEmitter</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">CustomEmitter</span><span class="p">(</span><span class="n">Emitter</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">emission_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observations</span><span class="p">):</span>
-        <span class="c1"># Implement your emission logic here</span>
-        <span class="k">pass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CustomEmitter</span><span class="p">(</span><span class="n">TFEmitter</span><span class="p">):</span>
+    <span class="o">...</span>
 </pre></div>
 </div>
-</section>
-<section id="tensorflow-emitters">
-<h2>TensorFlow Emitters<a class="headerlink" href="#tensorflow-emitters" title="Link to this heading"></a></h2>
-<p>The TensorFlow backend provides several emitter implementations:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="api.html#hidten.tf.emitter.TFEmitter" title="hidten.tf.emitter.TFEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.emitter.TFEmitter</span></code></a> - Base class for TensorFlow emitters</p></li>
-<li><p><a class="reference internal" href="api.html#hidten.tf.categorical.TFCategoricalEmitter" title="hidten.tf.categorical.TFCategoricalEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.categorical.TFCategoricalEmitter</span></code></a> - Categorical emissions</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.multivariate_normal.TFMultivariateNormalEmitter</span></code> - Multivariate normal emissions</p></li>
-</ul>
-</section>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
-<p>See the <a class="reference internal" href="getting_started.html"><span class="doc">Getting Started</span></a> guide for practical examples of using different emitters.</p>
+<p><em>TODO: This section is incomplete.</em></p>
 </section>
 </section>
 

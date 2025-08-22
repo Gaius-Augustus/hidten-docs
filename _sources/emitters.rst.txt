@@ -3,9 +3,6 @@ Emitters
 
 Understanding and using emission models in HidTen.
 
-What are Emitters?
-------------------
-
 Emitters are components that compute emission probabilities or scores for observations given hidden states.
 They define how likely each observation is to be emitted from each state.
 
@@ -14,11 +11,8 @@ New emitters can be added with :meth:`~hidten.hmm.HMM.add_emitter`.
 When using multiple emitters, multiple input *tracks* must be provided to the :doc:`algorithms`.
 The input tracks must match the order of emitters.
 
-Built-in Emitters
+Categorical
 -----------------
-
-Categorical Emitter
-~~~~~~~~~~~~~~~~~~~~
 
 :class:`hidten.tf.categorical.TFCategoricalEmitter` handles discrete observations with categorical distributions.
 As everything in HidTen, CategoricalEmitters support multiple *heads*, i.e. parallel
@@ -52,10 +46,10 @@ and 2 HMM heads with 3 states each:
 
     print(hmm.emitter[0].matrix())
 
-Continuous Emitters
-~~~~~~~~~~~~~~~~~~~
+Continuous
+-----------------
 
-:class:`hidten.tf.multivariate_normal.TFMultivariateNormalEmitter` handles continuous
+:class:`hidten.tf.multivariate_normal.TFMVNormalEmitter` handles continuous
 observations with multivariate normal distributions.
 
 .. code-block:: python
@@ -95,38 +89,131 @@ observations with multivariate normal distributions.
 
     print(hmm.emitter[0].matrix())
 
-Padding Emitter
-~~~~~~~~~~~~~~~~~~~
+Padding
+-----------------
 
-When the input sequence have variable length, we can use pad shorter sequences
-to the length of the longest sequence in a batch using padding tokens.
-In HidTen, this is realized with a special input track.
-Sequence padding can be realized by adding a :class:`hidten.tf.emitter.TFPaddingEmitter`.
+When the input sequences have variable length they can be padded
+with zeros.
+A :class:`hidten.tf.emitter.TFPaddingEmitter` must be added to the model that
+expects the binary padding as a separate input track, where `False` or `0`
+indicates a padding position. Padding positions will be ignored in :doc:`algorithms`.
+
+Note: HidTen only supports padding sequences to the right.
+
+The following code creates an HMM with 2 states and passes an input sequence with padding.
+
+.. code-block:: python
+
+    import numpy as np
+
+    from hidten import HMMMode
+    from hidten.tf import TFHMM
+    from hidten.tf.categorical import TFCategoricalEmitter
+    from hidten.tf.emitter import TFPaddingEmitter
+
+    hmm = TFHMM(states=2)
+    hmm.add_emitter(TFCategoricalEmitter())
+    hmm.emitter[0].allow = [(0, 0), (1, 1)]
+    hmm.add_emitter(TFPaddingEmitter())
+    observations = np.array([
+        [ [1., 0], [1, 0], [0, 1], [0, 0] ],
+        [ [0., 1], [1, 0], [1, 0], [1, 0] ]
+    ])
+    padding = np.array([[1, 1, 1, 0], [1, 1, 1, 1]])
+    posterior = hmm(observations, padding, mode=HMMMode.POSTERIOR)
+
+.. code-block:: python
+
+    <tf.Tensor: shape=(2, 4, 1, 3), dtype=float32, numpy=
+    array([[[[1., 0., 0.]],
+
+            [[1., 0., 0.]],
+
+            [[0., 1., 0.]],
+
+            [[0., 0., 1.]]],
+
+
+        [[[0., 1., 0.]],
+
+            [[1., 0., 0.]],
+
+            [[1., 0., 0.]],
+
+            [[1., 0., 0.]]]], dtype=float32)>
+
+Under the hood, the PaddingEmitter creates a new state (last channel) that will
+be used only for padding positions. Notice how the previously defined HMM has
+2 states, but HMMMode.POSTERIOR returns shape `[..., 3]`.
+
+Allowing and sharing
+-----------------
+
+Emissions of specific symbols at specific states can be allowed or disallowed
+using the :attr:`hidten.emitter.Emitter.allow` property.
+
+With the :attr:`hidten.emitter.Emitter.share` property, it can be defined that
+certain, consecutive states share the same emission parameters.
+
+In the following example, an emitter is created that only allows specific
+symbols at specific states and shares parameters between some of them:
+
+.. code-block:: python
+
+    from hidten import HMMConfig
+    from hidten.tf.categorical import TFCategoricalEmitter
+
+    emitter = TFCategoricalEmitter()
+    emitter.hmm_config = HMMConfig(states=[3, 2])
+
+    emitter.allow = [
+        # head 1
+        (0, 0, 0), (0, 0, 1), (0, 0, 2), (0, 1, 0), (0, 1, 2), (0, 2, 3),
+        # head 2
+        (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1), (1, 1, 2)
+    ]
+
+    # this shares the parameters of the three edges exiting state 1 in head 1
+    # and the parameters of the two edges exiting state 2 in head 1
+    emitter.share = [(0, 3), (3, 5)]
+
+    emitter.initializer = [
+        0.2, # shared 3 times, but will be rescaled to sum to one
+        0.5, # shared 2 times
+        1.,
+        0.3, 0.7,
+        0.2, 0.3, 0.5
+    ]
+
+    emitter.build((None, None, 4))
+
+    print(emitter.matrix())
+
+.. code-block:: python
+
+    tf.Tensor(
+    [[[0.33333334 0.33333334 0.33333334 0.        ]
+    [0.5        0.         0.5        0.        ]
+    [0.         0.         0.         1.        ]]
+
+    [[0.29999998 0.7        0.         0.        ]
+    [0.2        0.3        0.5        0.        ]
+    [0.         0.         0.         0.        ]]], shape=(2, 3, 4), dtype=float32)
+
+*Side note*: In this example we have demonstrated how to use an emitter without it
+being part of an HMM. This can be done by providing an :class:`hidten.hmm.HMMConfig`.
+
 
 Creating Custom Emitters
 -------------------------
 
-To create custom emitters, inherit from :class:`hidten.emitter.Emitter`:
+To create custom emitters, inherit from :class:`hidten.tf.emitter.TFEmitter`:
 
 .. code-block:: python
 
-    from hidten.emitter import Emitter
+    from hidten.tf.emitter import TFEmitter
 
-    class CustomEmitter(Emitter):
-        def emission_scores(self, observations):
-            # Implement your emission logic here
-            pass
+    class CustomEmitter(TFEmitter):
+        ...
 
-TensorFlow Emitters
--------------------
-
-The TensorFlow backend provides several emitter implementations:
-
-- :class:`hidten.tf.emitter.TFEmitter` - Base class for TensorFlow emitters
-- :class:`hidten.tf.categorical.TFCategoricalEmitter` - Categorical emissions
-- :class:`hidten.tf.multivariate_normal.TFMultivariateNormalEmitter` - Multivariate normal emissions
-
-Examples
---------
-
-See the :doc:`getting_started` guide for practical examples of using different emitters.
+*TODO: This section is incomplete.*

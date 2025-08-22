@@ -3,55 +3,118 @@ Transitioners
 
 Understanding and using transition models in HidTen.
 
-What are Transitioners?
------------------------
+Transitioners are components that compute transition probabilities or scores
+between hidden states.
+They define how likely the model is to transition from one state to another.
 
-Transitioners are components that compute transition probabilities or scores between hidden states. They define how likely the model is to transition from one state to another.
-
-Built-in Transitioners
+Built-in Transitioner
 ----------------------
 
-Standard Transitioners
-~~~~~~~~~~~~~~~~~~~~~~~
+Transition matrix
+~~~~~~~~~~~~~~~~~~~~~~
 
-:class:`hidten.tf.transitioner.TFTransitioner` provides basic transition matrix functionality.
+:class:`hidten.tf.transitioner.TFTransitioner` provides basic transition matrix
+functionality. The :attr:`hidten.transitioner.Transitioner.allow` property should be
+used to restrict the state transition graph.
+
+For a single-head HMM `allow` accepts a list of index pairs, describing directional
+edges between state pairs. For the multi-head case, we can `allow` like this:
 
 .. code-block:: python
 
     from hidten.tf.transitioner import TFTransitioner
-    
-    # Create transitioner with transition matrix
+
     transitioner = TFTransitioner()
+    transitioner.hmm_config = HMMConfig(states=[5, 5])
+    transitioner.allow = [
+        (0, 0, 0), (0, 0, 3), (0, 1, 3), (0, 2, 1), (0, 2, 4),
+        (0, 3, 1), (0, 4, 1), (0, 4, 2), (0, 4, 3),
+        (1, 0, 2), (1, 1, 4), (1, 2, 4), (1, 3, 1), (1, 4, 1)
+    ]
+    transitioner.initializer = [
+        0.4, 0.6, 1., 0.5, 0.5,
+        1., 0.1, 0.2, 0.7,
+        1., 1., 1., 1., 1.
+    ]
+    transitioner.build()
 
-Dense Transitioners
-~~~~~~~~~~~~~~~~~~~
+    print(transitioner.matrix())
 
-:class:`hidten.tf.dense.TFDenseTransitioner` handles fully-connected transition models.
+.. code-block:: python
+
+    tf.Tensor(
+    [[[0.39999998 0.         0.         0.6        0.        ]
+    [0.         0.         0.         1.         0.        ]
+    [0.         0.5        0.         0.         0.5       ]
+    [0.         1.         0.         0.         0.        ]
+    [0.         0.09999999 0.19999999 0.7        0.        ]]
+
+    [[0.         0.         1.         0.         0.        ]
+    [0.         0.         0.         0.         1.        ]
+    [0.         0.         0.         0.         1.        ]
+    [0.         1.         0.         0.         0.        ]
+    [0.         1.         0.         0.         0.        ]]], shape=(2, 5, 5), dtype=float32)
+
+The initializer is a list of probabilities that has the same length and order as
+used for `allow`.
+
+Note: `allow` is a *hard* constraint. Disallowed transitions will not be taken
+into account during training or inference and they can never be non-zero.
+
+Starting Distribution
+~~~~~~~~~~~~~~~~~~~~~~
+
+The :attr:`hidten.transitioner.Transitioner.allow_start` property should be
+used to restrict the starting distribution.
+
+E.g. allowing only the first and third state as valid starting states would look
+like this:
+
+.. code-block:: python
+
+    from hidten.tf.transitioner import TFTransitioner
+
+    transitioner = TFTransitioner()
+    transitioner.hmm_config = HMMConfig(states=[5])
+    transitioner.allow_start = [0, 2]
+    transitioner.initializer_start = [0.4, 0.6]
+    transitioner.build()
+
+    print(transitioner.start_dist())
+
+.. code-block:: python
+
+    tf.Tensor([[0.39999998 0.         0.6        0.         0.        ]], shape=(1, 5), dtype=float32)
+
+Note: It is not always useful to restrict the starting distribution. You might just
+want to provide a :attr:`hidten.transitioner.Transitioner.initializer_start` that
+contains probabilities for all states:
+
+.. code-block:: python
+
+    from hidten.tf.transitioner import TFTransitioner
+
+    transitioner = TFTransitioner()
+    transitioner.hmm_config = HMMConfig(states=[5])
+    transitioner.initializer_start = [0.3, 0.5, 0., 0.1, 0.1]
+    transitioner.build()
+
+    print(transitioner.start_dist())
+
+Note: In this example, the third state is *initialized* with a probability of zero,
+but since starting in this state is *allowed* (i.e. it has not been *disallowed*),
+a non-zero probability could be *learned*.
+
+Sharing
+-----------------
+
+With the :attr:`hidten.transitioner.Transitioner.share` property, it can be
+defined that certain, consecutive transitions share the same transition parameters.
+
 
 Creating Custom Transitioners
 ------------------------------
 
-To create custom transitioners, inherit from :class:`hidten.transitioner.Transitioner`:
+*TODO: This section is not yet complete.*
 
-.. code-block:: python
-
-    from hidten.transitioner import Transitioner
-    
-    class CustomTransitioner(Transitioner):
-        def transition_scores(self, states):
-            # Implement your transition logic here
-            pass
-
-TensorFlow Transitioners
-------------------------
-
-The TensorFlow backend provides several transitioner implementations:
-
-- :class:`hidten.tf.transitioner.TFTransitioner` - Base class for TensorFlow transitioners
-- :class:`hidten.tf.dense.TFDenseTransitioner` - Dense transition matrices
-- :class:`hidten.tf.sparse.TFSparseTransitioner` - Sparse transition matrices for efficiency
-
-Examples
---------
-
-See the :doc:`getting_started` guide for practical examples of using different transitioners.
+To create custom transitioners, inherit from :class:`hidten.tf.transitioner.TFTransitioner`.

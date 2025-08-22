@@ -48,15 +48,13 @@
 <li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms for Inference and Training</a></li>
 <li class="toctree-l1"><a class="reference internal" href="emitters.html">Emitters</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Transitioners</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#what-are-transitioners">What are Transitioners?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#built-in-transitioners">Built-in Transitioners</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#standard-transitioners">Standard Transitioners</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dense-transitioners">Dense Transitioners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#built-in-transitioner">Built-in Transitioner</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#transition-matrix">Transition matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#starting-distribution">Starting Distribution</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#sharing">Sharing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-custom-transitioners">Creating Custom Transitioners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#tensorflow-transitioners">TensorFlow Transitioners</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
 </ul>
@@ -93,51 +91,103 @@
   <section id="transitioners">
 <h1>Transitioners<a class="headerlink" href="#transitioners" title="Link to this heading"></a></h1>
 <p>Understanding and using transition models in HidTen.</p>
-<section id="what-are-transitioners">
-<h2>What are Transitioners?<a class="headerlink" href="#what-are-transitioners" title="Link to this heading"></a></h2>
-<p>Transitioners are components that compute transition probabilities or scores between hidden states. They define how likely the model is to transition from one state to another.</p>
-</section>
-<section id="built-in-transitioners">
-<h2>Built-in Transitioners<a class="headerlink" href="#built-in-transitioners" title="Link to this heading"></a></h2>
-<section id="standard-transitioners">
-<h3>Standard Transitioners<a class="headerlink" href="#standard-transitioners" title="Link to this heading"></a></h3>
-<p><a class="reference internal" href="api.html#hidten.tf.transitioner.TFTransitioner" title="hidten.tf.transitioner.TFTransitioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.transitioner.TFTransitioner</span></code></a> provides basic transition matrix functionality.</p>
+<p>Transitioners are components that compute transition probabilities or scores
+between hidden states.
+They define how likely the model is to transition from one state to another.</p>
+<section id="built-in-transitioner">
+<h2>Built-in Transitioner<a class="headerlink" href="#built-in-transitioner" title="Link to this heading"></a></h2>
+<section id="transition-matrix">
+<h3>Transition matrix<a class="headerlink" href="#transition-matrix" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="api.html#hidten.tf.transitioner.TFTransitioner" title="hidten.tf.transitioner.TFTransitioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.transitioner.TFTransitioner</span></code></a> provides basic transition matrix
+functionality. The <a class="reference internal" href="api.html#hidten.transitioner.Transitioner.allow" title="hidten.transitioner.Transitioner.allow"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hidten.transitioner.Transitioner.allow</span></code></a> property should be
+used to restrict the state transition graph.</p>
+<p>For a single-head HMM <cite>allow</cite> accepts a list of index pairs, describing directional
+edges between state pairs. For the multi-head case, we can <cite>allow</cite> like this:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf.transitioner</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFTransitioner</span>
 
-<span class="c1"># Create transitioner with transition matrix</span>
 <span class="n">transitioner</span> <span class="o">=</span> <span class="n">TFTransitioner</span><span class="p">()</span>
+<span class="n">transitioner</span><span class="o">.</span><span class="n">hmm_config</span> <span class="o">=</span> <span class="n">HMMConfig</span><span class="p">(</span><span class="n">states</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">transitioner</span><span class="o">.</span><span class="n">allow</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">transitioner</span><span class="o">.</span><span class="n">initializer</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span>
+    <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span>
+<span class="p">]</span>
+<span class="n">transitioner</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">transitioner</span><span class="o">.</span><span class="n">matrix</span><span class="p">())</span>
 </pre></div>
 </div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span>
+<span class="p">[[[</span><span class="mf">0.39999998</span> <span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">0.6</span>        <span class="mf">0.</span>        <span class="p">]</span>
+<span class="p">[</span><span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">1.</span>         <span class="mf">0.</span>        <span class="p">]</span>
+<span class="p">[</span><span class="mf">0.</span>         <span class="mf">0.5</span>        <span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">0.5</span>       <span class="p">]</span>
+<span class="p">[</span><span class="mf">0.</span>         <span class="mf">1.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>        <span class="p">]</span>
+<span class="p">[</span><span class="mf">0.</span>         <span class="mf">0.09999999</span> <span class="mf">0.19999999</span> <span class="mf">0.7</span>        <span class="mf">0.</span>        <span class="p">]]</span>
+
+<span class="p">[[</span><span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">1.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>        <span class="p">]</span>
+<span class="p">[</span><span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">1.</span>        <span class="p">]</span>
+<span class="p">[</span><span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">1.</span>        <span class="p">]</span>
+<span class="p">[</span><span class="mf">0.</span>         <span class="mf">1.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>        <span class="p">]</span>
+<span class="p">[</span><span class="mf">0.</span>         <span class="mf">1.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>         <span class="mf">0.</span>        <span class="p">]]],</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The initializer is a list of probabilities that has the same length and order as
+used for <cite>allow</cite>.</p>
+<p>Note: <cite>allow</cite> is a <em>hard</em> constraint. Disallowed transitions will not be taken
+into account during training or inference and they can never be non-zero.</p>
 </section>
-<section id="dense-transitioners">
-<h3>Dense Transitioners<a class="headerlink" href="#dense-transitioners" title="Link to this heading"></a></h3>
-<p><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.dense.TFDenseTransitioner</span></code> handles fully-connected transition models.</p>
+<section id="starting-distribution">
+<h3>Starting Distribution<a class="headerlink" href="#starting-distribution" title="Link to this heading"></a></h3>
+<p>The <a class="reference internal" href="api.html#hidten.transitioner.Transitioner.allow_start" title="hidten.transitioner.Transitioner.allow_start"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hidten.transitioner.Transitioner.allow_start</span></code></a> property should be
+used to restrict the starting distribution.</p>
+<p>E.g. allowing only the first and third state as valid starting states would look
+like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf.transitioner</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFTransitioner</span>
+
+<span class="n">transitioner</span> <span class="o">=</span> <span class="n">TFTransitioner</span><span class="p">()</span>
+<span class="n">transitioner</span><span class="o">.</span><span class="n">hmm_config</span> <span class="o">=</span> <span class="n">HMMConfig</span><span class="p">(</span><span class="n">states</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">transitioner</span><span class="o">.</span><span class="n">allow_start</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">transitioner</span><span class="o">.</span><span class="n">initializer_start</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]</span>
+<span class="n">transitioner</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">transitioner</span><span class="o">.</span><span class="n">start_dist</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([[</span><span class="mf">0.39999998</span> <span class="mf">0.</span>         <span class="mf">0.6</span>        <span class="mf">0.</span>         <span class="mf">0.</span>        <span class="p">]],</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note: It is not always useful to restrict the starting distribution. You might just
+want to provide a <code class="xref py py-attr docutils literal notranslate"><span class="pre">hidten.transitioner.Transitioner.initializer_start</span></code> that
+contains probabilities for all states:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf.transitioner</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFTransitioner</span>
+
+<span class="n">transitioner</span> <span class="o">=</span> <span class="n">TFTransitioner</span><span class="p">()</span>
+<span class="n">transitioner</span><span class="o">.</span><span class="n">hmm_config</span> <span class="o">=</span> <span class="n">HMMConfig</span><span class="p">(</span><span class="n">states</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">transitioner</span><span class="o">.</span><span class="n">initializer_start</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]</span>
+<span class="n">transitioner</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">transitioner</span><span class="o">.</span><span class="n">start_dist</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Note: In this example, the third state is <em>initialized</em> with a probability of zero,
+but since starting in this state is <em>allowed</em> (i.e. it has not been <em>disallowed</em>),
+a non-zero probability could be <em>learned</em>.</p>
 </section>
+</section>
+<section id="sharing">
+<h2>Sharing<a class="headerlink" href="#sharing" title="Link to this heading"></a></h2>
+<p>With the <a class="reference internal" href="api.html#hidten.transitioner.Transitioner.share" title="hidten.transitioner.Transitioner.share"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hidten.transitioner.Transitioner.share</span></code></a> property, it can be
+defined that certain, consecutive transitions share the same transition parameters.</p>
 </section>
 <section id="creating-custom-transitioners">
 <h2>Creating Custom Transitioners<a class="headerlink" href="#creating-custom-transitioners" title="Link to this heading"></a></h2>
-<p>To create custom transitioners, inherit from <a class="reference internal" href="api.html#hidten.transitioner.Transitioner" title="hidten.transitioner.Transitioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.transitioner.Transitioner</span></code></a>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.transitioner</span><span class="w"> </span><span class="kn">import</span> <span class="n">Transitioner</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">CustomTransitioner</span><span class="p">(</span><span class="n">Transitioner</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">transition_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
-        <span class="c1"># Implement your transition logic here</span>
-        <span class="k">pass</span>
-</pre></div>
-</div>
-</section>
-<section id="tensorflow-transitioners">
-<h2>TensorFlow Transitioners<a class="headerlink" href="#tensorflow-transitioners" title="Link to this heading"></a></h2>
-<p>The TensorFlow backend provides several transitioner implementations:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="api.html#hidten.tf.transitioner.TFTransitioner" title="hidten.tf.transitioner.TFTransitioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.transitioner.TFTransitioner</span></code></a> - Base class for TensorFlow transitioners</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.dense.TFDenseTransitioner</span></code> - Dense transition matrices</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.sparse.TFSparseTransitioner</span></code> - Sparse transition matrices for efficiency</p></li>
-</ul>
-</section>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
-<p>See the <a class="reference internal" href="getting_started.html"><span class="doc">Getting Started</span></a> guide for practical examples of using different transitioners.</p>
+<p><em>TODO: This section is not yet complete.</em></p>
+<p>To create custom transitioners, inherit from <a class="reference internal" href="api.html#hidten.tf.transitioner.TFTransitioner" title="hidten.tf.transitioner.TFTransitioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.transitioner.TFTransitioner</span></code></a>.</p>
 </section>
 </section>
 

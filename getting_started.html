@@ -44,10 +44,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#tensorflow">TensorFlow</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms for Inference and Training</a></li>
 <li class="toctree-l1"><a class="reference internal" href="emitters.html">Emitters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transitioners.html">Transitioners</a></li>
@@ -84,8 +81,6 @@
              
   <section id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h1>
-<section id="tensorflow">
-<h2>TensorFlow<a class="headerlink" href="#tensorflow" title="Link to this heading"></a></h2>
 <p>Let’s implement an HMM with the following state transition graph using HidTen:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">IR</span> <span class="o">-&gt;</span> <span class="n">E0</span> <span class="o">-&gt;</span> <span class="n">E1</span> <span class="o">-&gt;</span> <span class="n">E2</span>
 <span class="o">^------^-----------|</span>
@@ -97,8 +92,9 @@ Under the hood, two important components are created automatically
 (if the user does not provide them specifically), that are
 used by all HidTen algorithms:
 The <a class="reference internal" href="api.html#hidten.emitter.Emitter" title="hidten.emitter.Emitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.emitter.Emitter</span></code></a> and the <a class="reference internal" href="api.html#hidten.transitioner.Transitioner" title="hidten.transitioner.Transitioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.transitioner.Transitioner</span></code></a>.</p>
-<p>The Emitter computes <strong>emission scores</strong> from observations and the Transitioner
-uses the state transition graph given to it to compute steps in a Markov chain.</p>
+<p>The Emitter computes emission scores from observations.
+The Transitioner implements the state transition graph and computes timesteps in
+a Markov chain.</p>
 <p>Let’s see this in action:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new HMM with 4 states</span>
 <span class="n">hmm</span> <span class="o">=</span> <span class="n">TFHMM</span><span class="p">(</span><span class="n">states</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
@@ -153,7 +149,6 @@ uses the state transition graph given to it to compute steps in a Markov chain.<
 </pre></div>
 </div>
 <p>Next, we’ll see how to use the <cite>hmm</cite> for inference.</p>
-</section>
 </section>
 
 

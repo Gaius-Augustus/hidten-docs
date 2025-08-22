@@ -1,9 +1,6 @@
 Getting Started
 ===============
 
-TensorFlow
-----------
-
 Let's implement an HMM with the following state transition graph using HidTen:
 
 .. code-block:: python
@@ -18,8 +15,9 @@ Under the hood, two important components are created automatically
 used by all HidTen algorithms:
 The :class:`hidten.emitter.Emitter` and the :class:`hidten.transitioner.Transitioner`.
 
-The Emitter computes **emission scores** from observations and the Transitioner
-uses the state transition graph given to it to compute steps in a Markov chain.
+The Emitter computes emission scores from observations.
+The Transitioner implements the state transition graph and computes timesteps in
+a Markov chain.
 
 Let's see this in action:
 
