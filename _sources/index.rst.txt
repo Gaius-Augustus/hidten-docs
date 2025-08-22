@@ -12,6 +12,7 @@ Welcome to hidten's documentation!
    algorithms.rst
    emitters.rst
    transitioners.rst
+   advanced.rst
 
 .. toctree::
    :maxdepth: 2
