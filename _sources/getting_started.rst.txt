@@ -62,8 +62,8 @@ Let's see this in action:
         0.4, 0.2, 0.2, 0.2,       # E1
         0.4, 0.2, 0.2, 0.2,       # E2
     ]
-    # Note that HidTen support multiple emitters, which is why the emitter property
-    # is a list of emitters - by default only containing the Categorical Emitter.
+    # Note that HidTen supports multiple emitters, which is why the emitter property
+    # is a list of emitters - by default only containing the CategoricalEmitter.
 
 In TensorFlow, a layer has to be built to be used. Run:
 

@@ -49,8 +49,9 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Emitters</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#what-are-emitters">What are Emitters?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#built-in-emitters">Built-in Emitters</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#categorical-emitters">Categorical Emitters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#categorical-emitter">Categorical Emitter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#continuous-emitters">Continuous Emitters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#padding-emitter">Padding Emitter</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-custom-emitters">Creating Custom Emitters</a></li>
@@ -95,23 +96,94 @@
 <p>Understanding and using emission models in HidTen.</p>
 <section id="what-are-emitters">
 <h2>What are Emitters?<a class="headerlink" href="#what-are-emitters" title="Link to this heading"></a></h2>
-<p>Emitters are components that compute emission probabilities or scores for observations given hidden states. They define how likely each observation is to be emitted from each state.</p>
+<p>Emitters are components that compute emission probabilities or scores for observations given hidden states.
+They define how likely each observation is to be emitted from each state.</p>
+<p>A <a class="reference internal" href="api.html#hidten.hmm.HMM" title="hidten.hmm.HMM"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.hmm.HMM</span></code></a> can have multiple emitters, each responsible for a different aspect of the observation space.
+New emitters can be added with <a class="reference internal" href="api.html#hidten.hmm.HMM.add_emitter" title="hidten.hmm.HMM.add_emitter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_emitter()</span></code></a>.
+When using multiple emitters, multiple input <em>tracks</em> must be provided to the <a class="reference internal" href="algorithms.html"><span class="doc">Algorithms for Inference and Training</span></a>.
+The input tracks must match the order of emitters.</p>
 </section>
 <section id="built-in-emitters">
 <h2>Built-in Emitters<a class="headerlink" href="#built-in-emitters" title="Link to this heading"></a></h2>
-<section id="categorical-emitters">
-<h3>Categorical Emitters<a class="headerlink" href="#categorical-emitters" title="Link to this heading"></a></h3>
-<p><a class="reference internal" href="api.html#hidten.tf.categorical.TFCategoricalEmitter" title="hidten.tf.categorical.TFCategoricalEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.categorical.TFCategoricalEmitter</span></code></a> handles discrete observations with categorical distributions.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf.categorical</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFCategoricalEmitter</span>
+<section id="categorical-emitter">
+<h3>Categorical Emitter<a class="headerlink" href="#categorical-emitter" title="Link to this heading"></a></h3>
+<p><a class="reference internal" href="api.html#hidten.tf.categorical.TFCategoricalEmitter" title="hidten.tf.categorical.TFCategoricalEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.categorical.TFCategoricalEmitter</span></code></a> handles discrete observations with categorical distributions.
+As everything in HidTen, CategoricalEmitters support multiple <em>heads</em>, i.e. parallel
+models that use their own set of parameters and states.</p>
+<p>In the following example, a CategoricalEmitter is created for a discrete alphabet {0, 1, 2, 3}
+and 2 HMM heads with 3 states each:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFHMM</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf.categorical</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFCategoricalEmitter</span>
+
+<span class="n">hmm</span> <span class="o">=</span> <span class="n">TFHMM</span><span class="p">(</span><span class="n">states</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 
 <span class="c1"># Create categorical emitter for discrete alphabet {0, 1, 2, 3}</span>
 <span class="n">emitter</span> <span class="o">=</span> <span class="n">TFCategoricalEmitter</span><span class="p">()</span>
+<span class="n">hmm</span><span class="o">.</span><span class="n">add_emitter</span><span class="p">(</span><span class="n">emitter</span><span class="p">)</span>
+<span class="n">emitter</span><span class="o">.</span><span class="n">initializer</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># head 1</span>
+    <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span>  <span class="c1"># state 1</span>
+    <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span>      <span class="c1"># state 2</span>
+    <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span>        <span class="c1"># state 3</span>
+    <span class="c1"># head 2</span>
+    <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span>      <span class="c1"># state 1</span>
+    <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span>      <span class="c1"># state 2</span>
+    <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span>       <span class="c1"># state 3</span>
+<span class="p">]</span>
+
+<span class="n">hmm</span><span class="o">.</span><span class="n">build</span><span class="p">((</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">hmm</span><span class="o">.</span><span class="n">emitter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">matrix</span><span class="p">())</span>
 </pre></div>
 </div>
 </section>
 <section id="continuous-emitters">
 <h3>Continuous Emitters<a class="headerlink" href="#continuous-emitters" title="Link to this heading"></a></h3>
-<p><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.multivariate_normal.TFMultivariateNormalEmitter</span></code> handles continuous observations with multivariate normal distributions.</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.multivariate_normal.TFMultivariateNormalEmitter</span></code> handles continuous
+observations with multivariate normal distributions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFHMM</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf.multivariate_normal</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFMVNormalEmitter</span>
+
+<span class="n">hmm</span> <span class="o">=</span> <span class="n">TFHMM</span><span class="p">(</span><span class="n">states</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># Create categorical emitter for discrete alphabet {0, 1, 2, 3}</span>
+<span class="n">emitter</span> <span class="o">=</span> <span class="n">TFMVNormalEmitter</span><span class="p">()</span>
+<span class="n">hmm</span><span class="o">.</span><span class="n">add_emitter</span><span class="p">(</span><span class="n">emitter</span><span class="p">)</span>
+<span class="n">emitter</span><span class="o">.</span><span class="n">initializer</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># head 1, state 1</span>
+    <span class="c1"># means</span>
+    <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="c1"># variances</span>
+    <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="c1"># head 1, state 2</span>
+    <span class="c1"># means</span>
+    <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span>
+        <span class="c1"># variances</span>
+    <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="c1"># head 2, state 1</span>
+    <span class="c1"># means</span>
+    <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span>
+        <span class="c1"># variances</span>
+    <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="c1"># head 2, state 2</span>
+    <span class="c1"># means</span>
+    <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span>
+        <span class="c1"># variances</span>
+    <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">hmm</span><span class="o">.</span><span class="n">build</span><span class="p">((</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">hmm</span><span class="o">.</span><span class="n">emitter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">matrix</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+<section id="padding-emitter">
+<h3>Padding Emitter<a class="headerlink" href="#padding-emitter" title="Link to this heading"></a></h3>
+<p>When the input sequence have variable length, we can use pad shorter sequences
+to the length of the longest sequence in a batch using padding tokens.
+In HidTen, this is realized with a special input track.
+Sequence padding can be realized by adding a <a class="reference internal" href="api.html#hidten.tf.emitter.TFPaddingEmitter" title="hidten.tf.emitter.TFPaddingEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.emitter.TFPaddingEmitter</span></code></a>.</p>
 </section>
 </section>
 <section id="creating-custom-emitters">

@@ -6,27 +6,102 @@ Understanding and using emission models in HidTen.
 What are Emitters?
 ------------------
 
-Emitters are components that compute emission probabilities or scores for observations given hidden states. They define how likely each observation is to be emitted from each state.
+Emitters are components that compute emission probabilities or scores for observations given hidden states.
+They define how likely each observation is to be emitted from each state.
+
+A :class:`hidten.hmm.HMM` can have multiple emitters, each responsible for a different aspect of the observation space.
+New emitters can be added with :meth:`~hidten.hmm.HMM.add_emitter`.
+When using multiple emitters, multiple input *tracks* must be provided to the :doc:`algorithms`.
+The input tracks must match the order of emitters.
 
 Built-in Emitters
 -----------------
 
-Categorical Emitters
+Categorical Emitter
 ~~~~~~~~~~~~~~~~~~~~
 
 :class:`hidten.tf.categorical.TFCategoricalEmitter` handles discrete observations with categorical distributions.
+As everything in HidTen, CategoricalEmitters support multiple *heads*, i.e. parallel
+models that use their own set of parameters and states.
+
+In the following example, a CategoricalEmitter is created for a discrete alphabet {0, 1, 2, 3}
+and 2 HMM heads with 3 states each:
 
 .. code-block:: python
 
+    from hidten.tf import TFHMM
     from hidten.tf.categorical import TFCategoricalEmitter
-    
+
+    hmm = TFHMM(states=[3, 3])
+
     # Create categorical emitter for discrete alphabet {0, 1, 2, 3}
     emitter = TFCategoricalEmitter()
+    hmm.add_emitter(emitter)
+    emitter.initializer = [
+        # head 1
+        0.25, 0.25, 0.25, 0.25,  # state 1
+        0.4, 0.2, 0.2, 0.2,      # state 2
+        0., 0.5, 0.5, 0.,        # state 3
+        # head 2
+        0.3, 0.3, 0.2, 0.2,      # state 1
+        0.5, 0.1, 0.2, 0.2,      # state 2
+        0., 0.4, 0.4, 0.2,       # state 3
+    ]
+
+    hmm.build((None, None, 4))
+
+    print(hmm.emitter[0].matrix())
 
 Continuous Emitters
 ~~~~~~~~~~~~~~~~~~~
 
-:class:`hidten.tf.multivariate_normal.TFMultivariateNormalEmitter` handles continuous observations with multivariate normal distributions.
+:class:`hidten.tf.multivariate_normal.TFMultivariateNormalEmitter` handles continuous
+observations with multivariate normal distributions.
+
+.. code-block:: python
+
+    from hidten.tf import TFHMM
+    from hidten.tf.multivariate_normal import TFMVNormalEmitter
+
+    hmm = TFHMM(states=[2, 2])
+
+    # Create categorical emitter for discrete alphabet {0, 1, 2, 3}
+    emitter = TFMVNormalEmitter()
+    hmm.add_emitter(emitter)
+    emitter.initializer = [
+        # head 1, state 1
+        # means
+        0.0, 0.0, 0.0,
+        # variances
+        0.9, 0.5, 1.0,
+        # head 1, state 2
+        # means
+        0.5, 0.4, 0.6,
+            # variances
+        1.2, 0.5, 1.0,
+        # head 2, state 1
+        # means
+        1.0, 2.0, 3.0,
+            # variances
+        0.9, 0.7, 1.0,
+        # head 2, state 2
+        # means
+        0.7, 0.2, 0.3,
+            # variances
+        1, 1, 1,
+    ]
+
+    hmm.build((None, None, 3))
+
+    print(hmm.emitter[0].matrix())
+
+Padding Emitter
+~~~~~~~~~~~~~~~~~~~
+
+When the input sequence have variable length, we can use pad shorter sequences
+to the length of the longest sequence in a batch using padding tokens.
+In HidTen, this is realized with a special input track.
+Sequence padding can be realized by adding a :class:`hidten.tf.emitter.TFPaddingEmitter`.
 
 Creating Custom Emitters
 -------------------------
@@ -36,7 +111,7 @@ To create custom emitters, inherit from :class:`hidten.emitter.Emitter`:
 .. code-block:: python
 
     from hidten.emitter import Emitter
-    
+
     class CustomEmitter(Emitter):
         def emission_scores(self, observations):
             # Implement your emission logic here
