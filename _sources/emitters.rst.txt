@@ -12,9 +12,9 @@ When using multiple emitters, multiple input *tracks* must be provided to the :d
 The input tracks must match the order of emitters.
 
 Categorical
------------------
+-----------
 
-:class:`hidten.tf.categorical.TFCategoricalEmitter` handles discrete observations with categorical distributions.
+:class:`hidten.tf.emitter.categorical.TFCategoricalEmitter` handles discrete observations with categorical distributions.
 As everything in HidTen, CategoricalEmitters support multiple *heads*, i.e. parallel
 models that use their own set of parameters and states.
 
@@ -47,9 +47,9 @@ and 2 HMM heads with 3 states each:
     print(hmm.emitter[0].matrix())
 
 Continuous
------------------
+----------
 
-:class:`hidten.tf.multivariate_normal.TFMVNormalEmitter` handles continuous
+:class:`hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter` handles continuous
 observations with multivariate normal distributions.
 
 .. code-block:: python
@@ -90,11 +90,11 @@ observations with multivariate normal distributions.
     print(hmm.emitter[0].matrix())
 
 Padding
------------------
+-------
 
 When the input sequences have variable length they can be padded
 with zeros.
-A :class:`hidten.tf.emitter.TFPaddingEmitter` must be added to the model that
+A :class:`hidten.tf.emitter.base.TFPaddingEmitter` must be added to the model that
 expects the binary padding as a separate input track, where `False` or `0`
 indicates a padding position. Padding positions will be ignored in :doc:`algorithms`.
 
@@ -147,7 +147,7 @@ be used only for padding positions. Notice how the previously defined HMM has
 2 states, but HMMMode.POSTERIOR returns shape `[..., 3]`.
 
 Allowing and sharing
------------------
+--------------------
 
 Emissions of specific symbols at specific states can be allowed or disallowed
 using the :attr:`hidten.emitter.Emitter.allow` property.
@@ -205,9 +205,9 @@ being part of an HMM. This can be done by providing an :class:`hidten.hmm.HMMCon
 
 
 Creating Custom Emitters
--------------------------
+------------------------
 
-To create custom emitters, inherit from :class:`hidten.tf.emitter.TFEmitter`:
+To create custom emitters, inherit from :class:`hidten.tf.emitter.base.TFEmitter`:
 
 .. code-block:: python
 

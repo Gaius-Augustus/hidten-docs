@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Advanced" href="advanced.html" />
+    <link rel="next" title="Priors" href="priors.html" />
     <link rel="prev" title="Emitters" href="emitters.html" /> 
 </head>
 
@@ -57,6 +57,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#creating-custom-transitioners">Creating Custom Transitioners</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="priors.html">Priors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
@@ -100,7 +101,7 @@ They define how likely the model is to transition from one state to another.</p>
 <section id="transition-matrix">
 <h3>Transition matrix<a class="headerlink" href="#transition-matrix" title="Link to this heading"></a></h3>
 <p><a class="reference internal" href="api.html#hidten.tf.transitioner.TFTransitioner" title="hidten.tf.transitioner.TFTransitioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.transitioner.TFTransitioner</span></code></a> provides basic transition matrix
-functionality. The <a class="reference internal" href="api.html#hidten.transitioner.Transitioner.allow" title="hidten.transitioner.Transitioner.allow"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hidten.transitioner.Transitioner.allow</span></code></a> property should be
+functionality. The <code class="xref py py-attr docutils literal notranslate"><span class="pre">hidten.transitioner.Transitioner.allow</span></code> property should be
 used to restrict the state transition graph.</p>
 <p>For a single-head HMM <cite>allow</cite> accepts a list of index pairs, describing directional
 edges between state pairs. For the multi-head case, we can <cite>allow</cite> like this:</p>
@@ -182,7 +183,7 @@ a non-zero probability could be <em>learned</em>.</p>
 </section>
 <section id="sharing">
 <h2>Sharing<a class="headerlink" href="#sharing" title="Link to this heading"></a></h2>
-<p>With the <a class="reference internal" href="api.html#hidten.transitioner.Transitioner.share" title="hidten.transitioner.Transitioner.share"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hidten.transitioner.Transitioner.share</span></code></a> property, it can be
+<p>With the <code class="xref py py-attr docutils literal notranslate"><span class="pre">hidten.transitioner.Transitioner.share</span></code> property, it can be
 defined that certain, consecutive transitions share the same transition parameters.</p>
 </section>
 <section id="creating-custom-transitioners">
@@ -197,7 +198,7 @@ defined that certain, consecutive transitions share the same transition paramete
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="emitters.html" class="btn btn-neutral float-left" title="Emitters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="advanced.html" class="btn btn-neutral float-right" title="Advanced" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="priors.html" class="btn btn-neutral float-right" title="Priors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -45,6 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms for Inference and Training</a></li>
 <li class="toctree-l1"><a class="reference internal" href="emitters.html">Emitters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transitioners.html">Transitioners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="priors.html">Priors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
@@ -84,14 +85,12 @@
  | <a href="#A"><strong>A</strong></a>
  | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
- | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
  | <a href="#J"><strong>J</strong></a>
- | <a href="#K"><strong>K</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
@@ -118,12 +117,10 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#hidten.hmm.HMM.add_emitter">add_emitter() (hidten.hmm.HMM method)</a>
 </li>
-      <li><a href="api.html#hidten.emitter.Emitter.allow">allow (hidten.emitter.Emitter property)</a>
+      <li><a href="api.html#hidten.emitter.PaddingEmitter.allow">allow (hidten.emitter.PaddingEmitter property)</a>
 
       <ul>
-        <li><a href="api.html#hidten.emitter.PaddingEmitter.allow">(hidten.emitter.PaddingEmitter property)</a>
-</li>
-        <li><a href="api.html#hidten.transitioner.Transitioner.allow">(hidten.transitioner.Transitioner property)</a>
+        <li><a href="api.html#hidten.generic.Module.allow">(hidten.generic.Module property)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -142,11 +139,15 @@
 </li>
       <li><a href="api.html#hidten.tf.forward_backward.TFForwardBackwardMixin.backward_log">backward_log() (hidten.tf.forward_backward.TFForwardBackwardMixin method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#hidten.tf.hmm.TFHMM.build">build() (hidten.tf.hmm.TFHMM method)</a>
+      <li><a href="api.html#hidten.tf.emitter.categorical.TFCategoricalEmitter.build">build() (hidten.tf.emitter.categorical.TFCategoricalEmitter method)</a>
 
       <ul>
+        <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.build">(hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter method)</a>
+</li>
+        <li><a href="api.html#hidten.tf.hmm.TFHMM.build">(hidten.tf.hmm.TFHMM method)</a>
+</li>
+        <li><a href="api.html#hidten.tf.prior.dirichlet.TFDirichletPrior.build">(hidten.tf.prior.dirichlet.TFDirichletPrior method)</a>
+</li>
         <li><a href="api.html#hidten.tf.transitioner.TFTransitioner.build">(hidten.tf.transitioner.TFTransitioner method)</a>
 </li>
       </ul></li>
@@ -156,23 +157,21 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#hidten.tf.hmm.TFHMM.call">call() (hidten.tf.hmm.TFHMM method)</a>
+      <li><a href="api.html#hidten.tf.emitter.base.TFEmitter.call">call() (hidten.tf.emitter.base.TFEmitter method)</a>
 
       <ul>
+        <li><a href="api.html#hidten.tf.emitter.base.TFPaddingEmitter.call">(hidten.tf.emitter.base.TFPaddingEmitter method)</a>
+</li>
+        <li><a href="api.html#hidten.tf.hmm.TFHMM.call">(hidten.tf.hmm.TFHMM method)</a>
+</li>
+        <li><a href="api.html#hidten.tf.prior.base.TFPrior.call">(hidten.tf.prior.base.TFPrior method)</a>
+</li>
         <li><a href="api.html#hidten.tf.transitioner.TFTransitioner.call">(hidten.tf.transitioner.TFTransitioner method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#hidten.hmm.HMM.config">config (hidten.hmm.HMM attribute)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="D">D</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#hidten.generic.Distribution">Distribution (class in hidten.generic)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -189,11 +188,11 @@
 </li>
         <li><a href="api.html#hidten.hmm.HMM.emission_scores">(hidten.hmm.HMM method)</a>
 </li>
-      </ul></li>
-      <li><a href="api.html#hidten.emitter.Emitter.emit">emit (hidten.emitter.Emitter property)</a>
-
-      <ul>
-        <li><a href="api.html#hidten.emitter.PaddingEmitter.emit">(hidten.emitter.PaddingEmitter property)</a>
+        <li><a href="api.html#hidten.tf.emitter.base.TFPaddingEmitter.emission_scores">(hidten.tf.emitter.base.TFPaddingEmitter method)</a>
+</li>
+        <li><a href="api.html#hidten.tf.emitter.categorical.TFCategoricalEmitter.emission_scores">(hidten.tf.emitter.categorical.TFCategoricalEmitter method)</a>
+</li>
+        <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.emission_scores">(hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -226,13 +225,19 @@
 </li>
       <li><a href="api.html#hidten.tf.forward_backward.TFForwardBackwardMixin.forward_log">forward_log() (hidten.tf.forward_backward.TFForwardBackwardMixin method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#hidten.hmm.HMMMode.FORWARD_SCALED">FORWARD_SCALED (hidten.hmm.HMMMode attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#hidten.tf.forward_backward.TFForwardBackwardMixin.forward_scaled">forward_scaled() (hidten.tf.forward_backward.TFForwardBackwardMixin method)</a>
 </li>
-      <li><a href="api.html#hidten.tf.hmm.TFHMM.from_config">from_config() (hidten.tf.hmm.TFHMM class method)</a>
+      <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.from_config">from_config() (hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter class method)</a>
+
+      <ul>
+        <li><a href="api.html#hidten.tf.hmm.TFHMM.from_config">(hidten.tf.hmm.TFHMM class method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig.full_covariance">full_covariance (hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -240,11 +245,15 @@
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#hidten.tf.hmm.TFHMM.get_config">get_config() (hidten.tf.hmm.TFHMM method)</a>
+      <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.get_config">get_config() (hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter method)</a>
+
+      <ul>
+        <li><a href="api.html#hidten.tf.hmm.TFHMM.get_config">(hidten.tf.hmm.TFHMM method)</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#hidten.generic.Module.get_parameters">get_parameters() (hidten.generic.Module method)</a>
+      <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.get_default_initializer">get_default_initializer() (hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -297,10 +306,24 @@
 </li>
       </ul></li>
       <li>
-    hidten.tf.emitter
+    hidten.tf.emitter.base
 
       <ul>
-        <li><a href="api.html#module-hidten.tf.emitter">module</a>
+        <li><a href="api.html#module-hidten.tf.emitter.base">module</a>
+</li>
+      </ul></li>
+      <li>
+    hidten.tf.emitter.categorical
+
+      <ul>
+        <li><a href="api.html#module-hidten.tf.emitter.categorical">module</a>
+</li>
+      </ul></li>
+      <li>
+    hidten.tf.emitter.multivariate_normal
+
+      <ul>
+        <li><a href="api.html#module-hidten.tf.emitter.multivariate_normal">module</a>
 </li>
       </ul></li>
       <li>
@@ -310,6 +333,8 @@
         <li><a href="api.html#module-hidten.tf.forward_backward">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     hidten.tf.hmm
 
@@ -317,8 +342,20 @@
         <li><a href="api.html#module-hidten.tf.hmm">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    hidten.tf.prior.base
+
+      <ul>
+        <li><a href="api.html#module-hidten.tf.prior.base">module</a>
+</li>
+      </ul></li>
+      <li>
+    hidten.tf.prior.dirichlet
+
+      <ul>
+        <li><a href="api.html#module-hidten.tf.prior.dirichlet">module</a>
+</li>
+      </ul></li>
       <li>
     hidten.tf.scan
 
@@ -363,12 +400,8 @@
       </ul></li>
       <li><a href="api.html#hidten.hmm.HMM">HMM (class in hidten.hmm)</a>
 </li>
-      <li><a href="api.html#hidten.emitter.Emitter.hmm_config">hmm_config (hidten.emitter.Emitter property)</a>
-
-      <ul>
-        <li><a href="api.html#hidten.transitioner.Transitioner.hmm_config">(hidten.transitioner.Transitioner property)</a>
+      <li><a href="api.html#hidten.generic.Module.hmm_config">hmm_config (hidten.generic.Module property)</a>
 </li>
-      </ul></li>
       <li><a href="api.html#hidten.hmm.HMMConfig">HMMConfig (class in hidten.hmm)</a>
 </li>
       <li><a href="api.html#hidten.hmm.HMMMode">HMMMode (class in hidten.hmm)</a>
@@ -379,8 +412,18 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#hidten.tf.transitioner.TFTransitioner.initializer">initializer (hidten.tf.transitioner.TFTransitioner property)</a>
+      <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.init_transform">init_transform() (hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter method)</a>
 </li>
+      <li><a href="api.html#hidten.tf.emitter.categorical.TFCategoricalEmitter.initializer">initializer (hidten.tf.emitter.categorical.TFCategoricalEmitter property)</a>
+
+      <ul>
+        <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.initializer">(hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter property)</a>
+</li>
+        <li><a href="api.html#hidten.tf.prior.dirichlet.TFDirichletPrior.initializer">(hidten.tf.prior.dirichlet.TFDirichletPrior property)</a>
+</li>
+        <li><a href="api.html#hidten.tf.transitioner.TFTransitioner.initializer">(hidten.tf.transitioner.TFTransitioner property)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#hidten.tf.transitioner.TFTransitioner.initializer_start">initializer_start (hidten.tf.transitioner.TFTransitioner property)</a>
@@ -402,14 +445,6 @@
   </ul></td>
 </tr></table>
 
-<h2 id="K">K</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#hidten.emitter.Emitter.kernel_size">kernel_size (hidten.emitter.Emitter property)</a>
-</li>
-  </ul></td>
-</tr></table>
-
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -419,7 +454,7 @@
 </li>
       <li><a href="api.html#hidten.tf.util.local_to_global_factors">local_to_global_factors() (in module hidten.tf.util)</a>
 </li>
-      <li><a href="api.html#hidten.generic.Distribution.log_prob">log_prob() (hidten.generic.Distribution method)</a>
+      <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.log_prob">log_prob() (hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -442,9 +477,25 @@
       <li><a href="api.html#hidten.emitter.Emitter.matrix">matrix() (hidten.emitter.Emitter method)</a>
 
       <ul>
+        <li><a href="api.html#hidten.generic.Module.matrix">(hidten.generic.Module method)</a>
+</li>
+        <li><a href="api.html#hidten.tf.emitter.base.TFPaddingEmitter.matrix">(hidten.tf.emitter.base.TFPaddingEmitter method)</a>
+</li>
+        <li><a href="api.html#hidten.tf.emitter.categorical.TFCategoricalEmitter.matrix">(hidten.tf.emitter.categorical.TFCategoricalEmitter method)</a>
+</li>
+        <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.matrix">(hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter method)</a>
+</li>
+        <li><a href="api.html#hidten.tf.prior.dirichlet.TFDirichletPrior.matrix">(hidten.tf.prior.dirichlet.TFDirichletPrior method)</a>
+</li>
         <li><a href="api.html#hidten.tf.transitioner.TFTransitioner.matrix">(hidten.tf.transitioner.TFTransitioner method)</a>
 </li>
         <li><a href="api.html#hidten.transitioner.Transitioner.matrix">(hidten.transitioner.Transitioner method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.matrix_dim">matrix_dim (hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter property)</a>
+
+      <ul>
+        <li><a href="api.html#hidten.tf.transitioner.TFTransitioner.matrix_dim">(hidten.tf.transitioner.TFTransitioner property)</a>
 </li>
       </ul></li>
       <li><a href="api.html#hidten.transitioner.TransitionMode.MAX">MAX (hidten.transitioner.TransitionMode attribute)</a>
@@ -455,7 +506,7 @@
 </li>
       <li><a href="api.html#hidten.hmm.HMMMode.MEA">MEA (hidten.hmm.HMMMode attribute)</a>
 </li>
-      <li><a href="api.html#hidten.generic.Distribution.mean">mean() (hidten.generic.Distribution method)</a>
+      <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.mean">mean() (hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter method)</a>
 </li>
       <li><a href="api.html#hidten.transitioner.Transitioner.mode">mode (hidten.transitioner.Transitioner property)</a>
 </li>
@@ -464,9 +515,13 @@
       <ul>
         <li><a href="api.html#hidten.hmm.HMMConfig.model_config">(hidten.hmm.HMMConfig attribute)</a>
 </li>
+        <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig.model_config">(hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig attribute)</a>
+</li>
       </ul></li>
       <li><a href="api.html#hidten.config.ModelConfig">ModelConfig (class in hidten.config)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     module
 
@@ -483,11 +538,19 @@
 </li>
         <li><a href="api.html#module-hidten.prior">hidten.prior</a>
 </li>
-        <li><a href="api.html#module-hidten.tf.emitter">hidten.tf.emitter</a>
+        <li><a href="api.html#module-hidten.tf.emitter.base">hidten.tf.emitter.base</a>
+</li>
+        <li><a href="api.html#module-hidten.tf.emitter.categorical">hidten.tf.emitter.categorical</a>
+</li>
+        <li><a href="api.html#module-hidten.tf.emitter.multivariate_normal">hidten.tf.emitter.multivariate_normal</a>
 </li>
         <li><a href="api.html#module-hidten.tf.forward_backward">hidten.tf.forward_backward</a>
 </li>
         <li><a href="api.html#module-hidten.tf.hmm">hidten.tf.hmm</a>
+</li>
+        <li><a href="api.html#module-hidten.tf.prior.base">hidten.tf.prior.base</a>
+</li>
+        <li><a href="api.html#module-hidten.tf.prior.dirichlet">hidten.tf.prior.dirichlet</a>
 </li>
         <li><a href="api.html#module-hidten.tf.scan">hidten.tf.scan</a>
 </li>
@@ -502,8 +565,6 @@
         <li><a href="api.html#module-hidten.util">hidten.util</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#hidten.generic.Module">Module (class in hidten.generic)</a>
 </li>
   </ul></td>
@@ -528,11 +589,27 @@
 </li>
       <li><a href="api.html#hidten.hmm.HMMMode.POSTERIOR">POSTERIOR (hidten.hmm.HMMMode attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#hidten.tf.forward_backward.TFForwardBackwardMixin.posterior">posterior() (hidten.tf.forward_backward.TFForwardBackwardMixin method)</a>
 </li>
       <li><a href="api.html#hidten.prior.Prior">Prior (class in hidten.prior)</a>
+</li>
+      <li><a href="api.html#hidten.generic.Module.prior">prior (hidten.generic.Module property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#hidten.generic.Module.prior_scores">prior_scores() (hidten.generic.Module method)</a>
+
+      <ul>
+        <li><a href="api.html#hidten.hmm.HMM.prior_scores">(hidten.hmm.HMM method)</a>
+</li>
+        <li><a href="api.html#hidten.prior.Prior.prior_scores">(hidten.prior.Prior method)</a>
+</li>
+        <li><a href="api.html#hidten.tf.prior.dirichlet.TFDirichletPrior.prior_scores">(hidten.tf.prior.dirichlet.TFDirichletPrior method)</a>
+</li>
+        <li><a href="api.html#hidten.transitioner.Transitioner.prior_scores">(hidten.transitioner.Transitioner method)</a>
+</li>
+      </ul></li>
+      <li><a href="api.html#hidten.transitioner.Transitioner.prior_start">prior_start (hidten.transitioner.Transitioner property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -555,9 +632,11 @@
       <li><a href="api.html#hidten.emitter.Emitter.sample">sample() (hidten.emitter.Emitter method)</a>
 
       <ul>
-        <li><a href="api.html#hidten.generic.Distribution.sample">(hidten.generic.Distribution method)</a>
-</li>
         <li><a href="api.html#hidten.hmm.HMM.sample">(hidten.hmm.HMM method)</a>
+</li>
+        <li><a href="api.html#hidten.tf.emitter.categorical.TFCategoricalEmitter.sample">(hidten.tf.emitter.categorical.TFCategoricalEmitter method)</a>
+</li>
+        <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.sample">(hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter method)</a>
 </li>
         <li><a href="api.html#hidten.tf.hmm.TFHMM.sample">(hidten.tf.hmm.TFHMM method)</a>
 </li>
@@ -566,8 +645,12 @@
         <li><a href="api.html#hidten.transitioner.Transitioner.sample">(hidten.transitioner.Transitioner method)</a>
 </li>
       </ul></li>
-      <li><a href="api.html#hidten.tf.util.scale">scale() (in module hidten.tf.util)</a>
+      <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.scale">scale() (hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter method)</a>
+
+      <ul>
+        <li><a href="api.html#hidten.tf.util.scale">(in module hidten.tf.util)</a>
 </li>
+      </ul></li>
       <li><a href="api.html#hidten.tf.util.scaled_to_log">scaled_to_log() (in module hidten.tf.util)</a>
 </li>
       <li><a href="api.html#hidten.tf.scan.Scanner">Scanner (class in hidten.tf.scan)</a>
@@ -576,12 +659,12 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#hidten.emitter.Emitter.share">share (hidten.emitter.Emitter property)</a>
+      <li><a href="api.html#hidten.emitter.PaddingEmitter.share">share (hidten.emitter.PaddingEmitter property)</a>
 
       <ul>
-        <li><a href="api.html#hidten.emitter.PaddingEmitter.share">(hidten.emitter.PaddingEmitter property)</a>
+        <li><a href="api.html#hidten.generic.Module.share">(hidten.generic.Module property)</a>
 </li>
-        <li><a href="api.html#hidten.transitioner.Transitioner.share">(hidten.transitioner.Transitioner property)</a>
+        <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.share">(hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter property)</a>
 </li>
       </ul></li>
       <li><a href="api.html#hidten.transitioner.Transitioner.share_start">share_start (hidten.transitioner.Transitioner property)</a>
@@ -595,7 +678,13 @@
 </li>
       </ul></li>
       <li><a href="api.html#hidten.emitter.Emitter.state_emissions">state_emissions() (hidten.emitter.Emitter method)</a>
+
+      <ul>
+        <li><a href="api.html#hidten.tf.emitter.categorical.TFCategoricalEmitter.state_emissions">(hidten.tf.emitter.categorical.TFCategoricalEmitter method)</a>
 </li>
+        <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.state_emissions">(hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter method)</a>
+</li>
+      </ul></li>
       <li><a href="api.html#hidten.hmm.HMMConfig.states">states (hidten.hmm.HMMConfig attribute)</a>
 </li>
       <li><a href="api.html#hidten.tf.transitioner.TFTransitioner.step">step() (hidten.tf.transitioner.TFTransitioner method)</a>
@@ -612,9 +701,27 @@
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig.temperature">temperature (hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig attribute)</a>
+</li>
+      <li><a href="api.html#hidten.tf.emitter.categorical.TFCategoricalEmitter">TFCategoricalEmitter (class in hidten.tf.emitter.categorical)</a>
+</li>
+      <li><a href="api.html#hidten.tf.prior.dirichlet.TFDirichletPrior">TFDirichletPrior (class in hidten.tf.prior.dirichlet)</a>
+</li>
+      <li><a href="api.html#hidten.tf.emitter.base.TFEmitter">TFEmitter (class in hidten.tf.emitter.base)</a>
+</li>
       <li><a href="api.html#hidten.tf.forward_backward.TFForwardBackwardMixin">TFForwardBackwardMixin (class in hidten.tf.forward_backward)</a>
 </li>
       <li><a href="api.html#hidten.tf.hmm.TFHMM">TFHMM (class in hidten.tf.hmm)</a>
+</li>
+      <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter">TFMVNormalEmitter (class in hidten.tf.emitter.multivariate_normal)</a>
+</li>
+      <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig">TFMVNormalEmitterConfig (class in hidten.tf.emitter.multivariate_normal)</a>
+</li>
+      <li><a href="api.html#hidten.tf.emitter.base.TFPaddingEmitter">TFPaddingEmitter (class in hidten.tf.emitter.base)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#hidten.tf.prior.base.TFPrior">TFPrior (class in hidten.tf.prior.base)</a>
 </li>
       <li><a href="api.html#hidten.tf.transitioner.TFTransitioner">TFTransitioner (class in hidten.tf.transitioner)</a>
 </li>
@@ -622,8 +729,6 @@
 </li>
       <li><a href="api.html#hidten.tf.util.tiny">tiny() (in module hidten.tf.util)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#hidten.transitioner.Transitioner">Transitioner (class in hidten.transitioner)</a>
 </li>
       <li><a href="api.html#hidten.hmm.HMM.transitioner">transitioner (hidten.hmm.HMM property)</a>
@@ -656,7 +761,7 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#hidten.generic.Distribution.variance">variance() (hidten.generic.Distribution method)</a>
+      <li><a href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.variance">variance() (hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter method)</a>
 </li>
       <li><a href="api.html#hidten.hmm.HMMMode.VITERBI">VITERBI (hidten.hmm.HMMMode attribute)</a>
 </li>

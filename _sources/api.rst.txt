@@ -78,11 +78,11 @@ TensorFlow Emitters
 
 TensorFlow-specific emission models.
 
-.. automodule:: hidten.tf.emitter
+.. automodule:: hidten.tf.emitter.base
 
-.. automodule:: hidten.tf.categorical
+.. automodule:: hidten.tf.emitter.categorical
 
-.. automodule:: hidten.tf.multivariate_normal
+.. automodule:: hidten.tf.emitter.multivariate_normal
 
 TensorFlow Transitioners
 ------------------------
@@ -90,6 +90,16 @@ TensorFlow Transitioners
 TensorFlow-specific transition models.
 
 .. automodule:: hidten.tf.transitioner
+
+TensorFlow Priors
+-----------------
+
+TensorFlow-specific prior models.
+
+.. automodule:: hidten.tf.prior.base
+
+.. automodule:: hidten.tf.prior.dirichlet
+
 
 Algorithms
 ----------

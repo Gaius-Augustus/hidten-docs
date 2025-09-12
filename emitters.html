@@ -55,6 +55,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="transitioners.html">Transitioners</a></li>
+<li class="toctree-l1"><a class="reference internal" href="priors.html">Priors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
@@ -98,7 +99,7 @@ When using multiple emitters, multiple input <em>tracks</em> must be provided to
 The input tracks must match the order of emitters.</p>
 <section id="categorical">
 <h2>Categorical<a class="headerlink" href="#categorical" title="Link to this heading"></a></h2>
-<p><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.categorical.TFCategoricalEmitter</span></code> handles discrete observations with categorical distributions.
+<p><a class="reference internal" href="api.html#hidten.tf.emitter.categorical.TFCategoricalEmitter" title="hidten.tf.emitter.categorical.TFCategoricalEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.emitter.categorical.TFCategoricalEmitter</span></code></a> handles discrete observations with categorical distributions.
 As everything in HidTen, CategoricalEmitters support multiple <em>heads</em>, i.e. parallel
 models that use their own set of parameters and states.</p>
 <p>In the following example, a CategoricalEmitter is created for a discrete alphabet {0, 1, 2, 3}
@@ -130,7 +131,7 @@ and 2 HMM heads with 3 states each:</p>
 </section>
 <section id="continuous">
 <h2>Continuous<a class="headerlink" href="#continuous" title="Link to this heading"></a></h2>
-<p><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.multivariate_normal.TFMVNormalEmitter</span></code> handles continuous
+<p><a class="reference internal" href="api.html#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter" title="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter</span></code></a> handles continuous
 observations with multivariate normal distributions.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFHMM</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf.multivariate_normal</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFMVNormalEmitter</span>
@@ -173,7 +174,7 @@ observations with multivariate normal distributions.</p>
 <h2>Padding<a class="headerlink" href="#padding" title="Link to this heading"></a></h2>
 <p>When the input sequences have variable length they can be padded
 with zeros.
-A <code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.emitter.TFPaddingEmitter</span></code> must be added to the model that
+A <a class="reference internal" href="api.html#hidten.tf.emitter.base.TFPaddingEmitter" title="hidten.tf.emitter.base.TFPaddingEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.emitter.base.TFPaddingEmitter</span></code></a> must be added to the model that
 expects the binary padding as a separate input track, where <cite>False</cite> or <cite>0</cite>
 indicates a padding position. Padding positions will be ignored in <a class="reference internal" href="algorithms.html"><span class="doc">Algorithms for Inference and Training</span></a>.</p>
 <p>Note: HidTen only supports padding sequences to the right.</p>
@@ -223,8 +224,8 @@ be used only for padding positions. Notice how the previously defined HMM has
 <section id="allowing-and-sharing">
 <h2>Allowing and sharing<a class="headerlink" href="#allowing-and-sharing" title="Link to this heading"></a></h2>
 <p>Emissions of specific symbols at specific states can be allowed or disallowed
-using the <a class="reference internal" href="api.html#hidten.emitter.Emitter.allow" title="hidten.emitter.Emitter.allow"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hidten.emitter.Emitter.allow</span></code></a> property.</p>
-<p>With the <a class="reference internal" href="api.html#hidten.emitter.Emitter.share" title="hidten.emitter.Emitter.share"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hidten.emitter.Emitter.share</span></code></a> property, it can be defined that
+using the <code class="xref py py-attr docutils literal notranslate"><span class="pre">hidten.emitter.Emitter.allow</span></code> property.</p>
+<p>With the <code class="xref py py-attr docutils literal notranslate"><span class="pre">hidten.emitter.Emitter.share</span></code> property, it can be defined that
 certain, consecutive states share the same emission parameters.</p>
 <p>In the following example, an emitter is created that only allows specific
 symbols at specific states and shares parameters between some of them:</p>
@@ -273,7 +274,7 @@ being part of an HMM. This can be done by providing an <a class="reference inter
 </section>
 <section id="creating-custom-emitters">
 <h2>Creating Custom Emitters<a class="headerlink" href="#creating-custom-emitters" title="Link to this heading"></a></h2>
-<p>To create custom emitters, inherit from <code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.emitter.TFEmitter</span></code>:</p>
+<p>To create custom emitters, inherit from <a class="reference internal" href="api.html#hidten.tf.emitter.base.TFEmitter" title="hidten.tf.emitter.base.TFEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.emitter.base.TFEmitter</span></code></a>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">hidten.tf.emitter</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFEmitter</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">CustomEmitter</span><span class="p">(</span><span class="n">TFEmitter</span><span class="p">):</span>
