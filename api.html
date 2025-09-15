@@ -1056,23 +1056,24 @@ agree on all dimensions except for the last dimension
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.generic.Module.allow">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">allow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.generic.Module.allow" title="Link to this definition"></a></dt>
-<dd><p>Restrict the matrix of the module by only allowing a subset of the
-matrix entries to be modeled. If this method is not called before the
-model is built, a dense matrix is modeled (everything allowed).</p>
+<dd><p>Restrict the matrix of the module by only allowing a subset
+of the matrix entries to be modeled. If this method is not
+called before the model is built, a dense matrix is modeled
+(everything allowed).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>indices</strong> (<em>list</em><em> of </em><em>triplets</em>) – List of triplets <code class="docutils literal notranslate"><span class="pre">(h,</span> <span class="pre">i,</span> <span class="pre">j)</span></code>,
-where <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j)</span></code> is an allowed matrix entry of state <code class="docutils literal notranslate"><span class="pre">i</span></code>
-to column <code class="docutils literal notranslate"><span class="pre">j</span></code> for some head index <code class="docutils literal notranslate"><span class="pre">h</span></code>. For emitters, <code class="docutils literal notranslate"><span class="pre">j</span></code>
-refers to an symbol in the emission alphabet, for transitioners
-<code class="docutils literal notranslate"><span class="pre">j</span></code> refers to another state.
-If pairs <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j)</span></code> are given, they are assumed to
-be the same for all available heads. Therefore, they are
-internally expanded to triplets. The order of indices
-given remains throughout the Module. If an initializer
-is specified, values in this intializer always
-correspond to the (possibly automatically) expanded
-triplets.</p>
+where <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j)</span></code> is an allowed matrix entry of state
+<code class="docutils literal notranslate"><span class="pre">i</span></code> to column <code class="docutils literal notranslate"><span class="pre">j</span></code> for some head index <code class="docutils literal notranslate"><span class="pre">h</span></code>. For
+emitters, <code class="docutils literal notranslate"><span class="pre">j</span></code> refers to an symbol in the emission
+alphabet, for transitioners <code class="docutils literal notranslate"><span class="pre">j</span></code> refers to another
+state. If pairs <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j)</span></code> are given, they are assumed
+to be the same for all available heads. Therefore, they
+are internally expanded to triplets. The order of
+indices given remains throughout the Module. If an
+initializer is specified, values in this intializer
+always correspond to the (possibly automatically)
+expanded triplets.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1085,9 +1086,9 @@ triplets.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.generic.Module.matrix">
 <em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.generic.Module.matrix" title="Link to this definition"></a></dt>
-<dd><p>Calculates a matrix based on a parameter kernel for this module.
-This could be a transition matrix or a matrix describing emission
-distributions.</p>
+<dd><p>Calculates a matrix based on a parameter kernel for this
+module. This could be a transition matrix or a matrix describing
+emission distributions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><dl class="simple">
@@ -1114,8 +1115,12 @@ hidden states and <code class="docutils literal notranslate"><span class="pre">R
 <dd><p>Calculates the prior scores for the modules parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The prior scores of shape <code class="docutils literal notranslate"><span class="pre">(...,</span> <span class="pre">Q)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Q</span></code> is
-the number of hidden states in the HMM that uses this module.</p>
+<dd class="field-odd"><p><dl class="simple">
+<dt>The prior scores of shape <code class="docutils literal notranslate"><span class="pre">(...,</span> <span class="pre">Q)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Q</span></code></dt><dd><p>is the number of hidden states in the HMM that uses this
+module.</p>
+</dd>
+</dl>
+</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>Tensor</p>
@@ -2103,9 +2108,9 @@ values.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.prior.dirichlet.TFDirichletPrior.matrix">
 <span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.matrix" title="Link to this definition"></a></dt>
-<dd><p>Calculates a matrix based on a parameter kernel for this module.
-This could be a transition matrix or a matrix describing emission
-distributions.</p>
+<dd><p>Calculates a matrix based on a parameter kernel for this
+module. This could be a transition matrix or a matrix describing
+emission distributions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><dl class="simple">
@@ -2128,12 +2133,11 @@ hidden states and <code class="docutils literal notranslate"><span class="pre">R
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>values</strong> (<em>Tensor</em>) – The input values of shape
-<code class="docutils literal notranslate"><span class="pre">(...,</span> <span class="pre">H,</span> <span class="pre">Q,</span> <span class="pre">R)</span></code>, where the values must sum to 1 along the
-last dimension.</p>
+<code class="docutils literal notranslate"><span class="pre">(...,</span> <span class="pre">H,</span> <span class="pre">Q,</span> <span class="pre">R)</span></code>, where the values must sum to 1 along
+the last dimension.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The prior scores of shape
-<code class="docutils literal notranslate"><span class="pre">(...,</span> <span class="pre">H,</span> <span class="pre">Q)</span></code>.</p>
+<dd class="field-even"><p>The prior scores of shape <code class="docutils literal notranslate"><span class="pre">(...,</span> <span class="pre">H,</span> <span class="pre">Q)</span></code>.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Tensor</p>
@@ -2281,7 +2285,7 @@ Defaults to no parallelization.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.forward_backward.TFForwardBackwardMixin.posterior">
-<span class="sig-name descname"><span class="pre">posterior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.forward_backward.TFForwardBackwardMixin.posterior" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">posterior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_emission_scores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.forward_backward.TFForwardBackwardMixin.posterior" title="Link to this definition"></a></dt>
 <dd><p>Runs the vectorized and differentiable forward-backward
 algorithm and returns the posterior state probabilities.
 The result is not logarithmic!</p>
@@ -2299,6 +2303,8 @@ forward and backward probabilities. This can result in
 posterior values &gt; 1 due to numerical errors.</p></li>
 <li><p><strong>parallel</strong> (<em>int</em><em>, </em><em>optional</em>) – The parallel factor for the HMM.
 Defaults to no parallelization.</p></li>
+<li><p><strong>return_emission_scores</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to return the
+emission scores.</p></li>
 <li><p><strong>self</strong> (<a class="reference internal" href="#hidten.tf.hmm.TFHMM" title="hidten.tf.hmm.TFHMM"><em>TFHMM</em></a>)</p></li>
 </ul>
 </dd>
@@ -2327,8 +2333,8 @@ Must not be used otherwise than as a mixin in the TFHMM class.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.viterbi.TFViterbiMixin.maximum_expected_accuracy">
 <span class="sig-name descname"><span class="pre">maximum_expected_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">tf.int32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invalid_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate_state_seqs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.viterbi.TFViterbiMixin.maximum_expected_accuracy" title="Link to this definition"></a></dt>
-<dd><p>Computes the state sequences with maximum sum of the
-posterior probabilities.</p>
+<dd><p>For each batch sequence and each head, computes the state sequence
+X with maximum sum of the posterior probabilities and <cite>P(X) &gt; 0</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
