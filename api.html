@@ -752,7 +752,7 @@ padding as a binary input track where “true” or “1” indicates a
 non-padded position that should be used in calculations.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.emitter.PaddingEmitter.allow">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">allow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.emitter.PaddingEmitter.allow" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">allow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#hidten.emitter.PaddingEmitter.allow" title="Link to this definition"></a></dt>
 <dd><p>Not supported for PaddingEmitter.</p>
 </dd></dl>
 
@@ -851,16 +851,22 @@ head can be restricted in the number of states and the allowed
 transitions between states.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.transitioner.Transitioner.allow_start">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">allow_start</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.transitioner.Transitioner.allow_start" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">allow_start</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#hidten.transitioner.Transitioner.allow_start" title="Link to this definition"></a></dt>
 <dd><p>Restrict the starting distribution by only allowing the given
 states. If this method is not called before the model is built,
 all states are allowed.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>indices</strong> (<em>list</em><em> of </em><em>pairs</em>) – List of pairs <code class="docutils literal notranslate"><span class="pre">(h,</span> <span class="pre">i)</span></code>, where
-<code class="docutils literal notranslate"><span class="pre">i</span></code> is an allowed starting state for head <code class="docutils literal notranslate"><span class="pre">h</span></code>. If
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>Array of pairs <code class="docutils literal notranslate"><span class="pre">(h,</span> <span class="pre">i)</span></code>, where</dt><dd><p><code class="docutils literal notranslate"><span class="pre">i</span></code> is an allowed starting state for head <code class="docutils literal notranslate"><span class="pre">h</span></code>. If
 only tuples of one index <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">)</span></code> or integers <code class="docutils literal notranslate"><span class="pre">i</span></code> are
 given, they are assumed to be true in each head.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>indices (np.ndarray)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1055,15 +1061,15 @@ agree on all dimensions except for the last dimension
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.generic.Module.allow">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">allow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.generic.Module.allow" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">allow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#hidten.generic.Module.allow" title="Link to this definition"></a></dt>
 <dd><p>Restrict the matrix of the module by only allowing a subset
 of the matrix entries to be modeled. If this method is not
 called before the model is built, a dense matrix is modeled
 (everything allowed).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>indices</strong> (<em>list</em><em> of </em><em>triplets</em>) – List of triplets <code class="docutils literal notranslate"><span class="pre">(h,</span> <span class="pre">i,</span> <span class="pre">j)</span></code>,
-where <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j)</span></code> is an allowed matrix entry of state
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>Array of triplets <code class="docutils literal notranslate"><span class="pre">(h,</span> <span class="pre">i,</span> <span class="pre">j)</span></code>,</dt><dd><p>where <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j)</span></code> is an allowed matrix entry of state
 <code class="docutils literal notranslate"><span class="pre">i</span></code> to column <code class="docutils literal notranslate"><span class="pre">j</span></code> for some head index <code class="docutils literal notranslate"><span class="pre">h</span></code>. For
 emitters, <code class="docutils literal notranslate"><span class="pre">j</span></code> refers to an symbol in the emission
 alphabet, for transitioners <code class="docutils literal notranslate"><span class="pre">j</span></code> refers to another
@@ -1074,6 +1080,12 @@ indices given remains throughout the Module. If an
 initializer is specified, values in this intializer
 always correspond to the (possibly automatically)
 expanded triplets.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>indices (np.ndarray)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2616,7 +2628,7 @@ indices and shared ranges of those indices.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>indices</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>int</em><em>, </em><em>...</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>indices</strong> (<em>ndarray</em>)</p></li>
 <li><p><strong>share</strong> (<em>list</em><em>[</em><em>int</em><em>] </em><em>| </em><em>None</em>)</p></li>
 </ul>
 </dd>
