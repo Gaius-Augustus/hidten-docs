@@ -248,6 +248,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.build"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.build()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.initializer"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.initializer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.log_dirichlet_pdf"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.log_dirichlet_pdf()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.matrix"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.matrix()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.prior_scores"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.prior_scores()</span></code></a></li>
 </ul>
@@ -416,8 +417,8 @@ the states of shape <code class="docutils literal notranslate"><span class="pre"
 <dd><p>Calculates the prior scores for the HMM.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The prior scores of shape <code class="docutils literal notranslate"><span class="pre">(...,</span> <span class="pre">Q)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Q</span></code> is
-the number of hidden states in the HMM that uses this module.</p>
+<dd class="field-odd"><p>The prior scores of shape <code class="docutils literal notranslate"><span class="pre">(H)</span></code>, where <code class="docutils literal notranslate"><span class="pre">H</span></code> is
+the number of heads.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>Tensor</p>
@@ -1009,12 +1010,11 @@ returns <cite>prior_scores</cite> that rate how likely the parameters are.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>values</strong> (<em>Tensor</em>) – The input values of shape
-<code class="docutils literal notranslate"><span class="pre">(...,</span> <span class="pre">Q,</span> <span class="pre">R)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Q</span></code> is the number of hidden
-states and <code class="docutils literal notranslate"><span class="pre">R</span></code> is the prior feature dimension.</p>
+<code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code>, where <code class="docutils literal notranslate"><span class="pre">D</span></code> is the prior feature dimension.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><dl class="simple">
-<dt>The prior scores of shape</dt><dd><p><code class="docutils literal notranslate"><span class="pre">(...,</span> <span class="pre">Q)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Q</span></code> is the number of hidden
+<dt>The prior scores of shape</dt><dd><p><code class="docutils literal notranslate"><span class="pre">(H)</span></code> with prior scores for each head summed over the
 states.</p>
 </dd>
 </dl>
@@ -2074,12 +2074,12 @@ and <code class="docutils literal notranslate"><span class="pre">Q</span></code>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>inputs</strong> (<em>Tensor</em>) – The input tensor.</p></li>
+<li><p><strong>inputs</strong> (<em>Tensor</em>) – The input tensor of shape (H, Q, D).</p></li>
 <li><p><strong>values</strong> (<em>Tensor</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The output tensor.</p>
+<dd class="field-even"><p>The output tensor of shape (H,).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Tensor</p>
@@ -2118,6 +2118,28 @@ values.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="hidten.tf.prior.dirichlet.TFDirichletPrior.log_dirichlet_pdf">
+<span class="sig-name descname"><span class="pre">log_dirichlet_pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.log_dirichlet_pdf" title="Link to this definition"></a></dt>
+<dd><p>Compute the log pdf of a Dirichlet distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>Tensor</em>) – The input values of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code>, where the values
+must sum to 1 along the last dimension.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The log pdf with shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q)</span></code> matching the batch dimensions</dt><dd><p>of <cite>x</cite>.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.prior.dirichlet.TFDirichletPrior.matrix">
 <span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.matrix" title="Link to this definition"></a></dt>
 <dd><p>Calculates a matrix based on a parameter kernel for this
@@ -2145,11 +2167,15 @@ hidden states and <code class="docutils literal notranslate"><span class="pre">R
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>values</strong> (<em>Tensor</em>) – The input values of shape
-<code class="docutils literal notranslate"><span class="pre">(...,</span> <span class="pre">H,</span> <span class="pre">Q,</span> <span class="pre">R)</span></code>, where the values must sum to 1 along
+<code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code>, where the values must sum to 1 along
 the last dimension.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The prior scores of shape <code class="docutils literal notranslate"><span class="pre">(...,</span> <span class="pre">H,</span> <span class="pre">Q)</span></code>.</p>
+<dd class="field-even"><p><dl class="simple">
+<dt>The prior scores with shape <code class="docutils literal notranslate"><span class="pre">(H)</span></code> with dirichlet log</dt><dd><p>densities for each head summed over the states.</p>
+</dd>
+</dl>
+</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Tensor</p>
