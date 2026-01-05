@@ -146,11 +146,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#hidten.generic.Module"><code class="docutils literal notranslate"><span class="pre">Module</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.generic.Module.__call__"><code class="docutils literal notranslate"><span class="pre">Module.__call__()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.generic.Module.allow"><code class="docutils literal notranslate"><span class="pre">Module.allow</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.generic.Module.heads"><code class="docutils literal notranslate"><span class="pre">Module.heads</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.generic.Module.hmm_config"><code class="docutils literal notranslate"><span class="pre">Module.hmm_config</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.generic.Module.matrix"><code class="docutils literal notranslate"><span class="pre">Module.matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.generic.Module.max_states"><code class="docutils literal notranslate"><span class="pre">Module.max_states</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.generic.Module.prior"><code class="docutils literal notranslate"><span class="pre">Module.prior</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.generic.Module.prior_scores"><code class="docutils literal notranslate"><span class="pre">Module.prior_scores()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.generic.Module.share"><code class="docutils literal notranslate"><span class="pre">Module.share</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.generic.Module.states"><code class="docutils literal notranslate"><span class="pre">Module.states</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1091,6 +1094,12 @@ expanded triplets.</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="hidten.generic.Module.heads">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">heads</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#hidten.generic.Module.heads" title="Link to this definition"></a></dt>
+<dd><p>The number of heads in the HMM configuration.</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="hidten.generic.Module.hmm_config">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hmm_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.hmm.HMMConfig" title="hidten.hmm.HMMConfig"><span class="pre">HMMConfig</span></a></em><a class="headerlink" href="#hidten.generic.Module.hmm_config" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -1114,6 +1123,12 @@ hidden states and <code class="docutils literal notranslate"><span class="pre">R
 <dd class="field-even"><p>Tensor</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hidten.generic.Module.max_states">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_states</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#hidten.generic.Module.max_states" title="Link to this definition"></a></dt>
+<dd><p>The maximum number of states across all heads.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -1168,6 +1183,12 @@ in the parameter kernel are shared.</p>
 <dd class="field-odd"><p>share (np.ndarray)</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hidten.generic.Module.states">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">states</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.generic.Module.states" title="Link to this definition"></a></dt>
+<dd><p>The number of states for each head.</p>
 </dd></dl>
 
 </dd></dl>
