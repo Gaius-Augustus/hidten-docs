@@ -1142,18 +1142,30 @@ module.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.generic.Module.share">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">share</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.generic.Module.share" title="Link to this definition"></a></dt>
-<dd><p>Allows to share parameters.</p>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">share</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#hidten.generic.Module.share" title="Link to this definition"></a></dt>
+<dd><p>Defines if some parameters of the module are shared among
+different states.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>indices</strong> (<em>list</em><em> of </em><em>ranges</em><em> or </em><em>indices</em>) – A sequence of index
+<dd class="field-odd"><p><strong>indices</strong> (<em>list</em><em> of </em><em>ranges</em><em> or </em><em>list</em><em> of </em><em>indices</em><em> or </em><em>array</em><em> of </em><em>indices</em>) – A sequence of index
 pairs <code class="docutils literal notranslate"><span class="pre">(a,b)</span></code> where <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are indices of the
-tuples in <code class="docutils literal notranslate"><span class="pre">Prior.allow</span></code>. It has to be of the same
+tuples in <code class="docutils literal notranslate"><span class="pre">allow</span></code>. It has to be of the same
 length as the initial values given for the emission
 kernel. Alternatively, it can be a list of indices of
 the same length as <code class="docutils literal notranslate"><span class="pre">allow</span></code>. These indices are then
 used to mark which value in the given initial values
 will be used.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Array of indices of the same length as</dt><dd><p><code class="docutils literal notranslate"><span class="pre">allow</span></code>, where indices in <code class="docutils literal notranslate"><span class="pre">share</span></code> mark which values
+in the parameter kernel are shared.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>share (np.ndarray)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1833,18 +1845,30 @@ the HMM and <code class="docutils literal notranslate"><span class="pre">Q</span
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.share">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">share</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.share" title="Link to this definition"></a></dt>
-<dd><p>Allows to share parameters.</p>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">share</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.share" title="Link to this definition"></a></dt>
+<dd><p>Defines if some parameters of the module are shared among
+different states.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>indices</strong> (<em>list</em><em> of </em><em>ranges</em><em> or </em><em>indices</em>) – A sequence of index
+<dd class="field-odd"><p><strong>indices</strong> (<em>list</em><em> of </em><em>ranges</em><em> or </em><em>list</em><em> of </em><em>indices</em><em> or </em><em>array</em><em> of </em><em>indices</em>) – A sequence of index
 pairs <code class="docutils literal notranslate"><span class="pre">(a,b)</span></code> where <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are indices of the
-tuples in <code class="docutils literal notranslate"><span class="pre">Prior.allow</span></code>. It has to be of the same
+tuples in <code class="docutils literal notranslate"><span class="pre">allow</span></code>. It has to be of the same
 length as the initial values given for the emission
 kernel. Alternatively, it can be a list of indices of
 the same length as <code class="docutils literal notranslate"><span class="pre">allow</span></code>. These indices are then
 used to mark which value in the given initial values
 will be used.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Array of indices of the same length as</dt><dd><p><code class="docutils literal notranslate"><span class="pre">allow</span></code>, where indices in <code class="docutils literal notranslate"><span class="pre">share</span></code> mark which values
+in the parameter kernel are shared.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>share (np.ndarray)</p>
 </dd>
 </dl>
 </dd></dl>
