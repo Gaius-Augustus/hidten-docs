@@ -207,7 +207,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.from_config"><code class="docutils literal notranslate"><span class="pre">TFMVNormalEmitter.from_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.get_config"><code class="docutils literal notranslate"><span class="pre">TFMVNormalEmitter.get_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.get_default_initializer"><code class="docutils literal notranslate"><span class="pre">TFMVNormalEmitter.get_default_initializer()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.init_transform"><code class="docutils literal notranslate"><span class="pre">TFMVNormalEmitter.init_transform()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.initializer"><code class="docutils literal notranslate"><span class="pre">TFMVNormalEmitter.initializer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.log_prob"><code class="docutils literal notranslate"><span class="pre">TFMVNormalEmitter.log_prob()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.matrix"><code class="docutils literal notranslate"><span class="pre">TFMVNormalEmitter.matrix()</span></code></a></li>
@@ -226,6 +225,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig.temperature"><code class="docutils literal notranslate"><span class="pre">TFMVNormalEmitterConfig.temperature</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.mvn_init_transform"><code class="docutils literal notranslate"><span class="pre">mvn_init_transform()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.mvn_log_prob"><code class="docutils literal notranslate"><span class="pre">mvn_log_prob()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#tensorflow-transitioners">TensorFlow Transitioners</a><ul>
@@ -1732,20 +1733,6 @@ given configuration dictionary.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.init_transform">
-<span class="sig-name descname"><span class="pre">init_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.init_transform" title="Link to this definition"></a></dt>
-<dd><p>Transforms means and (co-)variances to kernel values.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x</strong> (<em>Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>Tensor</em></p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.initializer">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initializer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Initializer</span></em><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.initializer" title="Link to this definition"></a></dt>
@@ -1966,6 +1953,57 @@ Defaults to False.</p>
 <dd><p>Temperature for the multivariate normal distribution.</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.mvn_init_transform">
+<span class="sig-prename descclassname"><span class="pre">hidten.tf.emitter.multivariate_normal.</span></span><span class="sig-name descname"><span class="pre">mvn_init_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_covariance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.mvn_init_transform" title="Link to this definition"></a></dt>
+<dd><p>Transforms means and (co-)variances to kernel values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>Tensor</em>)</p></li>
+<li><p><strong>input_dim</strong> (<em>int</em>)</p></li>
+<li><p><strong>full_covariance</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Tensor</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.mvn_log_prob">
+<span class="sig-prename descclassname"><span class="pre">hidten.tf.emitter.multivariate_normal.</span></span><span class="sig-name descname"><span class="pre">mvn_log_prob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.mvn_log_prob" title="Link to this definition"></a></dt>
+<dd><p>Computes the log density function of the observations under
+the multivariate normal distribution with parameters mean and scale.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>observations</strong> (<em>Tensor</em>) – The observations to compute the log
+probability for. The shape should be <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">D)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">H,</span> <span class="pre">D)</span></code> or <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code>.</p></li>
+<li><p><strong>mean</strong> (<em>Tensor</em>) – The mean of the multivariate normal distribution
+of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code>.</p></li>
+<li><p><strong>scale</strong> (<em>Tensor</em>) – The scale of the multivariate normal distribution.
+A Matrix <code class="docutils literal notranslate"><span class="pre">A</span></code> such that <code class="docutils literal notranslate"><span class="pre">covariances</span> <span class="pre">=</span> <span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">A^T</span></code> of shape
+<code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D,</span> <span class="pre">D)</span></code> if full covariance is used, or <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code>
+if diagonal covariance is used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The log probability of the observations under the</dt><dd><p>multivariate normal distribution of shape
+<code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">H,</span> <span class="pre">Q)</span></code>.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -2703,7 +2741,7 @@ indices and shared ranges of those indices.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>indices</strong> (<em>ndarray</em>)</p></li>
-<li><p><strong>share</strong> (<em>list</em><em>[</em><em>int</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>share</strong> (<em>ndarray</em><em> | </em><em>list</em><em>[</em><em>int</em><em>] </em><em>| </em><em>None</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
