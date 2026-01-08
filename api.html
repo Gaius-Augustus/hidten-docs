@@ -245,6 +245,14 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#tensorflow-priors">TensorFlow Priors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hidten.tf.prior.base.TFCombinedPrior"><code class="docutils literal notranslate"><span class="pre">TFCombinedPrior</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.base.TFCombinedPrior.add_prior"><code class="docutils literal notranslate"><span class="pre">TFCombinedPrior.add_prior()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.base.TFCombinedPrior.build"><code class="docutils literal notranslate"><span class="pre">TFCombinedPrior.build()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.base.TFCombinedPrior.hmm_config"><code class="docutils literal notranslate"><span class="pre">TFCombinedPrior.hmm_config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.base.TFCombinedPrior.prior_scores"><code class="docutils literal notranslate"><span class="pre">TFCombinedPrior.prior_scores()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.base.TFCombinedPrior.priors"><code class="docutils literal notranslate"><span class="pre">TFCombinedPrior.priors</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.prior.base.TFPrior"><code class="docutils literal notranslate"><span class="pre">TFPrior</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.base.TFPrior.call"><code class="docutils literal notranslate"><span class="pre">TFPrior.call()</span></code></a></li>
 </ul>
@@ -1140,7 +1148,8 @@ hidden states and <code class="docutils literal notranslate"><span class="pre">R
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.generic.Module.prior_scores">
 <span class="sig-name descname"><span class="pre">prior_scores</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.generic.Module.prior_scores" title="Link to this definition"></a></dt>
-<dd><p>Calculates the prior scores for the modules parameters.</p>
+<dd><p>Calculates the prior scores for the modules parameters in log-scale.
+The scores of all modules with a prior are summed up in the HMM.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><dl class="simple">
@@ -1742,10 +1751,10 @@ The flat initializer must be resizeable to <code class="docutils literal notrans
 state.</p>
 <p>Let <code class="docutils literal notranslate"><span class="pre">D</span></code> be the dimensionality of the observations.
 If full covariance is used, then the initializer is required to
-contain <code class="docutils literal notranslate"><span class="pre">D</span></code> means followed by <code class="docutils literal notranslate"><span class="pre">D</span></code> variances (<code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">=</span> <span class="pre">2D</span></code>) per
-head and state. Otherwise, it is required to contain <code class="docutils literal notranslate"><span class="pre">D</span></code> means
-followed by the flat covariance matrix (<code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">=</span> <span class="pre">D</span> <span class="pre">+</span> <span class="pre">D^2</span></code>). The
-full, symmetric covariance matrix is expected.</p>
+contain <code class="docutils literal notranslate"><span class="pre">D</span></code> means followed by the flat, row-major covariance matrix
+(<code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">=</span> <span class="pre">D</span> <span class="pre">+</span> <span class="pre">D^2</span></code>). The full, symmetric covariance matrix is expected.
+Otherwise the means are followed by <code class="docutils literal notranslate"><span class="pre">D</span></code> variances (<code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">=</span> <span class="pre">2D</span></code>) per
+head and state.</p>
 <p>Defaults to means of zeros and variances of ones.</p>
 </dd></dl>
 
@@ -2153,6 +2162,75 @@ and <code class="docutils literal notranslate"><span class="pre">Q</span></code>
 <h2>TensorFlow Priors<a class="headerlink" href="#tensorflow-priors" title="Link to this heading"></a></h2>
 <p>TensorFlow-specific prior models.</p>
 <dl class="py class" id="module-hidten.tf.prior.base">
+<dt class="sig sig-object py" id="hidten.tf.prior.base.TFCombinedPrior">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.tf.prior.base.</span></span><span class="sig-name descname"><span class="pre">TFCombinedPrior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.base.TFCombinedPrior" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hidten.tf.prior.base.TFPrior" title="hidten.tf.prior.base.TFPrior"><code class="xref py py-class docutils literal notranslate"><span class="pre">TFPrior</span></code></a></p>
+<p>A prior that combines multiple priors by summing their scores.</p>
+<dl class="field-list simple">
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hidten.tf.prior.base.TFCombinedPrior.add_prior">
+<span class="sig-name descname"><span class="pre">add_prior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prior</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.base.TFCombinedPrior.add_prior" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>prior</strong> (<a class="reference internal" href="#hidten.tf.prior.base.TFPrior" title="hidten.tf.prior.base.TFPrior"><em>TFPrior</em></a>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hidten.tf.prior.base.TFCombinedPrior.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.base.TFCombinedPrior.build" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_shape</strong> (<em>TensorShape</em><em> | </em><em>tuple</em><em>[</em><em>int</em><em> | </em><em>None</em><em>, </em><em>...</em><em>] </em><em>| </em><em>tuple</em><em>[</em><em>tuple</em><em>[</em><em>int</em><em> | </em><em>None</em><em>, </em><em>...</em><em>]</em><em>, </em><em>...</em><em>] </em><em>| </em><em>None</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hidten.tf.prior.base.TFCombinedPrior.hmm_config">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hmm_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.hmm.HMMConfig" title="hidten.hmm.HMMConfig"><span class="pre">HMMConfig</span></a></em><a class="headerlink" href="#hidten.tf.prior.base.TFCombinedPrior.hmm_config" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hidten.tf.prior.base.TFCombinedPrior.prior_scores">
+<span class="sig-name descname"><span class="pre">prior_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.base.TFCombinedPrior.prior_scores" title="Link to this definition"></a></dt>
+<dd><p>Computes prior scores for the input values by summing the scores
+from all contained priors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>values</strong> (<em>Tensor</em>) – The input values of shape
+<code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code>, where <code class="docutils literal notranslate"><span class="pre">D</span></code> is the prior feature dimension.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The prior scores of shape</dt><dd><p><code class="docutils literal notranslate"><span class="pre">(H)</span></code> with prior scores for each head summed over the
+states.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hidten.tf.prior.base.TFCombinedPrior.priors">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">priors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hidten.tf.prior.base.TFPrior" title="hidten.tf.prior.base.TFPrior"><span class="pre">TFPrior</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.tf.prior.base.TFCombinedPrior.priors" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="hidten.tf.prior.base.TFPrior">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.tf.prior.base.</span></span><span class="sig-name descname"><span class="pre">TFPrior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.base.TFPrior" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TFLayer</span></code>, <a class="reference internal" href="#hidten.prior.Prior" title="hidten.prior.Prior"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prior</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>]</p>
@@ -2171,7 +2249,7 @@ and <code class="docutils literal notranslate"><span class="pre">Q</span></code>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The output tensor of shape (H,).</p>
+<dd class="field-even"><p>The output tensor of shape (H,) in log-scale.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Tensor</p>
