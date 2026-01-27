@@ -14,8 +14,8 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=2709fde1"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -348,7 +348,7 @@
 <p>Core HMM implementation with configuration and modes.</p>
 <dl class="py class" id="module-hidten.hmm">
 <dt class="sig sig-object py" id="hidten.hmm.HMM">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.hmm.</span></span><span class="sig-name descname"><span class="pre">HMM</span></span><a class="headerlink" href="#hidten.hmm.HMM" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.hmm.</span></span><span class="sig-name descname"><span class="pre">HMM</span></span><a class="headerlink" href="#hidten.hmm.HMM" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T_Tensor</span></code>]</p>
 <p>A modular hidden Markov model (HMM).</p>
 <dl class="py method">
@@ -366,7 +366,7 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.hmm.HMM.config">
-<span class="sig-name descname"><span class="pre">config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.hmm.HMMConfig" title="hidten.hmm.HMMConfig"><span class="pre">HMMConfig</span></a></em><a class="headerlink" href="#hidten.hmm.HMM.config" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">config</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.hmm.HMMConfig" title="hidten.hmm.HMMConfig"><span class="pre">HMMConfig</span></a></span><a class="headerlink" href="#hidten.hmm.HMM.config" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -394,12 +394,12 @@ if all heads should receive the same input.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.hmm.HMM.emitter">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">emitter</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hidten.emitter.Emitter" title="hidten.emitter.Emitter"><span class="pre">Emitter</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T_Tensor</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.hmm.HMM.emitter" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">emitter</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hidten.emitter.Emitter" title="hidten.emitter.Emitter"><span class="pre">Emitter</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T_Tensor</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#hidten.hmm.HMM.emitter" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.hmm.HMM.joint_log_prob">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">joint_log_prob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.hmm.HMM.joint_log_prob" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">joint_log_prob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.hmm.HMM.joint_log_prob" title="Link to this definition"></a></dt>
 <dd><p>Computes the joint log-probability of the observations <code class="docutils literal notranslate"><span class="pre">o</span></code>
 and the states <code class="docutils literal notranslate"><span class="pre">x</span></code>, i.e. <code class="docutils literal notranslate"><span class="pre">P(o,</span> <span class="pre">x)</span></code>.</p>
 <dl class="field-list simple">
@@ -440,7 +440,7 @@ the number of heads.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.hmm.HMM.sample">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.hmm.HMM.sample" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.hmm.HMM.sample" title="Link to this definition"></a></dt>
 <dd><p>Samples a number of tensors from the HMM by repeatedly
 sampling states based on possible state transitions and
 afterward sampling possbile emissions from these states.</p>
@@ -466,7 +466,7 @@ the emission alphabet.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.hmm.HMM.transitioner">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transitioner</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.transitioner.Transitioner" title="hidten.transitioner.Transitioner"><span class="pre">Transitioner</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T_Tensor</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.hmm.HMM.transitioner" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">transitioner</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.transitioner.Transitioner" title="hidten.transitioner.Transitioner"><span class="pre">Transitioner</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T_Tensor</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#hidten.hmm.HMM.transitioner" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -484,7 +484,7 @@ the emission alphabet.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hidten.hmm.HMMConfig">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.hmm.</span></span><span class="sig-name descname"><span class="pre">HMMConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.hmm.HMMConfig" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.hmm.</span></span><span class="sig-name descname"><span class="pre">HMMConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.hmm.HMMConfig" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#hidten.config.ModelConfig" title="hidten.config.ModelConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelConfig</span></code></a></p>
 <p>The basic configuration for any HMM.</p>
 <dl class="field-list simple">
@@ -498,26 +498,26 @@ the emission alphabet.</p>
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.hmm.HMMConfig.heads">
-<span class="sig-name descname"><span class="pre">heads</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#hidten.hmm.HMMConfig.heads" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">heads</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#hidten.hmm.HMMConfig.heads" title="Link to this definition"></a></dt>
 <dd><p>Number of heads in the HMM. If not specified, can be inferred by
 the length of <code class="docutils literal notranslate"><span class="pre">states</span></code>. Defaults to 1.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.hmm.HMMConfig.max_states">
-<span class="sig-name descname"><span class="pre">max_states</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#hidten.hmm.HMMConfig.max_states" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">max_states</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#hidten.hmm.HMMConfig.max_states" title="Link to this definition"></a></dt>
 <dd><p>Maximal number of states across all HMM heads.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.hmm.HMMConfig.model_config">
-<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'frozen':</span> <span class="pre">True}</span></em><a class="headerlink" href="#hidten.hmm.HMMConfig.model_config" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">model_config</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'frozen':</span> <span class="pre">True}</span></span><a class="headerlink" href="#hidten.hmm.HMMConfig.model_config" title="Link to this definition"></a></dt>
 <dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.hmm.HMMConfig.states">
-<span class="sig-name descname"><span class="pre">states</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.hmm.HMMConfig.states" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">states</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#hidten.hmm.HMMConfig.states" title="Link to this definition"></a></dt>
 <dd><p>The number of states in each head of the HMM. Can also be given
 as a single integer and is automatically expanded to the given
 number of heads.</p>
@@ -525,64 +525,64 @@ number of heads.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.hmm.HMMConfig.validate_config">
-<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.hmm.HMMConfig.validate_config" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">validate_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.hmm.HMMConfig.validate_config" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hidten.hmm.HMMMode">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.hmm.</span></span><span class="sig-name descname"><span class="pre">HMMMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.hmm.HMMMode" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.hmm.</span></span><span class="sig-name descname"><span class="pre">HMMMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.hmm.HMMMode" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
 <p>Collection of modes for an HMM. Changing the mode leads to a
 different behaviour when calling an <code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.HMM</span></code> as a
 function by <code class="docutils literal notranslate"><span class="pre">__call__</span></code>.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.hmm.HMMMode.BACKWARD_LOG">
-<span class="sig-name descname"><span class="pre">BACKWARD_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#hidten.hmm.HMMMode.BACKWARD_LOG" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">BACKWARD_LOG</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#hidten.hmm.HMMMode.BACKWARD_LOG" title="Link to this definition"></a></dt>
 <dd><p>Enables calculation of the logarithmic backward variables.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.hmm.HMMMode.EMISSION_SCORES">
-<span class="sig-name descname"><span class="pre">EMISSION_SCORES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></em><a class="headerlink" href="#hidten.hmm.HMMMode.EMISSION_SCORES" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">EMISSION_SCORES</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></span><a class="headerlink" href="#hidten.hmm.HMMMode.EMISSION_SCORES" title="Link to this definition"></a></dt>
 <dd><p>Only outputs the scores of the given emissions without utilizing
 any transitions of the model.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.hmm.HMMMode.FORWARD_LOG">
-<span class="sig-name descname"><span class="pre">FORWARD_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#hidten.hmm.HMMMode.FORWARD_LOG" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">FORWARD_LOG</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#hidten.hmm.HMMMode.FORWARD_LOG" title="Link to this definition"></a></dt>
 <dd><p>Enables calculation of the logarithmic forward variables.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.hmm.HMMMode.FORWARD_SCALED">
-<span class="sig-name descname"><span class="pre">FORWARD_SCALED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#hidten.hmm.HMMMode.FORWARD_SCALED" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">FORWARD_SCALED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#hidten.hmm.HMMMode.FORWARD_SCALED" title="Link to this definition"></a></dt>
 <dd><p>Enables calculation of the scaled forward variables.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.hmm.HMMMode.LIKELIHOOD_LOG">
-<span class="sig-name descname"><span class="pre">LIKELIHOOD_LOG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#hidten.hmm.HMMMode.LIKELIHOOD_LOG" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">LIKELIHOOD_LOG</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></span><a class="headerlink" href="#hidten.hmm.HMMMode.LIKELIHOOD_LOG" title="Link to this definition"></a></dt>
 <dd><p>Enables calculation of the log-likelihood.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.hmm.HMMMode.MEA">
-<span class="sig-name descname"><span class="pre">MEA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#hidten.hmm.HMMMode.MEA" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">MEA</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></span><a class="headerlink" href="#hidten.hmm.HMMMode.MEA" title="Link to this definition"></a></dt>
 <dd><p>Enables calculation of MEA state sequences.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.hmm.HMMMode.POSTERIOR">
-<span class="sig-name descname"><span class="pre">POSTERIOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#hidten.hmm.HMMMode.POSTERIOR" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">POSTERIOR</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></span><a class="headerlink" href="#hidten.hmm.HMMMode.POSTERIOR" title="Link to this definition"></a></dt>
 <dd><p>Enables calculation of posterior state distributions.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.hmm.HMMMode.VITERBI">
-<span class="sig-name descname"><span class="pre">VITERBI</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#hidten.hmm.HMMMode.VITERBI" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">VITERBI</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></span><a class="headerlink" href="#hidten.hmm.HMMMode.VITERBI" title="Link to this definition"></a></dt>
 <dd><p>Enables calculation of Viterbi state sequences.</p>
 </dd></dl>
 
@@ -594,7 +594,7 @@ any transitions of the model.</p>
 <p>Base configuration classes and decorators for model setup.</p>
 <dl class="py class" id="module-hidten.config">
 <dt class="sig sig-object py" id="hidten.config.ModelConfig">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.config.</span></span><span class="sig-name descname"><span class="pre">ModelConfig</span></span><a class="headerlink" href="#hidten.config.ModelConfig" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.config.</span></span><span class="sig-name descname"><span class="pre">ModelConfig</span></span><a class="headerlink" href="#hidten.config.ModelConfig" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>A base model configuration class that new config classes should
 inherit from. A method <code class="docutils literal notranslate"><span class="pre">self.validate_config</span></code> can be defined where
@@ -603,7 +603,7 @@ value errors can be thrown or fields can be updated.</p>
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.config.ModelConfig.model_config">
-<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#hidten.config.ModelConfig.model_config" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">model_config</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></span><a class="headerlink" href="#hidten.config.ModelConfig.model_config" title="Link to this definition"></a></dt>
 <dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
 </dd></dl>
 
@@ -659,7 +659,7 @@ manual <code class="docutils literal notranslate"><span class="pre">__init__</sp
 <p>Emission models that map observations to feature values.</p>
 <dl class="py class" id="module-hidten.emitter">
 <dt class="sig sig-object py" id="hidten.emitter.Emitter">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.emitter.</span></span><span class="sig-name descname"><span class="pre">Emitter</span></span><a class="headerlink" href="#hidten.emitter.Emitter" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.emitter.</span></span><span class="sig-name descname"><span class="pre">Emitter</span></span><a class="headerlink" href="#hidten.emitter.Emitter" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#hidten.generic.Module" title="hidten.generic.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T_Tensor</span></code>]</p>
 <p>The Emitter base class.</p>
 <p>An emitter is a module that maps sequences of observations to
@@ -667,7 +667,7 @@ feature values. The feature values decribe how likely each
 observation is to be emitted by each hidden state.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.emitter.Emitter.emission_scores">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">emission_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observations</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.emitter.Emitter.emission_scores" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">emission_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observations</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.emitter.Emitter.emission_scores" title="Link to this definition"></a></dt>
 <dd><p>Computes how likely each observation is emitted by any
 hidden state.</p>
 <dl class="field-list simple">
@@ -691,7 +691,7 @@ size of the emission alphabet.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.emitter.Emitter.matrix">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.emitter.Emitter.matrix" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.emitter.Emitter.matrix" title="Link to this definition"></a></dt>
 <dd><p>Calculates the emission matrix based on parameters of this
 class.</p>
 <dl class="field-list simple">
@@ -711,7 +711,7 @@ hidden states and <code class="docutils literal notranslate"><span class="pre">K
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.emitter.Emitter.sample">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.emitter.Emitter.sample" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.emitter.Emitter.sample" title="Link to this definition"></a></dt>
 <dd><p>Samples a possible emission given the current state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -730,7 +730,7 @@ the HMM and <code class="docutils literal notranslate"><span class="pre">Q</span
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.emitter.Emitter.state_emissions">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">state_emissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.emitter.Emitter.state_emissions" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">state_emissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.emitter.Emitter.state_emissions" title="Link to this definition"></a></dt>
 <dd><p>Computes how likely any observation is emitted by the
 given hidden states.</p>
 <dl class="field-list simple">
@@ -757,7 +757,7 @@ emission alphabet.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hidten.emitter.PaddingEmitter">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.emitter.</span></span><span class="sig-name descname"><span class="pre">PaddingEmitter</span></span><a class="headerlink" href="#hidten.emitter.PaddingEmitter" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.emitter.</span></span><span class="sig-name descname"><span class="pre">PaddingEmitter</span></span><a class="headerlink" href="#hidten.emitter.PaddingEmitter" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#hidten.emitter.Emitter" title="hidten.emitter.Emitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Emitter</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T_Tensor</span></code>]</p>
 <p>A specialized emitter to handle padding tracks. Adding this
 emitter makes an HMM support variable-length sequences. Accepts
@@ -765,13 +765,13 @@ padding as a binary input track where “true” or “1” indicates a
 non-padded position that should be used in calculations.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.emitter.PaddingEmitter.allow">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">allow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#hidten.emitter.PaddingEmitter.allow" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">allow</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></span><a class="headerlink" href="#hidten.emitter.PaddingEmitter.allow" title="Link to this definition"></a></dt>
 <dd><p>Not supported for PaddingEmitter.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.emitter.PaddingEmitter.emission_scores">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">emission_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observations</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.emitter.PaddingEmitter.emission_scores" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">emission_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observations</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.emitter.PaddingEmitter.emission_scores" title="Link to this definition"></a></dt>
 <dd><p>Returns emission scores with the following scheme:</p>
 <blockquote>
 <div><blockquote>
@@ -805,7 +805,7 @@ internal, appended padding emission state.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.emitter.PaddingEmitter.share">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">share</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.emitter.PaddingEmitter.share" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">share</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#hidten.emitter.PaddingEmitter.share" title="Link to this definition"></a></dt>
 <dd><p>Not supported for PaddingEmitter.</p>
 </dd></dl>
 
@@ -817,37 +817,37 @@ internal, appended padding emission state.</p>
 <p>Transition models that handle state-to-state transitions.</p>
 <dl class="py class" id="module-hidten.transitioner">
 <dt class="sig sig-object py" id="hidten.transitioner.TransitionMode">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.transitioner.</span></span><span class="sig-name descname"><span class="pre">TransitionMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.transitioner.TransitionMode" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.transitioner.</span></span><span class="sig-name descname"><span class="pre">TransitionMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.transitioner.TransitionMode" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntFlag</span></code></p>
 <p>Collection of modes for the transitioner step.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.transitioner.TransitionMode.ALLOWED">
-<span class="sig-name descname"><span class="pre">ALLOWED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#hidten.transitioner.TransitionMode.ALLOWED" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">ALLOWED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></span><a class="headerlink" href="#hidten.transitioner.TransitionMode.ALLOWED" title="Link to this definition"></a></dt>
 <dd><p>Instead of the regular transition matrix, uses a matrix that contains
 ones for allowed transitions and zeros otherwise.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.transitioner.TransitionMode.LOG_SUM_EXP">
-<span class="sig-name descname"><span class="pre">LOG_SUM_EXP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#hidten.transitioner.TransitionMode.LOG_SUM_EXP" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">LOG_SUM_EXP</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#hidten.transitioner.TransitionMode.LOG_SUM_EXP" title="Link to this definition"></a></dt>
 <dd><p>Calculates the log-sum-exp over the latent states.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.transitioner.TransitionMode.MAX">
-<span class="sig-name descname"><span class="pre">MAX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#hidten.transitioner.TransitionMode.MAX" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">MAX</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></span><a class="headerlink" href="#hidten.transitioner.TransitionMode.MAX" title="Link to this definition"></a></dt>
 <dd><p>Computes the maximum over the latent states.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.transitioner.TransitionMode.REVERSE">
-<span class="sig-name descname"><span class="pre">REVERSE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></em><a class="headerlink" href="#hidten.transitioner.TransitionMode.REVERSE" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">REVERSE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">16</span></span><a class="headerlink" href="#hidten.transitioner.TransitionMode.REVERSE" title="Link to this definition"></a></dt>
 <dd><p>Computes steps in reverse order.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.transitioner.TransitionMode.SUM">
-<span class="sig-name descname"><span class="pre">SUM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#hidten.transitioner.TransitionMode.SUM" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">SUM</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#hidten.transitioner.TransitionMode.SUM" title="Link to this definition"></a></dt>
 <dd><p>Sums over the latent states.</p>
 </dd></dl>
 
@@ -855,7 +855,7 @@ ones for allowed transitions and zeros otherwise.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hidten.transitioner.Transitioner">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.transitioner.</span></span><span class="sig-name descname"><span class="pre">Transitioner</span></span><a class="headerlink" href="#hidten.transitioner.Transitioner" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.transitioner.</span></span><span class="sig-name descname"><span class="pre">Transitioner</span></span><a class="headerlink" href="#hidten.transitioner.Transitioner" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#hidten.generic.Module" title="hidten.generic.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T_Tensor</span></code>]</p>
 <p>The Transitioner base class.</p>
 <p>A transitioner is a module that implements a discrete time step of a
@@ -864,7 +864,7 @@ head can be restricted in the number of states and the allowed
 transitions between states.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.transitioner.Transitioner.allow_start">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">allow_start</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#hidten.transitioner.Transitioner.allow_start" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">allow_start</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></span><a class="headerlink" href="#hidten.transitioner.Transitioner.allow_start" title="Link to this definition"></a></dt>
 <dd><p>Restrict the starting distribution by only allowing the given
 states. If this method is not called before the model is built,
 all states are allowed.</p>
@@ -886,7 +886,7 @@ given, they are assumed to be true in each head.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.transitioner.Transitioner.matrix">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.transitioner.Transitioner.matrix" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.transitioner.Transitioner.matrix" title="Link to this definition"></a></dt>
 <dd><p>Computes the state transition matrices for each model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -904,17 +904,20 @@ given, they are assumed to be true in each head.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.transitioner.Transitioner.mode">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.transitioner.TransitionMode" title="hidten.transitioner.TransitionMode"><span class="pre">TransitionMode</span></a></em><a class="headerlink" href="#hidten.transitioner.Transitioner.mode" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">mode</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.transitioner.TransitionMode" title="hidten.transitioner.TransitionMode"><span class="pre">TransitionMode</span></a></span><a class="headerlink" href="#hidten.transitioner.Transitioner.mode" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.transitioner.Transitioner.prior_scores">
 <span class="sig-name descname"><span class="pre">prior_scores</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.transitioner.Transitioner.prior_scores" title="Link to this definition"></a></dt>
-<dd><p>Calculates the prior scores for the modules parameters.</p>
+<dd><p>Calculates the prior scores for the modules’ parameters in log-scale.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The prior scores of shape <code class="docutils literal notranslate"><span class="pre">(...,</span> <span class="pre">Q)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Q</span></code> is
-the number of hidden states in the HMM that uses this module.</p>
+<dd class="field-odd"><p><dl class="simple">
+<dt>The prior scores of shape <code class="docutils literal notranslate"><span class="pre">(H)</span></code>, where <code class="docutils literal notranslate"><span class="pre">H</span></code></dt><dd><p>is the number of heads.</p>
+</dd>
+</dl>
+</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>Tensor</p>
@@ -924,12 +927,12 @@ the number of hidden states in the HMM that uses this module.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.transitioner.Transitioner.prior_start">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">prior_start</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.prior.Prior" title="hidten.prior.Prior"><span class="pre">Prior</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T_Tensor</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#hidten.transitioner.Transitioner.prior_start" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">prior_start</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.prior.Prior" title="hidten.prior.Prior"><span class="pre">Prior</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T_Tensor</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#hidten.transitioner.Transitioner.prior_start" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.transitioner.Transitioner.sample">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.transitioner.Transitioner.sample" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.transitioner.Transitioner.sample" title="Link to this definition"></a></dt>
 <dd><p>Samples a possible next state given the previous.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -950,7 +953,7 @@ distribution with <code class="docutils literal notranslate"><span class="pre">B
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.transitioner.Transitioner.share_start">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">share_start</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.transitioner.Transitioner.share_start" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">share_start</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#hidten.transitioner.Transitioner.share_start" title="Link to this definition"></a></dt>
 <dd><p>Allows to share parameters of the start distribution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -968,7 +971,7 @@ initial values will be used.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.transitioner.Transitioner.start_dist">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">start_dist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.transitioner.Transitioner.start_dist" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">start_dist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.transitioner.Transitioner.start_dist" title="Link to this definition"></a></dt>
 <dd><p>Computes the initial distribution for each model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -982,7 +985,7 @@ initial values will be used.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.transitioner.Transitioner.step">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.transitioner.Transitioner.step" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.transitioner.Transitioner.step" title="Link to this definition"></a></dt>
 <dd><p>Performs a single time step of the Markov chain.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1007,7 +1010,7 @@ and <code class="docutils literal notranslate"><span class="pre">Q</span></code>
 <p>Prior distributions for model parameters.</p>
 <dl class="py class" id="module-hidten.prior">
 <dt class="sig sig-object py" id="hidten.prior.Prior">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.prior.</span></span><span class="sig-name descname"><span class="pre">Prior</span></span><a class="headerlink" href="#hidten.prior.Prior" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.prior.</span></span><span class="sig-name descname"><span class="pre">Prior</span></span><a class="headerlink" href="#hidten.prior.Prior" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#hidten.generic.Module" title="hidten.generic.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T_Tensor</span></code>]</p>
 <p>The prior base class.</p>
 <p>A prior is a module takes as input a tensor of shape <cite>(…, Q, K)</cite>, where
@@ -1017,7 +1020,7 @@ The prior rates this parameter set, usually in a probabilistic way, and
 returns <cite>prior_scores</cite> that rate how likely the parameters are.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.prior.Prior.prior_scores">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">prior_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.prior.Prior.prior_scores" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">prior_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.prior.Prior.prior_scores" title="Link to this definition"></a></dt>
 <dd><p>Computes prior scores for the input values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1046,7 +1049,7 @@ states.</p>
 <p>Abstract base classes for modules and distributions.</p>
 <dl class="py class" id="module-hidten.generic">
 <dt class="sig sig-object py" id="hidten.generic.Module">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.generic.</span></span><span class="sig-name descname"><span class="pre">Module</span></span><a class="headerlink" href="#hidten.generic.Module" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.generic.</span></span><span class="sig-name descname"><span class="pre">Module</span></span><a class="headerlink" href="#hidten.generic.Module" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T_Tensor</span></code>]</p>
 <p>Base class for all modules in the HMM framework.</p>
 <dl class="py method">
@@ -1073,7 +1076,7 @@ agree on all dimensions except for the last dimension
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.generic.Module.allow">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">allow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#hidten.generic.Module.allow" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">allow</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></span><a class="headerlink" href="#hidten.generic.Module.allow" title="Link to this definition"></a></dt>
 <dd><p>Restrict the matrix of the module by only allowing a subset
 of the matrix entries to be modeled. If this method is not
 called before the model is built, a dense matrix is modeled
@@ -1104,18 +1107,18 @@ expanded triplets.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.generic.Module.heads">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">heads</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#hidten.generic.Module.heads" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">heads</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#hidten.generic.Module.heads" title="Link to this definition"></a></dt>
 <dd><p>The number of heads in the HMM configuration.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.generic.Module.hmm_config">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hmm_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.hmm.HMMConfig" title="hidten.hmm.HMMConfig"><span class="pre">HMMConfig</span></a></em><a class="headerlink" href="#hidten.generic.Module.hmm_config" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">hmm_config</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.hmm.HMMConfig" title="hidten.hmm.HMMConfig"><span class="pre">HMMConfig</span></a></span><a class="headerlink" href="#hidten.generic.Module.hmm_config" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.generic.Module.matrix">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.generic.Module.matrix" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.generic.Module.matrix" title="Link to this definition"></a></dt>
 <dd><p>Calculates a matrix based on a parameter kernel for this
 module. This could be a transition matrix or a matrix describing
 emission distributions.</p>
@@ -1136,25 +1139,23 @@ hidden states and <code class="docutils literal notranslate"><span class="pre">R
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.generic.Module.max_states">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_states</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#hidten.generic.Module.max_states" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">max_states</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#hidten.generic.Module.max_states" title="Link to this definition"></a></dt>
 <dd><p>The maximum number of states across all heads.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.generic.Module.prior">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">prior</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.prior.Prior" title="hidten.prior.Prior"><span class="pre">Prior</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T_Tensor</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#hidten.generic.Module.prior" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">prior</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.prior.Prior" title="hidten.prior.Prior"><span class="pre">Prior</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T_Tensor</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#hidten.generic.Module.prior" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.generic.Module.prior_scores">
 <span class="sig-name descname"><span class="pre">prior_scores</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.generic.Module.prior_scores" title="Link to this definition"></a></dt>
-<dd><p>Calculates the prior scores for the modules parameters in log-scale.
-The scores of all modules with a prior are summed up in the HMM.</p>
+<dd><p>Calculates the prior scores for the modules’ parameters in log-scale.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><dl class="simple">
-<dt>The prior scores of shape <code class="docutils literal notranslate"><span class="pre">(...,</span> <span class="pre">Q)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Q</span></code></dt><dd><p>is the number of hidden states in the HMM that uses this
-module.</p>
+<dt>The prior scores of shape <code class="docutils literal notranslate"><span class="pre">(H)</span></code>, where <code class="docutils literal notranslate"><span class="pre">H</span></code></dt><dd><p>is the number of heads.</p>
 </dd>
 </dl>
 </p>
@@ -1167,7 +1168,7 @@ module.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.generic.Module.share">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">share</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#hidten.generic.Module.share" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">share</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#hidten.generic.Module.share" title="Link to this definition"></a></dt>
 <dd><p>Defines if some parameters of the module are shared among
 different states.</p>
 <dl class="field-list simple">
@@ -1190,14 +1191,14 @@ in the parameter kernel are shared.</p>
 </p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>share (np.ndarray)</p>
+<dd class="field-odd"><p><a class="reference internal" href="#hidten.generic.Module.share" title="hidten.generic.Module.share">share</a> (np.ndarray)</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.generic.Module.states">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">states</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.generic.Module.states" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">states</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#hidten.generic.Module.states" title="Link to this definition"></a></dt>
 <dd><p>The number of states for each head.</p>
 </dd></dl>
 
@@ -1292,7 +1293,7 @@ where <code class="docutils literal notranslate"><span class="pre">(i,</span> <s
 <p>Main TensorFlow implementation of HMM.</p>
 <dl class="py class" id="module-hidten.tf.hmm">
 <dt class="sig sig-object py" id="hidten.tf.hmm.TFHMM">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.tf.hmm.</span></span><span class="sig-name descname"><span class="pre">TFHMM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.hmm.TFHMM" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.tf.hmm.</span></span><span class="sig-name descname"><span class="pre">TFHMM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.hmm.TFHMM" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code>, <a class="reference internal" href="#hidten.hmm.HMM" title="hidten.hmm.HMM"><code class="xref py py-class docutils literal notranslate"><span class="pre">HMM</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>], <a class="reference internal" href="#hidten.tf.viterbi.TFViterbiMixin" title="hidten.tf.viterbi.TFViterbiMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">TFViterbiMixin</span></code></a>, <a class="reference internal" href="#hidten.tf.forward_backward.TFForwardBackwardMixin" title="hidten.tf.forward_backward.TFForwardBackwardMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">TFForwardBackwardMixin</span></code></a></p>
 <p>The basic configuration for any HMM.</p>
 <dl class="field-list simple">
@@ -1344,12 +1345,12 @@ processed in parallel. Defaults to 1.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.tf.hmm.TFHMM.emitter">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">emitter</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hidten.tf.emitter.base.TFEmitter" title="hidten.tf.emitter.base.TFEmitter"><span class="pre">TFEmitter</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.tf.hmm.TFHMM.emitter" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">emitter</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hidten.tf.emitter.base.TFEmitter" title="hidten.tf.emitter.base.TFEmitter"><span class="pre">TFEmitter</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#hidten.tf.hmm.TFHMM.emitter" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.hmm.TFHMM.from_config">
-<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.hmm.TFHMM.from_config" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.hmm.TFHMM.from_config" title="Link to this definition"></a></dt>
 <dd><p>Initializes and returns an object of this class with the
 given configuration dictionary.</p>
 <dl class="field-list simple">
@@ -1430,7 +1431,7 @@ the emission alphabet.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.tf.hmm.TFHMM.transitioner">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transitioner</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.tf.transitioner.TFTransitioner" title="hidten.tf.transitioner.TFTransitioner"><span class="pre">TFTransitioner</span></a></em><a class="headerlink" href="#hidten.tf.hmm.TFHMM.transitioner" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">transitioner</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.tf.transitioner.TFTransitioner" title="hidten.tf.transitioner.TFTransitioner"><span class="pre">TFTransitioner</span></a></span><a class="headerlink" href="#hidten.tf.hmm.TFHMM.transitioner" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1441,7 +1442,7 @@ the emission alphabet.</p>
 <p>TensorFlow-specific emission models.</p>
 <dl class="py class" id="module-hidten.tf.emitter.base">
 <dt class="sig sig-object py" id="hidten.tf.emitter.base.TFEmitter">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.tf.emitter.base.</span></span><span class="sig-name descname"><span class="pre">TFEmitter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.base.TFEmitter" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.tf.emitter.base.</span></span><span class="sig-name descname"><span class="pre">TFEmitter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.base.TFEmitter" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TFLayer</span></code>, <a class="reference internal" href="#hidten.emitter.Emitter" title="hidten.emitter.Emitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Emitter</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>]</p>
 <p>Base class for TF emitters.</p>
 <dl class="field-list simple">
@@ -1466,7 +1467,7 @@ the emission alphabet.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hidten.tf.emitter.base.TFPaddingEmitter">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.tf.emitter.base.</span></span><span class="sig-name descname"><span class="pre">TFPaddingEmitter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.base.TFPaddingEmitter" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.tf.emitter.base.</span></span><span class="sig-name descname"><span class="pre">TFPaddingEmitter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.base.TFPaddingEmitter" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Layer</span></code>, <a class="reference internal" href="#hidten.emitter.PaddingEmitter" title="hidten.emitter.PaddingEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">PaddingEmitter</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>]</p>
 <p>TensorFlow implementation of the PaddingEmitter.</p>
 <dl class="py method">
@@ -1543,7 +1544,7 @@ hidden states and <code class="docutils literal notranslate"><span class="pre">K
 
 <dl class="py class" id="module-hidten.tf.emitter.categorical">
 <dt class="sig sig-object py" id="hidten.tf.emitter.categorical.TFCategoricalEmitter">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.tf.emitter.categorical.</span></span><span class="sig-name descname"><span class="pre">TFCategoricalEmitter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.categorical.TFCategoricalEmitter" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.tf.emitter.categorical.</span></span><span class="sig-name descname"><span class="pre">TFCategoricalEmitter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.categorical.TFCategoricalEmitter" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#hidten.tf.emitter.base.TFEmitter" title="hidten.tf.emitter.base.TFEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">TFEmitter</span></code></a></p>
 <p>An emitter for categorical observations.</p>
 <dl class="field-list simple">
@@ -1587,7 +1588,7 @@ size of the emission alphabet.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.tf.emitter.categorical.TFCategoricalEmitter.initializer">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initializer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Initializer</span></em><a class="headerlink" href="#hidten.tf.emitter.categorical.TFCategoricalEmitter.initializer" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">initializer</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Initializer</span></span><a class="headerlink" href="#hidten.tf.emitter.categorical.TFCategoricalEmitter.initializer" title="Link to this definition"></a></dt>
 <dd><p>The initializer of the emission matrix. Defaults to constant
 values.</p>
 </dd></dl>
@@ -1660,7 +1661,7 @@ emission alphabet.</p>
 
 <dl class="py class" id="module-hidten.tf.emitter.multivariate_normal">
 <dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.tf.emitter.multivariate_normal.</span></span><span class="sig-name descname"><span class="pre">TFMVNormalEmitter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.tf.emitter.multivariate_normal.</span></span><span class="sig-name descname"><span class="pre">TFMVNormalEmitter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#hidten.tf.emitter.base.TFEmitter" title="hidten.tf.emitter.base.TFEmitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">TFEmitter</span></code></a></p>
 <p>An emitter for multivariate normal distributed observations.
 The configuration for a multivariate normal emitter.</p>
@@ -1705,7 +1706,7 @@ size of the emission alphabet.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.from_config">
-<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.from_config" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.from_config" title="Link to this definition"></a></dt>
 <dd><p>Initializes and returns an object of this class with the
 given configuration dictionary.</p>
 <dl class="field-list simple">
@@ -1744,7 +1745,7 @@ given configuration dictionary.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.initializer">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initializer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Initializer</span></em><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.initializer" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">initializer</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Initializer</span></span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.initializer" title="Link to this definition"></a></dt>
 <dd><p>The initializer of the distribution.
 The flat initializer must be resizeable to <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">P)</span></code> where
 <code class="docutils literal notranslate"><span class="pre">P</span></code> is the number of distribution parameters per head and
@@ -1806,7 +1807,7 @@ hidden states and <code class="docutils literal notranslate"><span class="pre">P
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.matrix_dim">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">matrix_dim</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.matrix_dim" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">matrix_dim</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.matrix_dim" title="Link to this definition"></a></dt>
 <dd><p>Last dimension of the matrix.</p>
 </dd></dl>
 
@@ -1862,7 +1863,7 @@ the HMM and <code class="docutils literal notranslate"><span class="pre">Q</span
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.share">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">share</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.share" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">share</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.share" title="Link to this definition"></a></dt>
 <dd><p>Defines if some parameters of the module are shared among
 different states.</p>
 <dl class="field-list simple">
@@ -1885,7 +1886,7 @@ in the parameter kernel are shared.</p>
 </p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>share (np.ndarray)</p>
+<dd class="field-odd"><p><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.share" title="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.share">share</a> (np.ndarray)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1932,7 +1933,7 @@ with shape <code class="docutils literal notranslate"><span class="pre">(H,</spa
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.tf.emitter.multivariate_normal.</span></span><span class="sig-name descname"><span class="pre">TFMVNormalEmitterConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_covariance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.tf.emitter.multivariate_normal.</span></span><span class="sig-name descname"><span class="pre">TFMVNormalEmitterConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_covariance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#hidten.config.ModelConfig" title="hidten.config.ModelConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelConfig</span></code></a></p>
 <p>The configuration for a multivariate normal emitter.</p>
 <dl class="field-list simple">
@@ -1945,20 +1946,20 @@ with shape <code class="docutils literal notranslate"><span class="pre">(H,</spa
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig.full_covariance">
-<span class="sig-name descname"><span class="pre">full_covariance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig.full_covariance" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">full_covariance</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig.full_covariance" title="Link to this definition"></a></dt>
 <dd><p>Whether to use a full covariance matrix or a diagonal one.
 Defaults to False.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig.model_config">
-<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig.model_config" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">model_config</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig.model_config" title="Link to this definition"></a></dt>
 <dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig.temperature">
-<span class="sig-name descname"><span class="pre">temperature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig.temperature" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">temperature</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitterConfig.temperature" title="Link to this definition"></a></dt>
 <dd><p>Temperature for the multivariate normal distribution.</p>
 </dd></dl>
 
@@ -2030,7 +2031,7 @@ if diagonal covariance is used.</p></li>
 <p>TensorFlow-specific transition models.</p>
 <dl class="py class" id="module-hidten.tf.transitioner">
 <dt class="sig sig-object py" id="hidten.tf.transitioner.TFTransitioner">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.tf.transitioner.</span></span><span class="sig-name descname"><span class="pre">TFTransitioner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.transitioner.TFTransitioner" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.tf.transitioner.</span></span><span class="sig-name descname"><span class="pre">TFTransitioner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.transitioner.TFTransitioner" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TFLayer</span></code>, <a class="reference internal" href="#hidten.transitioner.Transitioner" title="hidten.transitioner.Transitioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">Transitioner</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>]</p>
 <dl class="field-list simple">
 </dl>
@@ -2065,14 +2066,14 @@ if diagonal covariance is used.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.tf.transitioner.TFTransitioner.initializer">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initializer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Initializer</span></em><a class="headerlink" href="#hidten.tf.transitioner.TFTransitioner.initializer" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">initializer</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Initializer</span></span><a class="headerlink" href="#hidten.tf.transitioner.TFTransitioner.initializer" title="Link to this definition"></a></dt>
 <dd><p>The initializer of the transition values that are allowed in
 the Transitioner. Defaults to constant values.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.tf.transitioner.TFTransitioner.initializer_start">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initializer_start</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Initializer</span></em><a class="headerlink" href="#hidten.tf.transitioner.TFTransitioner.initializer_start" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">initializer_start</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Initializer</span></span><a class="headerlink" href="#hidten.tf.transitioner.TFTransitioner.initializer_start" title="Link to this definition"></a></dt>
 <dd><p>The initializer of the start distribution of allowed states
 in the Transitioner. Defaults to constant values.</p>
 </dd></dl>
@@ -2097,7 +2098,7 @@ in the Transitioner. Defaults to constant values.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.tf.transitioner.TFTransitioner.matrix_dim">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">matrix_dim</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#hidten.tf.transitioner.TFTransitioner.matrix_dim" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">matrix_dim</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#hidten.tf.transitioner.TFTransitioner.matrix_dim" title="Link to this definition"></a></dt>
 <dd><p>Last dimension of the matrix.</p>
 </dd></dl>
 
@@ -2163,7 +2164,7 @@ and <code class="docutils literal notranslate"><span class="pre">Q</span></code>
 <p>TensorFlow-specific prior models.</p>
 <dl class="py class" id="module-hidten.tf.prior.base">
 <dt class="sig sig-object py" id="hidten.tf.prior.base.TFCombinedPrior">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.tf.prior.base.</span></span><span class="sig-name descname"><span class="pre">TFCombinedPrior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.base.TFCombinedPrior" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.tf.prior.base.</span></span><span class="sig-name descname"><span class="pre">TFCombinedPrior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.base.TFCombinedPrior" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#hidten.tf.prior.base.TFPrior" title="hidten.tf.prior.base.TFPrior"><code class="xref py py-class docutils literal notranslate"><span class="pre">TFPrior</span></code></a></p>
 <p>A prior that combines multiple priors by summing their scores.</p>
 <dl class="field-list simple">
@@ -2196,7 +2197,7 @@ and <code class="docutils literal notranslate"><span class="pre">Q</span></code>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.tf.prior.base.TFCombinedPrior.hmm_config">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hmm_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.hmm.HMMConfig" title="hidten.hmm.HMMConfig"><span class="pre">HMMConfig</span></a></em><a class="headerlink" href="#hidten.tf.prior.base.TFCombinedPrior.hmm_config" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">hmm_config</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#hidten.hmm.HMMConfig" title="hidten.hmm.HMMConfig"><span class="pre">HMMConfig</span></a></span><a class="headerlink" href="#hidten.tf.prior.base.TFCombinedPrior.hmm_config" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -2225,14 +2226,14 @@ states.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.tf.prior.base.TFCombinedPrior.priors">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">priors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hidten.tf.prior.base.TFPrior" title="hidten.tf.prior.base.TFPrior"><span class="pre">TFPrior</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#hidten.tf.prior.base.TFCombinedPrior.priors" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">priors</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hidten.tf.prior.base.TFPrior" title="hidten.tf.prior.base.TFPrior"><span class="pre">TFPrior</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#hidten.tf.prior.base.TFCombinedPrior.priors" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hidten.tf.prior.base.TFPrior">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.tf.prior.base.</span></span><span class="sig-name descname"><span class="pre">TFPrior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.base.TFPrior" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.tf.prior.base.</span></span><span class="sig-name descname"><span class="pre">TFPrior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.base.TFPrior" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TFLayer</span></code>, <a class="reference internal" href="#hidten.prior.Prior" title="hidten.prior.Prior"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prior</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>]</p>
 <p>Base class for TF priors.</p>
 <dl class="field-list simple">
@@ -2261,7 +2262,7 @@ states.</p>
 
 <dl class="py class" id="module-hidten.tf.prior.dirichlet">
 <dt class="sig sig-object py" id="hidten.tf.prior.dirichlet.TFDirichletPrior">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.tf.prior.dirichlet.</span></span><span class="sig-name descname"><span class="pre">TFDirichletPrior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.dirichlet.TFDirichletPrior" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.tf.prior.dirichlet.</span></span><span class="sig-name descname"><span class="pre">TFDirichletPrior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.dirichlet.TFDirichletPrior" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#hidten.tf.prior.base.TFPrior" title="hidten.tf.prior.base.TFPrior"><code class="xref py py-class docutils literal notranslate"><span class="pre">TFPrior</span></code></a></p>
 <p>A Dirichlet prior for categorical observations. Can be added to a
 <code class="xref py py-class docutils literal notranslate"><span class="pre">hidten.tf.categorical.TFCategoricalEmitter</span></code>.</p>
@@ -2282,7 +2283,7 @@ states.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="hidten.tf.prior.dirichlet.TFDirichletPrior.initializer">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initializer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Initializer</span></em><a class="headerlink" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.initializer" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">initializer</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Initializer</span></span><a class="headerlink" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.initializer" title="Link to this definition"></a></dt>
 <dd><p>The initializer of the emission matrix. Defaults to constant
 values.</p>
 </dd></dl>
@@ -2293,15 +2294,12 @@ values.</p>
 <dd><p>Compute the log pdf of a Dirichlet distribution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x</strong> (<em>Tensor</em>) – The input values of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code>, where the values
-must sum to 1 along the last dimension.</p>
+<dd class="field-odd"><p><strong>x</strong> (<em>Tensor</em>) – The input values of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code>, where the
+values must sum to 1 along the last dimension.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>The log pdf with shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q)</span></code> matching the batch dimensions</dt><dd><p>of <cite>x</cite>.</p>
-</dd>
-</dl>
-</p>
+<dd class="field-even"><p>The log pdf with shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q)</span></code> matching the batch
+dimensions of <cite>x</cite>.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Tensor</p>
@@ -2361,7 +2359,7 @@ the last dimension.</p>
 <p>Core algorithms for inference and learning.</p>
 <dl class="py class" id="module-hidten.tf.forward_backward">
 <dt class="sig sig-object py" id="hidten.tf.forward_backward.TFForwardBackwardMixin">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.tf.forward_backward.</span></span><span class="sig-name descname"><span class="pre">TFForwardBackwardMixin</span></span><a class="headerlink" href="#hidten.tf.forward_backward.TFForwardBackwardMixin" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.tf.forward_backward.</span></span><span class="sig-name descname"><span class="pre">TFForwardBackwardMixin</span></span><a class="headerlink" href="#hidten.tf.forward_backward.TFForwardBackwardMixin" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#hidten.tf.scan.Scanner" title="hidten.tf.scan.Scanner"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scanner</span></code></a></p>
 <p>Mixin class for the forward-backward algorithm in TensorFlow.
 Must not be used otherwise than as a mixin in the TFHMM class.</p>
@@ -2534,7 +2532,7 @@ maximum number of states in all HMMs.</p>
 
 <dl class="py class" id="module-hidten.tf.viterbi">
 <dt class="sig sig-object py" id="hidten.tf.viterbi.TFViterbiMixin">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.tf.viterbi.</span></span><span class="sig-name descname"><span class="pre">TFViterbiMixin</span></span><a class="headerlink" href="#hidten.tf.viterbi.TFViterbiMixin" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.tf.viterbi.</span></span><span class="sig-name descname"><span class="pre">TFViterbiMixin</span></span><a class="headerlink" href="#hidten.tf.viterbi.TFViterbiMixin" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#hidten.tf.scan.Scanner" title="hidten.tf.scan.Scanner"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scanner</span></code></a></p>
 <p>Mixin class for the Viterbi algorithm in TensorFlow.
 Must not be used otherwise than as a mixin in the TFHMM class.</p>
@@ -2628,7 +2626,7 @@ shape <code class="docutils literal notranslate"><span class="pre">(B,</span> <s
 
 <dl class="py class" id="module-hidten.tf.scan">
 <dt class="sig sig-object py" id="hidten.tf.scan.Scanner">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hidten.tf.scan.</span></span><span class="sig-name descname"><span class="pre">Scanner</span></span><a class="headerlink" href="#hidten.tf.scan.Scanner" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">hidten.tf.scan.</span></span><span class="sig-name descname"><span class="pre">Scanner</span></span><a class="headerlink" href="#hidten.tf.scan.Scanner" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 </dd></dl>
 
