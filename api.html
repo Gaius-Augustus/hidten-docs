@@ -288,6 +288,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#tensorflow-utilities">TensorFlow Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.clip"><code class="docutils literal notranslate"><span class="pre">clip()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.ensure_array"><code class="docutils literal notranslate"><span class="pre">ensure_array()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.epsilon"><code class="docutils literal notranslate"><span class="pre">epsilon()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.flat_to_triangular"><code class="docutils literal notranslate"><span class="pre">flat_to_triangular()</span></code></a></li>
@@ -2723,6 +2724,24 @@ shape <code class="docutils literal notranslate"><span class="pre">(B,</span> <s
 <h2>TensorFlow Utilities<a class="headerlink" href="#tensorflow-utilities" title="Link to this heading"></a></h2>
 <p>TensorFlow-specific utility functions.</p>
 <dl class="py function" id="module-hidten.tf.util">
+<dt class="sig sig-object py" id="hidten.tf.util.clip">
+<span class="sig-prename descclassname"><span class="pre">hidten.tf.util.</span></span><span class="sig-name descname"><span class="pre">clip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.util.clip" title="Link to this definition"></a></dt>
+<dd><p>Clips the values of <cite>x</cite> to be between <cite>min_val</cite> and <cite>max_val</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>Tensor</em>)</p></li>
+<li><p><strong>min_val</strong> (<em>float</em><em> | </em><em>int</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>max_val</strong> (<em>float</em><em> | </em><em>int</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Tensor</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="hidten.tf.util.ensure_array">
 <span class="sig-prename descclassname"><span class="pre">hidten.tf.util.</span></span><span class="sig-name descname"><span class="pre">ensure_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.util.ensure_array" title="Link to this definition"></a></dt>
 <dd><p>Ensures that the input is a numpy array.</p>
