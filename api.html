@@ -98,6 +98,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#emitters">Emitters</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.emitter.Emitter"><code class="docutils literal notranslate"><span class="pre">Emitter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.emitter.Emitter.clip_max"><code class="docutils literal notranslate"><span class="pre">Emitter.clip_max</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.emitter.Emitter.clip_min"><code class="docutils literal notranslate"><span class="pre">Emitter.clip_min</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.emitter.Emitter.emission_scores"><code class="docutils literal notranslate"><span class="pre">Emitter.emission_scores()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.emitter.Emitter.matrix"><code class="docutils literal notranslate"><span class="pre">Emitter.matrix()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.emitter.Emitter.sample"><code class="docutils literal notranslate"><span class="pre">Emitter.sample()</span></code></a></li>
@@ -299,12 +301,15 @@
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.np_dtype"><code class="docutils literal notranslate"><span class="pre">np_dtype()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.safe_div"><code class="docutils literal notranslate"><span class="pre">safe_div()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.safe_log"><code class="docutils literal notranslate"><span class="pre">safe_log()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.safe_matmul"><code class="docutils literal notranslate"><span class="pre">safe_matmul()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.safe_norm"><code class="docutils literal notranslate"><span class="pre">safe_norm()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.scale"><code class="docutils literal notranslate"><span class="pre">scale()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.scaled_to_log"><code class="docutils literal notranslate"><span class="pre">scaled_to_log()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.setup_initializer"><code class="docutils literal notranslate"><span class="pre">setup_initializer()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.shared_tensor"><code class="docutils literal notranslate"><span class="pre">shared_tensor()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.tiny"><code class="docutils literal notranslate"><span class="pre">tiny()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.triangular_to_flat"><code class="docutils literal notranslate"><span class="pre">triangular_to_flat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.zero"><code class="docutils literal notranslate"><span class="pre">zero()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.util.zero_row_softmax"><code class="docutils literal notranslate"><span class="pre">zero_row_softmax()</span></code></a></li>
 </ul>
 </li>
@@ -666,6 +671,18 @@ manual <code class="docutils literal notranslate"><span class="pre">__init__</sp
 <p>An emitter is a module that maps sequences of observations to
 feature values. The feature values decribe how likely each
 observation is to be emitted by each hidden state.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="hidten.emitter.Emitter.clip_max">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">clip_max</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#hidten.emitter.Emitter.clip_max" title="Link to this definition"></a></dt>
+<dd><p>Clips the calculated emission scores to the given maximum.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hidten.emitter.Emitter.clip_min">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">clip_min</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#hidten.emitter.Emitter.clip_min" title="Link to this definition"></a></dt>
+<dd><p>Clips the calculated emission scores to the given minimum.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.emitter.Emitter.emission_scores">
 <span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">emission_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observations</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.emitter.Emitter.emission_scores" title="Link to this definition"></a></dt>
@@ -824,8 +841,8 @@ internal, appended padding emission state.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hidten.transitioner.TransitionMode.ALLOWED">
 <span class="sig-name descname"><span class="pre">ALLOWED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></span><a class="headerlink" href="#hidten.transitioner.TransitionMode.ALLOWED" title="Link to this definition"></a></dt>
-<dd><p>Instead of the regular transition matrix, uses a matrix that contains
-ones for allowed transitions and zeros otherwise.</p>
+<dd><p>Instead of the regular transition matrix, uses a matrix that
+contains ones for allowed transitions and zeros otherwise.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -892,18 +909,26 @@ given, they are assumed to be true in each head.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.transitioner.Transitioner.matrix">
-<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.transitioner.Transitioner.matrix" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transition_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.transitioner.Transitioner.matrix" title="Link to this definition"></a></dt>
 <dd><p>Computes the state transition matrices for each model.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><dl class="simple">
-<dt>The state transition probabilities of shape</dt><dd><p><code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">Q)</span></code>.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>transition_delta</strong> (<em>Tensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Time-varying
+change that is added on top of the transitioner kernel.
+Should be of shape <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">K)</span></code> or broadcastable to it,
+where <code class="docutils literal notranslate"><span class="pre">K</span></code> is the kernel size of transitioner (see
+<code class="docutils literal notranslate"><span class="pre">transitioner.kernel.shape</span></code>).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The state transition probabilities of shape</dt><dd><p><code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">Q)</span></code> (or <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">H,</span> <span class="pre">Q,</span> <span class="pre">Q)</span></code> if
+transition_delta is provided).</p>
 </dd>
 </dl>
 </p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Tensor</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -991,13 +1016,17 @@ initial values will be used.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.transitioner.Transitioner.step">
-<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.transitioner.Transitioner.step" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.transitioner.Transitioner.step" title="Link to this definition"></a></dt>
 <dd><p>Performs a single time step of the Markov chain.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x</strong> (<em>Tensor</em>) – The input tensor of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">B,</span> <span class="pre">Q)</span></code>.
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>Tensor</em>) – The input tensor of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">B,</span> <span class="pre">Q)</span></code>.
 <code class="docutils literal notranslate"><span class="pre">B</span></code> is the batch size, <code class="docutils literal notranslate"><span class="pre">H</span></code> is the number of heads
-and <code class="docutils literal notranslate"><span class="pre">Q</span></code> is the number of states.</p>
+and <code class="docutils literal notranslate"><span class="pre">Q</span></code> is the number of states.</p></li>
+<li><p><strong>t</strong> (<em>int</em><em>, </em><em>optional</em>) – The time step index. This is only needed
+for transitioners that use transition deltas.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The output tensor of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">B,</span> <span class="pre">Q)</span></code>.</p>
@@ -1182,7 +1211,7 @@ different states.</p>
 <dd class="field-odd"><p><strong>indices</strong> (<em>list</em><em> of </em><em>ranges</em><em> or </em><em>list</em><em> of </em><em>indices</em><em> or </em><em>array</em><em> of </em><em>indices</em>) – A sequence of index
 pairs <code class="docutils literal notranslate"><span class="pre">(a,b)</span></code> where <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are indices of the
 tuples in <code class="docutils literal notranslate"><span class="pre">allow</span></code>. It has to be of the same
-length as the initial values given for the emission
+length as the initial values given for the
 kernel. Alternatively, it can be a list of indices of
 the same length as <code class="docutils literal notranslate"><span class="pre">allow</span></code>. These indices are then
 used to mark which value in the given initial values
@@ -1319,7 +1348,7 @@ where <code class="docutils literal notranslate"><span class="pre">(i,</span> <s
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.hmm.TFHMM.call">
-<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">HMMMode.FORWARD_LOG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.hmm.TFHMM.call" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">HMMMode.FORWARD_LOG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.hmm.TFHMM.call" title="Link to this definition"></a></dt>
 <dd><p>Calls the layer with an operation defined by its call mode.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1329,6 +1358,11 @@ sequence(s). Tensor i should be broadcastable to shape
 <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">H,</span> <span class="pre">D_i)</span></code> where <code class="docutils literal notranslate"><span class="pre">B</span></code> is the batch size, <code class="docutils literal notranslate"><span class="pre">T</span></code>
 is the time dimension, <code class="docutils literal notranslate"><span class="pre">H</span></code> is the number of HMM
 heads and <code class="docutils literal notranslate"><span class="pre">D_i</span></code> is the feature dimension.</p></li>
+<li><p><strong>transition_delta</strong> (<em>Tensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Time-varying
+change that is added on top of the transitioner kernel.
+Should be of shape <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T-1,</span> <span class="pre">K)</span></code> or broadcastable to
+it, where <code class="docutils literal notranslate"><span class="pre">K</span></code> is the kernel size of transitioner (see
+<code class="docutils literal notranslate"><span class="pre">transitioner.kernel.shape</span></code>).</p></li>
 <li><p><strong>mode</strong> (<a class="reference internal" href="#hidten.hmm.HMMMode" title="hidten.hmm.HMMMode"><em>HMMMode</em></a>) – The call mode of the HMM. Defaults to
 <code class="docutils literal notranslate"><span class="pre">HMMMode.FORWARD_LOG</span></code>.</p></li>
 <li><p><strong>parallel</strong> (<em>int</em>) – The parallel factor for the HMM. This is
@@ -1877,7 +1911,7 @@ different states.</p>
 <dd class="field-odd"><p><strong>indices</strong> (<em>list</em><em> of </em><em>ranges</em><em> or </em><em>list</em><em> of </em><em>indices</em><em> or </em><em>array</em><em> of </em><em>indices</em>) – A sequence of index
 pairs <code class="docutils literal notranslate"><span class="pre">(a,b)</span></code> where <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are indices of the
 tuples in <code class="docutils literal notranslate"><span class="pre">allow</span></code>. It has to be of the same
-length as the initial values given for the emission
+length as the initial values given for the
 kernel. Alternatively, it can be a list of indices of
 the same length as <code class="docutils literal notranslate"><span class="pre">allow</span></code>. These indices are then
 used to mark which value in the given initial values
@@ -2056,11 +2090,12 @@ if diagonal covariance is used.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.transitioner.TFTransitioner.call">
-<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.transitioner.TFTransitioner.call" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.transitioner.TFTransitioner.call" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<em>Tensor</em>)</p></li>
+<li><p><strong>t</strong> (<em>int</em><em> | </em><em>None</em>)</p></li>
 <li><p><strong>batch_first</strong> (<em>bool</em>)</p></li>
 </ul>
 </dd>
@@ -2086,18 +2121,26 @@ in the Transitioner. Defaults to constant values.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.transitioner.TFTransitioner.matrix">
-<span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.transitioner.TFTransitioner.matrix" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transition_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.transitioner.TFTransitioner.matrix" title="Link to this definition"></a></dt>
 <dd><p>Computes the state transition matrices for each model.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><dl class="simple">
-<dt>The state transition probabilities of shape</dt><dd><p><code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">Q)</span></code>.</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>transition_delta</strong> (<em>Tensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Time-varying
+change that is added on top of the transitioner kernel.
+Should be of shape <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">K)</span></code> or broadcastable to it,
+where <code class="docutils literal notranslate"><span class="pre">K</span></code> is the kernel size of transitioner (see
+<code class="docutils literal notranslate"><span class="pre">transitioner.kernel.shape</span></code>).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The state transition probabilities of shape</dt><dd><p><code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">Q)</span></code> (or <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">H,</span> <span class="pre">Q,</span> <span class="pre">Q)</span></code> if
+transition_delta is provided).</p>
 </dd>
 </dl>
 </p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Tensor</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2145,13 +2188,17 @@ distribution with <code class="docutils literal notranslate"><span class="pre">B
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.transitioner.TFTransitioner.step">
-<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.transitioner.TFTransitioner.step" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.transitioner.TFTransitioner.step" title="Link to this definition"></a></dt>
 <dd><p>Performs a single time step of the Markov chain.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x</strong> (<em>Tensor</em>) – The input tensor of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">B,</span> <span class="pre">Q)</span></code>.
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>Tensor</em>) – The input tensor of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">B,</span> <span class="pre">Q)</span></code>.
 <code class="docutils literal notranslate"><span class="pre">B</span></code> is the batch size, <code class="docutils literal notranslate"><span class="pre">H</span></code> is the number of heads
-and <code class="docutils literal notranslate"><span class="pre">Q</span></code> is the number of states.</p>
+and <code class="docutils literal notranslate"><span class="pre">Q</span></code> is the number of states.</p></li>
+<li><p><strong>t</strong> (<em>int</em><em>, </em><em>optional</em>) – The time step index. This is only needed
+for transitioners that use transition deltas.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The output tensor of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">B,</span> <span class="pre">Q)</span></code>.</p>
@@ -2371,7 +2418,7 @@ the last dimension.</p>
 Must not be used otherwise than as a mixin in the TFHMM class.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.forward_backward.TFForwardBackwardMixin.backward_log">
-<span class="sig-name descname"><span class="pre">backward_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.forward_backward.TFForwardBackwardMixin.backward_log" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">backward_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.forward_backward.TFForwardBackwardMixin.backward_log" title="Link to this definition"></a></dt>
 <dd><p>Runs the vectorized and differentiable backward algorithm and
 returns backward log-probabilities.</p>
 <dl class="field-list simple">
@@ -2380,8 +2427,13 @@ returns backward log-probabilities.</p>
 <li><p><strong>observations</strong> (<em>Tensor</em><em> or </em><em>tuple</em><em> of </em><em>Tensors</em>) – The input
 sequence(s). Tensor i should be broadcastable to shape
 <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">H,</span> <span class="pre">D_i)</span></code> where <code class="docutils literal notranslate"><span class="pre">B</span></code> is the batch size, <code class="docutils literal notranslate"><span class="pre">T</span></code>
-is the time dimension, <code class="docutils literal notranslate"><span class="pre">H</span></code> is the number of HMM
-heads and <code class="docutils literal notranslate"><span class="pre">D_i</span></code> is the feature dimension.</p></li>
+is the time dimension, <code class="docutils literal notranslate"><span class="pre">H</span></code> is the number of HMM heads
+and <code class="docutils literal notranslate"><span class="pre">D_i</span></code> is the feature dimension.</p></li>
+<li><p><strong>transition_delta</strong> (<em>Tensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Time-varying
+change that is added on top of the transitioner kernel.
+Should be of shape <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T-1,</span> <span class="pre">K)</span></code> or broadcastable to
+it, where <code class="docutils literal notranslate"><span class="pre">K</span></code> is the kernel size of transitioner (see
+<code class="docutils literal notranslate"><span class="pre">transitioner.kernel.shape</span></code>).</p></li>
 <li><p><strong>parallel</strong> (<em>int</em><em>, </em><em>optional</em>) – The parallel factor for the HMM.
 Defaults to no parallelization.</p></li>
 <li><p><strong>self</strong> (<a class="reference internal" href="#hidten.tf.hmm.TFHMM" title="hidten.tf.hmm.TFHMM"><em>TFHMM</em></a>)</p></li>
@@ -2402,7 +2454,7 @@ Defaults to no parallelization.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.forward_backward.TFForwardBackwardMixin.forward_log">
-<span class="sig-name descname"><span class="pre">forward_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.forward_backward.TFForwardBackwardMixin.forward_log" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">forward_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.forward_backward.TFForwardBackwardMixin.forward_log" title="Link to this definition"></a></dt>
 <dd><p>Runs the vectorized and differentiable forward algorithm that
 calculates logarithmic forward probabilities.</p>
 <dl class="field-list simple">
@@ -2411,8 +2463,13 @@ calculates logarithmic forward probabilities.</p>
 <li><p><strong>observations</strong> (<em>Tensor</em><em> or </em><em>tuple</em><em> of </em><em>Tensors</em>) – The input
 sequence(s). Tensor i should be broadcastable to shape
 <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">H,</span> <span class="pre">D_i)</span></code> where <code class="docutils literal notranslate"><span class="pre">B</span></code> is the batch size, <code class="docutils literal notranslate"><span class="pre">T</span></code>
-is the time dimension, <code class="docutils literal notranslate"><span class="pre">H</span></code> is the number of HMM
-heads and <code class="docutils literal notranslate"><span class="pre">D_i</span></code> is the feature dimension.</p></li>
+is the time dimension, <code class="docutils literal notranslate"><span class="pre">H</span></code> is the number of HMM heads
+and <code class="docutils literal notranslate"><span class="pre">D_i</span></code> is the feature dimension.</p></li>
+<li><p><strong>transition_delta</strong> (<em>Tensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Time-varying
+change that is added on top of the transitioner kernel.
+Should be of shape <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T-1,</span> <span class="pre">K)</span></code> or broadcastable to
+it, where <code class="docutils literal notranslate"><span class="pre">K</span></code> is the kernel size of transitioner (see
+<code class="docutils literal notranslate"><span class="pre">transitioner.kernel.shape</span></code>).</p></li>
 <li><p><strong>parallel</strong> (<em>int</em><em>, </em><em>optional</em>) – The parallel factor for the HMM.
 Defaults to no parallelization.</p></li>
 <li><p><strong>self</strong> (<a class="reference internal" href="#hidten.tf.hmm.TFHMM" title="hidten.tf.hmm.TFHMM"><em>TFHMM</em></a>)</p></li>
@@ -2433,7 +2490,7 @@ Defaults to no parallelization.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.forward_backward.TFForwardBackwardMixin.forward_scaled">
-<span class="sig-name descname"><span class="pre">forward_scaled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.forward_backward.TFForwardBackwardMixin.forward_scaled" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">forward_scaled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.forward_backward.TFForwardBackwardMixin.forward_scaled" title="Link to this definition"></a></dt>
 <dd><p>Runs the scaled variant of the forward algorithm in
 vectorized and differentiable manner.</p>
 <dl class="field-list simple">
@@ -2444,6 +2501,11 @@ sequence(s). Tensor i should be broadcastable to shape
 <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">H,</span> <span class="pre">D_i)</span></code> where <code class="docutils literal notranslate"><span class="pre">B</span></code> is the batch size, <code class="docutils literal notranslate"><span class="pre">T</span></code>
 is the time dimension, <code class="docutils literal notranslate"><span class="pre">H</span></code> is the number of HMM heads
 and <code class="docutils literal notranslate"><span class="pre">D_i</span></code> is the feature dimension.</p></li>
+<li><p><strong>transition_delta</strong> (<em>Tensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Time-varying
+change that is added on top of the transitioner kernel.
+Should be of shape <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T-1,</span> <span class="pre">K)</span></code> or broadcastable to
+it, where <code class="docutils literal notranslate"><span class="pre">K</span></code> is the kernel size of transitioner (see
+<code class="docutils literal notranslate"><span class="pre">transitioner.kernel.shape</span></code>).</p></li>
 <li><p><strong>parallel</strong> (<em>int</em><em>, </em><em>optional</em>) – The parallel factor for the HMM.
 Defaults to no parallelization.</p></li>
 <li><p><strong>self</strong> (<a class="reference internal" href="#hidten.tf.hmm.TFHMM" title="hidten.tf.hmm.TFHMM"><em>TFHMM</em></a>)</p></li>
@@ -2466,7 +2528,7 @@ scaling factors of shape <code class="docutils literal notranslate"><span class=
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.forward_backward.TFForwardBackwardMixin.likelihood_log">
-<span class="sig-name descname"><span class="pre">likelihood_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.forward_backward.TFForwardBackwardMixin.likelihood_log" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">likelihood_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.forward_backward.TFForwardBackwardMixin.likelihood_log" title="Link to this definition"></a></dt>
 <dd><p>Computes the log-likelihood of the observations using the
 forward algorithm.</p>
 <dl class="field-list simple">
@@ -2475,8 +2537,13 @@ forward algorithm.</p>
 <li><p><strong>observations</strong> (<em>Tensor</em><em> or </em><em>tuple</em><em> of </em><em>Tensors</em>) – The input
 sequence(s). Tensor i should be broadcastable to shape
 <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">H,</span> <span class="pre">D_i)</span></code> where <code class="docutils literal notranslate"><span class="pre">B</span></code> is the batch size, <code class="docutils literal notranslate"><span class="pre">T</span></code>
-is the time dimension, <code class="docutils literal notranslate"><span class="pre">H</span></code> is the number of HMM
-heads and <code class="docutils literal notranslate"><span class="pre">D_i</span></code> is the feature dimension.</p></li>
+is the time dimension, <code class="docutils literal notranslate"><span class="pre">H</span></code> is the number of HMM heads
+and <code class="docutils literal notranslate"><span class="pre">D_i</span></code> is the feature dimension.</p></li>
+<li><p><strong>transition_delta</strong> (<em>Tensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Time-varying
+change that is added on top of the transitioner kernel.
+Should be of shape <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T-1,</span> <span class="pre">K)</span></code> or broadcastable to
+it, where <code class="docutils literal notranslate"><span class="pre">K</span></code> is the kernel size of transitioner (see
+<code class="docutils literal notranslate"><span class="pre">transitioner.kernel.shape</span></code>).</p></li>
 <li><p><strong>parallel</strong> (<em>int</em><em>, </em><em>optional</em>) – The parallel factor for the HMM.
 Defaults to no parallelization.</p></li>
 <li><p><strong>self</strong> (<a class="reference internal" href="#hidten.tf.hmm.TFHMM" title="hidten.tf.hmm.TFHMM"><em>TFHMM</em></a>)</p></li>
@@ -2497,26 +2564,31 @@ Defaults to no parallelization.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.forward_backward.TFForwardBackwardMixin.posterior">
-<span class="sig-name descname"><span class="pre">posterior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_emission_scores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.forward_backward.TFForwardBackwardMixin.posterior" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">posterior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_emission_scores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.forward_backward.TFForwardBackwardMixin.posterior" title="Link to this definition"></a></dt>
 <dd><p>Runs the vectorized and differentiable forward-backward
-algorithm and returns the posterior state probabilities.
-The result is not logarithmic!</p>
+algorithm and returns the posterior state probabilities. The
+result is not logarithmic!</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>observations</strong> (<em>Tensor</em><em> or </em><em>tuple</em><em> of </em><em>Tensors</em>) – The input
 sequence(s). Tensor i should be broadcastable to shape
 <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">H,</span> <span class="pre">D_i)</span></code> where <code class="docutils literal notranslate"><span class="pre">B</span></code> is the batch size, <code class="docutils literal notranslate"><span class="pre">T</span></code>
-is the time dimension, <code class="docutils literal notranslate"><span class="pre">H</span></code> is the number of HMM
-heads and <code class="docutils literal notranslate"><span class="pre">D_i</span></code> is the feature dimension.</p></li>
+is the time dimension, <code class="docutils literal notranslate"><span class="pre">H</span></code> is the number of HMM heads
+and <code class="docutils literal notranslate"><span class="pre">D_i</span></code> is the feature dimension.</p></li>
+<li><p><strong>transition_delta</strong> (<em>Tensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Time-varying
+change that is added on top of the transitioner kernel.
+Should be of shape <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T-1,</span> <span class="pre">K)</span></code> or broadcastable to
+it, where <code class="docutils literal notranslate"><span class="pre">K</span></code> is the kernel size of transitioner (see
+<code class="docutils literal notranslate"><span class="pre">transitioner.kernel.shape</span></code>).</p></li>
 <li><p><strong>normalize</strong> (<em>bool</em>) – Whether to normalize the posterior. If
 false, the output will be the naked product of scaled
 forward and backward probabilities. This can result in
 posterior values &gt; 1 due to numerical errors.</p></li>
 <li><p><strong>parallel</strong> (<em>int</em><em>, </em><em>optional</em>) – The parallel factor for the HMM.
 Defaults to no parallelization.</p></li>
-<li><p><strong>return_emission_scores</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to return the
-emission scores.</p></li>
+<li><p><strong>return_emission_scores</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to return
+the emission scores.</p></li>
 <li><p><strong>self</strong> (<a class="reference internal" href="#hidten.tf.hmm.TFHMM" title="hidten.tf.hmm.TFHMM"><em>TFHMM</em></a>)</p></li>
 </ul>
 </dd>
@@ -2544,7 +2616,7 @@ maximum number of states in all HMMs.</p>
 Must not be used otherwise than as a mixin in the TFHMM class.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.viterbi.TFViterbiMixin.maximum_expected_accuracy">
-<span class="sig-name descname"><span class="pre">maximum_expected_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">tf.int32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invalid_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate_state_seqs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.viterbi.TFViterbiMixin.maximum_expected_accuracy" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">maximum_expected_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">tf.int32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invalid_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate_state_seqs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.viterbi.TFViterbiMixin.maximum_expected_accuracy" title="Link to this definition"></a></dt>
 <dd><p>For each batch sequence and each head, computes the state sequence
 X with maximum sum of the posterior probabilities and <cite>P(X) &gt; 0</cite>.</p>
 <dl class="field-list simple">
@@ -2555,6 +2627,11 @@ sequence(s). Tensor i should be broadcastable to shape
 <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">H,</span> <span class="pre">D_i)</span></code> where <code class="docutils literal notranslate"><span class="pre">B</span></code> is the batch size, <code class="docutils literal notranslate"><span class="pre">T</span></code>
 is the time dimension, <code class="docutils literal notranslate"><span class="pre">H</span></code> is the number of HMM
 heads and <code class="docutils literal notranslate"><span class="pre">D_i</span></code> is the feature dimension.</p></li>
+<li><p><strong>transition_delta</strong> (<em>Tensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Time-varying change
+that is added on top of the transitioner kernel. Should be
+of shape <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">K)</span></code> or broadcastable to it, where
+<code class="docutils literal notranslate"><span class="pre">K</span></code> is the kernel size of transitioner
+(see <code class="docutils literal notranslate"><span class="pre">transitioner.kernel.shape</span></code>).</p></li>
 <li><p><strong>parallel</strong> (<em>int</em>) – The parallel factor for the HMM.</p></li>
 <li><p><strong>output_type</strong> (<em>tf.dtypes.DType</em>) – The type of the output
 tensor.</p></li>
@@ -2581,7 +2658,7 @@ non-zero probability.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.viterbi.TFViterbiMixin.viterbi">
-<span class="sig-name descname"><span class="pre">viterbi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">tf.int32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_variables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invalid_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate_state_seqs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.viterbi.TFViterbiMixin.viterbi" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">viterbi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">tf.int32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_variables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invalid_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate_state_seqs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.viterbi.TFViterbiMixin.viterbi" title="Link to this definition"></a></dt>
 <dd><p>Computes the most likely state sequences for the given
 observations with the Viterbi algorithm.</p>
 <p>The implementation is logarithmic (underflow-safe) and capable
@@ -2597,6 +2674,11 @@ sequence(s). Tensor i should be broadcastable to shape
 <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">H,</span> <span class="pre">D_i)</span></code> where <code class="docutils literal notranslate"><span class="pre">B</span></code> is the batch size, <code class="docutils literal notranslate"><span class="pre">T</span></code>
 is the time dimension, <code class="docutils literal notranslate"><span class="pre">H</span></code> is the number of HMM
 heads and <code class="docutils literal notranslate"><span class="pre">D_i</span></code> is the feature dimension.</p></li>
+<li><p><strong>transition_delta</strong> (<em>Tensor</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Time-varying change
+that is added on top of the transitioner kernel. Should be
+of shape <code class="docutils literal notranslate"><span class="pre">(B,</span> <span class="pre">T,</span> <span class="pre">K)</span></code> or broadcastable to it, where
+<code class="docutils literal notranslate"><span class="pre">K</span></code> is the kernel size of transitioner
+(see <code class="docutils literal notranslate"><span class="pre">transitioner.kernel.shape</span></code>).</p></li>
 <li><p><strong>parallel</strong> (<em>int</em>) – The parallel factor for the HMM.</p></li>
 <li><p><strong>output_type</strong> (<em>tf.dtypes.DType</em>) – The type of the output
 tensor.</p></li>
@@ -2646,7 +2728,7 @@ shape <code class="docutils literal notranslate"><span class="pre">(B,</span> <s
 <dd><p>Ensures that the input is a numpy array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x</strong> (<em>ndarray</em><em> | </em><em>list</em><em> | </em><em>float</em><em> | </em><em>int</em>)</p>
+<dd class="field-odd"><p><strong>x</strong> (<em>Tensor</em><em> | </em><em>ndarray</em><em> | </em><em>list</em><em> | </em><em>float</em><em> | </em><em>int</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>ndarray</em></p>
@@ -2857,14 +2939,13 @@ indices and shared ranges of those indices.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hidten.tf.util.safe_div">
-<span class="sig-prename descclassname"><span class="pre">hidten.tf.util.</span></span><span class="sig-name descname"><span class="pre">safe_div</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_tiny</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.util.safe_div" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hidten.tf.util.</span></span><span class="sig-name descname"><span class="pre">safe_div</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.util.safe_div" title="Link to this definition"></a></dt>
 <dd><p>Safely divides the first tensor by the second.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<em>Tensor</em>)</p></li>
 <li><p><strong>y</strong> (<em>Tensor</em>)</p></li>
-<li><p><strong>use_tiny</strong> (<em>bool</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -2896,6 +2977,55 @@ where <cite>x_i=0</cite>.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="hidten.tf.util.safe_matmul">
+<span class="sig-prename descclassname"><span class="pre">hidten.tf.util.</span></span><span class="sig-name descname"><span class="pre">safe_matmul</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transpose_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">balance_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_balancing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.util.safe_matmul" title="Link to this definition"></a></dt>
+<dd><p>Performs a batched matrix multiplication of A and B.
+This is functionally equivalent to tf.matmul (except unused arguments),
+but numerically, this method is guarded against loss of precision in cases
+where <cite>A</cite> is very thin, i.e. let <cite>A</cite> have shape <cite>( …, m, n )</cite> and <cite>B</cite>
+have shape <cite>( …, n, p )</cite>, then if <cite>m</cite> is large compared to <cite>n</cite>
+(e.g. <cite>m=512, n=15</cite>), the numerical precision of, e.g., the forward
+algorithm will suffer compared to the equivalent case of performing
+multiple smaller, more balanced matrix multiplications.</p>
+<p>When both <cite>m</cite> and <cite>n</cite> are statically known and <cite>m</cite> &gt; <cite>balance_factor * n</cite>,
+this method will express the multiplication
+of <cite>A</cite> and <cite>B</cite> as multiple smaller multiplications like this:
+<cite>(…, m, n) x (…, n, p)</cite> -&gt; <cite>(…, c, z, n) x (…, 1, n, p)</cite>
+where <cite>b=cz + r</cite> with <cite>z = balance_factor * n</cite> and <cite>c</cite> and <cite>r</cite> are chosen
+appropriately.</p>
+<p>Note: Swapping this method with the default tf.matmul makes some tests
+with small HMMs but large batch sizes fail due to numerical precision issues.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>Tensor</em>)</p></li>
+<li><p><strong>B</strong> (<em>Tensor</em>)</p></li>
+<li><p><strong>transpose_b</strong> (<em>bool</em>)</p></li>
+<li><p><strong>balance_factor</strong> (<em>int</em>)</p></li>
+<li><p><strong>use_balancing</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Tensor</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hidten.tf.util.safe_norm">
+<span class="sig-prename descclassname"><span class="pre">hidten.tf.util.</span></span><span class="sig-name descname"><span class="pre">safe_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.util.safe_norm" title="Link to this definition"></a></dt>
+<dd><p>Safely makes a probability distribution out of <cite>x</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>Tensor</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Tensor</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="hidten.tf.util.scale">
 <span class="sig-prename descclassname"><span class="pre">hidten.tf.util.</span></span><span class="sig-name descname"><span class="pre">scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.util.scale" title="Link to this definition"></a></dt>
 <dd><p>Scales the values by their sum over the last dimension and
@@ -2920,7 +3050,9 @@ factors of shape <code class="docutils literal notranslate"><span class="pre">(.
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hidten.tf.util.scaled_to_log">
-<span class="sig-prename descclassname"><span class="pre">hidten.tf.util.</span></span><span class="sig-name descname"><span class="pre">scaled_to_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scaled_probs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling_factors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_cumsum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.util.scaled_to_log" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hidten.tf.util.</span></span><span class="sig-name descname"><span class="pre">scaled_to_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scaled_probs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling_factors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_cumsum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#hidten.tf.util.scaled_to_log" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">hidten.tf.util.</span></span><span class="sig-name descname"><span class="pre">scaled_to_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scaled_probs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling_factors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_cumsum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span></dt>
 <dd><p>Utility function that converts scaled probabilities to
 log-probabilities.</p>
 <dl class="field-list simple">
@@ -2979,15 +3111,17 @@ scatter operations.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>indices</strong> (<em>T_TFTensor</em>) – Tensor of shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">2)</span></code>, dtype int64.</p></li>
-<li><p><strong>values</strong> (<em>T_TFTensor</em>) – Tensor of shape <code class="docutils literal notranslate"><span class="pre">(K,</span> <span class="pre">)</span></code>, dtype float32.</p></li>
-<li><p><strong>shape</strong> (<em>T_TFTensor</em>) – Shape of the resulting tensor.</p></li>
-<li><p><strong>share</strong> (<em>T_TFTensor</em><em>, </em><em>optional</em>) – Tensor of shape <code class="docutils literal notranslate"><span class="pre">(K,</span> <span class="pre">)</span></code>, dtype
+<li><p><strong>values</strong> (<em>T_TFTensor</em>) – Tensor of shape <code class="docutils literal notranslate"><span class="pre">(...,</span> <span class="pre">K)</span></code>,
+dtype float32.</p></li>
+<li><p><strong>shape</strong> (<em>T_TFTensor</em>) – Shape of the resulting tensor not including
+the leading dimensions of <code class="docutils literal notranslate"><span class="pre">values</span></code>.</p></li>
+<li><p><strong>share</strong> (<em>T_TFTensor</em><em>, </em><em>optional</em>) – Tensor of shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">)</span></code>, dtype
 int32 or int64. Defaults to no parameter sharing.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><dl class="simple">
-<dt>A dense tensor with shared parameters placed at</dt><dd><p>given indices.</p>
+<dt>A dense tensor with shared parameters placed at</dt><dd><p>given indices. The shape is <code class="docutils literal notranslate"><span class="pre">(...,</span> <span class="pre">)</span> <span class="pre">+</span> <span class="pre">shape</span></code>.</p>
 </dd>
 </dl>
 </p>
@@ -3036,6 +3170,21 @@ shape <code class="docutils literal notranslate"><span class="pre">(...,</span> 
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hidten.tf.util.zero">
+<span class="sig-prename descclassname"><span class="pre">hidten.tf.util.</span></span><span class="sig-name descname"><span class="pre">zero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.util.zero" title="Link to this definition"></a></dt>
+<dd><p>Returns a small value that can be used without trouble in
+divisions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>Tensor</em><em> | </em><em>ndarray</em><em> | </em><em>list</em><em> | </em><em>tuple</em><em> | </em><em>float</em><em> | </em><em>int</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
