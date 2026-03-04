@@ -1855,12 +1855,15 @@ hidden states and <code class="docutils literal notranslate"><span class="pre">P
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.mean">
-<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.mean" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.mean" title="Link to this definition"></a></dt>
 <dd><p>The mean vector of the multivariate normal distribution with
 shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>Tensor</em></p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>matrix</strong> (<em>Tensor</em><em> | </em><em>None</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Tensor</em></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1886,7 +1889,7 @@ the HMM and <code class="docutils literal notranslate"><span class="pre">Q</span
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.scale">
-<span class="sig-name descname"><span class="pre">scale</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.scale" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.scale" title="Link to this definition"></a></dt>
 <dd><p>Computes the scale of the multivariate normal distribution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -1899,6 +1902,9 @@ the HMM and <code class="docutils literal notranslate"><span class="pre">Q</span
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>Tensor</p>
+</dd>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>matrix</strong> (<em>Tensor</em><em> | </em><em>None</em>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1930,13 +1936,16 @@ emission alphabet.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.variance">
-<span class="sig-name descname"><span class="pre">variance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.variance" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.variance" title="Link to this definition"></a></dt>
 <dd><p>The covariance matrix of the multivariate normal distribution
 with shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D,</span> <span class="pre">D)</span></code> if full covariance is used, or
 <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code> if diagonal covariance is used.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>Tensor</em></p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>matrix</strong> (<em>Tensor</em><em> | </em><em>None</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Tensor</em></p>
 </dd>
 </dl>
 </dd></dl>
