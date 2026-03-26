@@ -216,7 +216,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.matrix_dim"><code class="docutils literal notranslate"><span class="pre">TFMVNormalEmitter.matrix_dim</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.mean"><code class="docutils literal notranslate"><span class="pre">TFMVNormalEmitter.mean()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.sample"><code class="docutils literal notranslate"><span class="pre">TFMVNormalEmitter.sample()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.scale"><code class="docutils literal notranslate"><span class="pre">TFMVNormalEmitter.scale()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.sqrt_variance"><code class="docutils literal notranslate"><span class="pre">TFMVNormalEmitter.sqrt_variance()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.state_emissions"><code class="docutils literal notranslate"><span class="pre">TFMVNormalEmitter.state_emissions()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.variance"><code class="docutils literal notranslate"><span class="pre">TFMVNormalEmitter.variance()</span></code></a></li>
 </ul>
@@ -1898,14 +1898,17 @@ the HMM and <code class="docutils literal notranslate"><span class="pre">Q</span
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.scale">
-<span class="sig-name descname"><span class="pre">scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.scale" title="Link to this definition"></a></dt>
-<dd><p>Computes the scale of the multivariate normal distribution.</p>
+<dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.sqrt_variance">
+<span class="sig-name descname"><span class="pre">sqrt_variance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.sqrt_variance" title="Link to this definition"></a></dt>
+<dd><p>Returns the square root of the variance of the multivariate normal
+distribution. For full covariance, this is the Cholesky factor <code class="docutils literal notranslate"><span class="pre">A</span></code>
+such that <code class="docutils literal notranslate"><span class="pre">covariance</span> <span class="pre">=</span> <span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">A^T</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><dl class="simple">
-<dt>A Matrix <code class="docutils literal notranslate"><span class="pre">A</span></code> such that <code class="docutils literal notranslate"><span class="pre">covariances</span> <span class="pre">=</span> <span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">A^T</span></code></dt><dd><p>of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D,</span> <span class="pre">D)</span></code> if full covariance is used, or
-<code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code> if diagonal covariance is used.</p>
+<dt>A matrix <code class="docutils literal notranslate"><span class="pre">A</span></code> of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D,</span> <span class="pre">D)</span></code> if full</dt><dd><p>covariance is used, or a vector of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code>
+with entry-wise <code class="docutils literal notranslate"><span class="pre">sqrt(variance)</span></code> if diagonal covariance
+is used.</p>
 </dd>
 </dl>
 </p>
