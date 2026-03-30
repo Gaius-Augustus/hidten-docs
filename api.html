@@ -259,6 +259,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.prior.base.TFPrior"><code class="docutils literal notranslate"><span class="pre">TFPrior</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.base.TFPrior.call"><code class="docutils literal notranslate"><span class="pre">TFPrior.call()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.base.TFPrior.temperature"><code class="docutils literal notranslate"><span class="pre">TFPrior.temperature</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior</span></code></a><ul>
@@ -2225,6 +2226,9 @@ for transitioners that use transition deltas.</p></li>
 <dd><p>Bases: <a class="reference internal" href="#hidten.tf.prior.base.TFPrior" title="hidten.tf.prior.base.TFPrior"><code class="xref py py-class docutils literal notranslate"><span class="pre">TFPrior</span></code></a></p>
 <p>A prior that combines multiple priors by summing their scores.</p>
 <dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>temperature</strong> (<em>float</em>)</p>
+</dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.prior.base.TFCombinedPrior.add_prior">
@@ -2294,6 +2298,9 @@ states.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TFLayer</span></code>, <a class="reference internal" href="#hidten.prior.Prior" title="hidten.prior.Prior"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prior</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>]</p>
 <p>Base class for TF priors.</p>
 <dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>temperature</strong> (<em>float</em>)</p>
+</dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.prior.base.TFPrior.call">
@@ -2313,6 +2320,13 @@ states.</p>
 <dd class="field-odd"><p>Tensor</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hidten.tf.prior.base.TFPrior.temperature">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">temperature</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#hidten.tf.prior.base.TFPrior.temperature" title="Link to this definition"></a></dt>
+<dd><p>Scaling factor for the prior log-likelihood. Values &gt; 1 strengthen
+the prior, values &lt; 1 weaken it, and 1.0 leaves it unchanged.</p>
 </dd></dl>
 
 </dd></dl>
