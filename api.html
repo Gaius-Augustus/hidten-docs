@@ -1839,21 +1839,27 @@ probability for. The shape should be <code class="docutils literal notranslate">
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.matrix">
-<span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.matrix" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sqrt_variance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.emitter.multivariate_normal.TFMVNormalEmitter.matrix" title="Link to this definition"></a></dt>
 <dd><p>Calculates a tensor with the parameters of the multivariate
 normal distributions per head and state. The first <code class="docutils literal notranslate"><span class="pre">D</span></code> values
-are the means, the rest are the scales, either diagonal or full.</p>
+are the means, the rest are the variances, either diagonal or full.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><dl class="simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sqrt_variance</strong> (<em>bool</em>) – Whether to return the square root of the
+variance (the scale matrix <code class="docutils literal notranslate"><span class="pre">A</span></code>) instead of the variance
+itself. For full covariance, this is the Cholesky factor
+<code class="docutils literal notranslate"><span class="pre">A</span></code> such that <code class="docutils literal notranslate"><span class="pre">covariance</span> <span class="pre">=</span> <span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">A^T</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
 <dt>The emission matrix of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">P)</span></code> where</dt><dd><p><code class="docutils literal notranslate"><span class="pre">H</span></code> is the number of heads, <code class="docutils literal notranslate"><span class="pre">Q</span></code> is the number of
 hidden states and <code class="docutils literal notranslate"><span class="pre">P</span></code> is the number of parameters.</p>
 </dd>
 </dl>
 </p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Tensor</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
 </dd>
 </dl>
 </dd></dl>
