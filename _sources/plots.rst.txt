@@ -1,0 +1,95 @@
+Plotting
+========
+
+The :mod:`hidten.visualize` module provides functions for visualising a trained
+HMM — its transition graph and per-state emission distributions.
+
+Quick start
+-----------
+
+The easiest way to visualise an HMM is :func:`~hidten.visualize.plot_hmm`,
+which draws the transition graph and overlays an emission inset for every
+emitter in one call:
+
+.. code-block:: python
+
+    from hidten.visualize import plot_hmm
+
+    fig, pos = plot_hmm(hmm, head=0)
+
+For multi-head HMMs pass the desired ``head`` index. The function returns the
+:class:`~matplotlib.figure.Figure` and the node-position dict ``pos`` (see
+below).
+
+Fine-tuned plotting
+-------------------
+
+The underlying building blocks can be called individually for more control.
+
+Transition graph
+~~~~~~~~~~~~~~~~
+
+:func:`~hidten.visualize.plot_transition_graph` renders the state transition
+graph using `NetworkX <https://networkx.org>`_:
+
+.. code-block:: python
+
+    from hidten.visualize import plot_transition_graph
+
+    fig, pos = plot_transition_graph(
+        hmm.transitioner,
+        head=0,
+        title="My HMM",
+        state_labels=["IR", "E0", "E1", "E2"],
+    )
+
+Edges are drawn only when their probability exceeds ``threshold`` (default
+``1e-16``).  When ``color_edges=True`` (default), edge colour and width
+reflect the transition probability using the ``edge_cmap`` colormap.
+
+Emission insets
+~~~~~~~~~~~~~~~
+
+:func:`~hidten.visualize.plot_emissions` overlays small inset charts at each
+node showing the emission distribution for a given emitter head.  It is
+designed to be called *after* :func:`~hidten.visualize.plot_transition_graph`
+so that it can draw on top of the existing axes:
+
+.. code-block:: python
+
+    from hidten.visualize import plot_emissions
+
+    ax = fig.gca()
+    plot_emissions(hmm.emitter[0], pos, ax=ax, head=0, inset_column=0)
+    plot_emissions(hmm.emitter[1], pos, ax=ax, head=0, inset_column=1)
+
+Multiple emitters are placed side by side using the ``inset_column`` parameter.
+The ``inset_size`` parameter controls the size of each inset as a fraction of
+the data-coordinate span.
+
+Supported emitter types
+-----------------------
+
+* **Categorical emitters** — rendered as sequence logos using
+  `Logomaker <https://logomaker.readthedocs.io>`_.  The ``alphabet`` and
+  ``color_scheme`` parameters control the characters and colours displayed.
+
+* **Multivariate normal emitters** — rendered as a set of overlaid 1-D
+  Gaussian curves, one per dimension.  Line appearance is controlled via
+  ``normal_linewidth`` and ``normal_alpha``.
+
+* **Custom emitters** — pass a callable to ``custom_plot_fn`` with the
+  signature ``fn(axins, emitter, node, head, title, title_font_size)`` to
+  handle any other emitter type.
+
+Example notebook
+----------------
+
+A worked example can be found in ``docs/examples/visualize.ipynb``.
+
+API reference
+-------------
+
+.. autofunction:: hidten.visualize.plot_hmm
+.. autofunction:: hidten.visualize.plot_transition_graph
+.. autofunction:: hidten.visualize.plot_emissions
