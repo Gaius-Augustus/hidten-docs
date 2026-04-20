@@ -272,6 +272,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.log_dirichlet_pdf"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.log_dirichlet_pdf()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.matrix"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.matrix()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.matrix_dim"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.matrix_dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.mean"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.mean()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.prior_scores"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.prior_scores()</span></code></a></li>
 </ul>
 </li>
@@ -2466,6 +2467,25 @@ hidden states and <code class="docutils literal notranslate"><span class="pre">P
 <dt class="sig sig-object py" id="hidten.tf.prior.dirichlet.TFDirichletPrior.matrix_dim">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">matrix_dim</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.matrix_dim" title="Link to this definition"></a></dt>
 <dd><p>Last dimension of the matrix.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hidten.tf.prior.dirichlet.TFDirichletPrior.mean">
+<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.mean" title="Link to this definition"></a></dt>
+<dd><p>Compute the mean of the Dirichlet prior distribution.</p>
+<p>For a single component, the mean is <code class="docutils literal notranslate"><span class="pre">alpha</span> <span class="pre">/</span> <span class="pre">sum(alpha)</span></code>.
+For a mixture, the mean is the mixture-weighted average of per-component
+means: <code class="docutils literal notranslate"><span class="pre">sum_c</span> <span class="pre">w_c</span> <span class="pre">*</span> <span class="pre">alpha_c</span> <span class="pre">/</span> <span class="pre">sum_d(alpha_c_d)</span></code>.</p>
+<p>Padding states (where all concentrations are zero) are returned as
+zeros.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mean of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
