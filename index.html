@@ -85,29 +85,36 @@
 <h1>Welcome to hidten’s documentation!<a class="headerlink" href="#welcome-to-hidten-s-documentation" title="Link to this heading"></a></h1>
 <section id="hidten">
 <h2>hidten<a class="headerlink" href="#hidten" title="Link to this heading"></a></h2>
-<p>A framework for combining hidden Markov- and related models with modern deep learning.</p>
-<p>Find the documentation <a class="reference external" href="https://gaius-augustus.github.io/hidten-docs/">here</a>.</p>
-<section id="summary">
-<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h3>
+<p>A framework that integrates hidden Markov and related models with modern deep learning—revealing hid(den) structure within your ten(sors).</p>
+<p>Find the documentation <a class="reference external" href="https://gaius-augustus.github.io/hidten-docs/">here</a> to get started.</p>
 <ul class="simple">
-<li><p>build models over a discrete latent state space</p></li>
-<li><p>currently: Hidden Markov Models (HMMs), future: Conditional Random Fields (CRFs)</p></li>
-<li><p>gradient-based and highly parallel training</p></li>
-<li><p>highly parallel inference</p></li>
-<li><p>can be part of larger deep learning models</p></li>
-<li><p>pythonic, clean, extensible, tested</p></li>
-<li><p>future (?): swapable machine learning backend (currently only TensorFlow)</p></li>
+<li><p>Provides intuitive classes to easily define latent state graphs and combine emission distributions for both discrete and continuous input tracks. 🧩</p></li>
+<li><p>Implements core Hidden Markov Model (HMM) algorithms for training and inference, including Forward–Backward and Viterbi. ⚡</p></li>
+<li><p>Enables gradient-based, highly parallel training as well as efficient parallel inference. 🔄</p></li>
+<li><p>Pythonic, clean, extensible, and thoroughly tested. ✅</p></li>
 </ul>
-</section>
 <section id="installation">
 <h3>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/Gaius-Augustus/hidten</span></code></p>
-<p>For users:</p>
-<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.[tensorflow,plots]</span></code></p>
-<p>For developers:</p>
-<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.[tensorflow,plots,test,doc]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">hidten[tensorflow]</span></code></p>
+</section>
+<section id="installation-for-developers">
+<h3>Installation for developers<a class="headerlink" href="#installation-for-developers" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/Gaius-Augustus/hidten</span></code>
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.[tensorflow,plots,test,doc]</span></code></p>
 <p>Build the docs:</p>
 <p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">docs</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">html</span></code></p>
+</section>
+<section id="license">
+<h3>License<a class="headerlink" href="#license" title="Link to this heading"></a></h3>
+<p>This project is licensed under the <a class="reference internal" href="#/LICENSE"><span class="xref myst">MIT license</span></a>.</p>
+</section>
+<section id="tools-using-hidten">
+<h3>Tools using hidten<a class="headerlink" href="#tools-using-hidten" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/Gaius-Augustus/Tiberius">Tiberius: End-to-End Deep Learning with an HMM for Gene
+Prediction</a></p></li>
+<li><p><a class="reference external" href="https://github.com/Gaius-Augustus/learnMSA">learnMSA: deep protein multiple alignments with large language and hidden Markov models</a></p></li>
+</ul>
 </section>
 </section>
 <div class="toctree-wrapper compound">
