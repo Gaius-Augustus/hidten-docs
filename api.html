@@ -265,10 +265,12 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.build"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.build()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.dirichlet_multinomial_scores"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.dirichlet_multinomial_scores()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.from_config"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.from_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.get_config"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.get_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.get_default_initializer"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.get_default_initializer()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.initializer"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.initializer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.log_dirichlet_multinomial_pmf"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.log_dirichlet_multinomial_pmf()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.log_dirichlet_pdf"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.log_dirichlet_pdf()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.matrix"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.matrix()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.matrix_dim"><code class="docutils literal notranslate"><span class="pre">TFDirichletPrior.matrix_dim</span></code></a></li>
@@ -2364,6 +2366,32 @@ The configuration for a Dirichlet prior.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="hidten.tf.prior.dirichlet.TFDirichletPrior.dirichlet_multinomial_scores">
+<span class="sig-name descname"><span class="pre">dirichlet_multinomial_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.dirichlet_multinomial_scores" title="Link to this definition"></a></dt>
+<dd><p>Computes log Dirichlet-multinomial marginals of count vectors.</p>
+<p>Scores observed count vectors with the (mixture of) Dirichlet-multinomial
+marginal(s), i.e. the proper marginal likelihood of the counts with the
+categorical probabilities integrated out (Sjolander et al. 1996). This is
+the count-based counterpart of <a class="reference internal" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.prior_scores" title="hidten.tf.prior.dirichlet.TFDirichletPrior.prior_scores"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prior_scores()</span></code></a>, which instead scores
+probability vectors with the Dirichlet density.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>values</strong> (<em>Tensor</em>) – The observed count vectors of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The scores with shape <code class="docutils literal notranslate"><span class="pre">(H)</span></code> with Dirichlet-multinomial</dt><dd><p>log marginals for each head summed over the states.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="hidten.tf.prior.dirichlet.TFDirichletPrior.from_config">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.from_config" title="Link to this definition"></a></dt>
 <dd><p>Initializes and returns an object of this class with the
@@ -2418,6 +2446,27 @@ of mixture components. The initializer is ordered as follows:
 - Concentrations of component <code class="docutils literal notranslate"><span class="pre">C</span></code> (<code class="docutils literal notranslate"><span class="pre">D</span></code> values)
 - Mixture coefficients (<code class="docutils literal notranslate"><span class="pre">C</span></code> values)</p>
 <p>Defaults to concentration ones and uniform mixture coefficients.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hidten.tf.prior.dirichlet.TFDirichletPrior.log_dirichlet_multinomial_pmf">
+<span class="sig-name descname"><span class="pre">log_dirichlet_multinomial_pmf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">counts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hidten.tf.prior.dirichlet.TFDirichletPrior.log_dirichlet_multinomial_pmf" title="Link to this definition"></a></dt>
+<dd><p>Compute the log pmf of a Dirichlet-multinomial marginal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>counts</strong> (<em>Tensor</em>) – The observed count vectors of shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">D)</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The log pmf with shape <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q)</span></code> for single component,</dt><dd><p>or <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">Q,</span> <span class="pre">C)</span></code> for multiple components.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
